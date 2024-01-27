@@ -1,4 +1,4 @@
-function [weights, covariances, success] = cv_generalized_spls(matrices, cs, gs, e, itr_lim)
+function [weights, covariances, success] = cv_generalized_spls(matrices, cs, gs, e, itr_lim, plotflag)
 %
 %   Generalized Sparse PLS algorithm
 %
@@ -164,12 +164,14 @@ while diff > e && success
     %     end
     % end
 
-    scatter(k, corr(matrices{1}*weights{1}(:,2),matrices{2}*weights{2}(:,2)), 'yellow') 
-    hold on
-    scatter(k, corr(matrices{1}*weights{1}(:,2),matrices{3}*weights{3}(:,2)), 'red') 
-    hold on
-    scatter(k, corr(matrices{2}*weights{2}(:,2),matrices{3}*weights{3}(:,2)), 'blue') 
-    hold on
+    if plotflag
+        scatter(k, corr(matrices{1}*weights{1}(:,2),matrices{2}*weights{2}(:,2)), 'yellow')
+        hold on
+        scatter(k, corr(matrices{1}*weights{1}(:,2),matrices{3}*weights{3}(:,2)), 'red')
+        hold on
+        scatter(k, corr(matrices{2}*weights{2}(:,2),matrices{3}*weights{3}(:,2)), 'blue')
+        hold on
+    end
     
     k = k + 1;
 end
