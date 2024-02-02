@@ -1,4 +1,4 @@
-function [weights, covariances, success, k, diff, dims] = cv_generalized_spls(matrices, cs, gs, e, itr_lim, plotflag)
+function [weights, covariances, success, k, diff, dims] = cv_generalized_spls(matrices, cs, gs, e, itr_lim, printopt)
 %
 %   Generalized Sparse PLS algorithm
 %
@@ -85,12 +85,19 @@ for i = 1:num_matrices
     weights{i}(:, 1) = weights{i}(:, 1) ./ norm(weights{i}(:, 1));  % normalise
 end
 
+if printopt == 2 % detailed weight computation output
+
+    for i = 1:num_matrices
+        fprintf('Initial weights %d: %s\n\n', i, strtrim(sprintf('%d ', weights{i}(:,1))));
+    end
+
+end
 
 % Main Loop
 diff = 10 * e;  % start the diff with a high value
 k = 0;
 success = true;
-if plotflag
+if printopt == 1
     figure
 end
 while diff > e && success
@@ -162,13 +169,23 @@ while diff > e && success
     %     end
     % end
 
-    if plotflag
+    if printopt == 1
         scatter(k, corr(matrices{1}*weights{1}(:,2),matrices{2}*weights{2}(:,2)), 'yellow')
         hold on
         scatter(k, corr(matrices{1}*weights{1}(:,2),matrices{3}*weights{3}(:,2)), 'red')
         hold on
         scatter(k, corr(matrices{2}*weights{2}(:,2),matrices{3}*weights{3}(:,2)), 'blue')
         hold on
+    end
+
+
+    if printopt == 2 % detailed weight computation output
+        fprintf('Iteration %d:\n', k)
+        for i = 1:num_matrices
+
+            fprintf('Updated weights %d: %s\n\n', i, strtrim(sprintf('%d ', weights{i}(:,1))));
+        end
+
     end
 
     k = k + 1;
@@ -185,6 +202,8 @@ for i = 1:num_matrices
 end
 
 fprintf('SPLS: itr: %d    diff: %.2e    %s\n', k, diff, dims_str);
+
+
 
 %--- Add converged weight vectors to output
 weights = cellfun(@format_converged_vectors, weights, 'UniformOutput', false);

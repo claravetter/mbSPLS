@@ -1,4 +1,4 @@
-function [u, v, success] = cv_spls(X, Y, cu, cv, e, itr_lim)
+function [u, v, success, i, diff, dims] = cv_spls(X, Y, cu, cv, e, itr_lim, printopt)
 %
 %   Sparse PLS algorithm, please check Monteiro et al. 2016 for details:
 %   doi:10.1016/j.jneumeth.2016.06.011
@@ -50,6 +50,9 @@ else
     no_sparse_Y = false;
 end
 
+if ~exist('printopt', 'var')
+    printopt = 0;
+end
 % Convergence threshold
 if ~exist('e', 'var')
     e = 1E-5;
@@ -79,11 +82,17 @@ v_temp(:,1) = v_temp(:,1)./norm(v_temp(:,1)); % normalise
 
 clear U V
 
+if printopt == 2 % detailed weight computation output
+    fprintf('Initial u: %s\n', strtrim(sprintf('%d ', u_temp(:,1))));
+    fprintf('Initial v: %s\n\n', strtrim(sprintf('%d ', v_temp(:,1))));
+end
 %--- Main Loop
 diff = 10*e; %start the diff with a high value
 i = 0;
 success = true;
-figure
+if printopt == 1  % plot
+    figure
+end
 while diff > e && success
 
     %--- Compute u
@@ -103,8 +112,8 @@ while diff > e && success
         error(['No weights were included in the model, this should never '...
             'happen. Try increasing lu.']);
     end
-    
-    
+
+
     %--- Compute v
     if no_sparse_Y
         v_temp(:,2) = C'*u_temp(:,2);
@@ -122,7 +131,7 @@ while diff > e && success
         error(['No weights were included in the model, this should never '...
             'happen. Try increasing lv.']);
     end
-    
+
     %--- Check convergence
     diff_u = norm(u_temp(:,2) - u_temp(:,1));
     diff_v = norm(v_temp(:,2) - v_temp(:,1));
@@ -130,14 +139,22 @@ while diff > e && success
     % update u and v for the next iteration
     u_temp(:,1) = u_temp(:,2);
     v_temp(:,1) = v_temp(:,2);
-    
+
     if i >= itr_lim
         warning('Maximum number of iterations reached.');
         success = false;
     end
-    
-    scatter(i, corr(X*u_temp(:,2),Y*v_temp(:,2))) 
-    hold on
+
+    if printopt == 1 % plot
+        scatter(i, corr(X*u_temp(:,2),Y*v_temp(:,2)))
+        hold on
+    end
+
+    if printopt == 2
+        fprintf('Iteration %d:\n', i);
+        fprintf('Updated u: %s\n', strtrim(sprintf('%d ', u_temp(:,1))));
+        fprintf('Updated v: %s\n\n', strtrim(sprintf('%d ', v_temp(:,1))));
+    end
 
     i = i+1;
 end
@@ -155,7 +172,7 @@ if failed_sparsity_v
 end
 
 fprintf('SPLS: itr: %d    diff: %.2e    dim_u: %d    dim_v: %d\n', i, diff, dim_u, dim_v);
-
+dims = [dim_u, dim_v];
 %--- Add converged weight vectors to output
 u = u_temp(:, end);
 v = v_temp(:, end);
@@ -177,10 +194,10 @@ up = up./norm(up,2);
 
 %--- check if it obeys the condition. If not, find delta that does.
 if norm(up, 1) > c
-    
+
     delta1 = delta;
     delta2  = delta1+1.1; % delta2 must be > 1
-    
+
     % get first estimate of delta2
     flag = false;
     i = 0;
@@ -188,7 +205,7 @@ if norm(up, 1) > c
     while ~flag
         up = soft_thresh(w, delta2);
         up = up./norm(up,2);
-        
+
         if sum(abs(up)) == 0 || isnan(sum(abs(up))) % if everthing is zero, the up/|up| will be 0/0 = nan
             delta2 = delta2/1.618; % They have to be diferent, otherwise it might not converge
         elseif norm(up, 1) > c
@@ -197,9 +214,9 @@ if norm(up, 1) > c
         elseif norm(up, 1) <= c
             flag = true;
         end
-        
+
         if delta2>max_delta, max_delta = delta2;end
-        
+
         if delta2 == 0
             warning('Delta has to be zero.');
             success = false;
@@ -213,15 +230,15 @@ if norm(up, 1) > c
             break
         end
     end
-    
+
 
     up = bisec(w, c, delta1, delta2);
     if isempty(up) || sum(isnan(up))>0
         warning('Delta estimation unsuccessful.')
         success = false;
     end
-    
-    
+
+
 end
 
 
@@ -252,7 +269,7 @@ while ~converge && success
     elseif norm(out, 1) < c
         x2 = x;
     end
-    
+
     diff = abs(norm(out, 1) - c);
     if diff <= tolerance
         converge = true;
