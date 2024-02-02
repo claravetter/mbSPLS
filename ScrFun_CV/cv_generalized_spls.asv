@@ -1,4 +1,4 @@
-function [weights, covariances, success, k, diff, dims] = cv_generalized_spls(matrices, cs, gs, e, itr_lim, plotflag)
+function [weights, covariances, success] = cv_generalized_spls(matrices, cs, gs, e, itr_lim, plotflag)
 %
 %   Generalized Sparse PLS algorithm
 %
