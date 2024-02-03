@@ -113,18 +113,15 @@ while diff > e && success
             weights_temp(:,j) = weights_temp(:,j) ./ norm(weights_temp(:,j), 2); % this in the loop or after the loop?
         end
 
-        if ~no_sparse_matrix(i)
+        if ~no_sparse_matrix(i) % if sparse
             weights2 = weights;
             [weights2{i}(:,2), tmp_success] = update(sum(weights_temp .* gs(i, :),2), cs(i));
             failed_sparsity_weights(i) = ~tmp_success;
         end
 
-        if no_sparse_matrix(i) || failed_sparsity_weights(i)
-            %if failed_sparsity_weights(i) % If it was not successful, return non sparse version
+        if no_sparse_matrix(i) || failed_sparsity_weights(i) % if not sparse
             for j = 1:num_matrices
-
                 weights_temp(:,j) = covariances{i,j} * weights{j}(:, 1); % it is actually (:,2) when v_temp is updated
-
                 weights_temp(:,j) = weights_temp(:,j) ./ norm(weights_temp(:,j), 2); % this in the loop or after the loop?
             end
             weights{i}(:,2) = sum(weights_temp .* gs(i, :),2);
