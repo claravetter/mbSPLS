@@ -65,22 +65,23 @@ for i = 1:num_matrices
         [Us{i, j}, ~, Vs{i, j}] = svd(covariances{i, j}, 0);
         weights_pairs{i,j}(:,1) = Vs{i,j}(:,1);
         weights_pairs{i,j}(:,1) = weights_pairs{i,j}(:,1)./norm(weights_pairs{i,j}(:,1)); % normalise
-
-        %end
     end
 end
+
 for i = 1:num_matrices
     % Initialize vs_combined as a sum of weighted columns from Vs
-    %us_combined = zeros(num_weights(i), 1);
+    us_combined = zeros(num_weights(i), 1);
     vs_combined = zeros(num_weights(i), 1);
     for j = 1:num_matrices
         if j ~= i
-            %us_combined = us_combined + gs(i, j) * Us{i, j}(:, 1);
             vs_combined = vs_combined + gs(i,j) *  weights_pairs{j,i}(:,1);
         end
     end
 
     % Initialize weight vectors with the combined columns
+    % if i < j
+    %     weights{i}(:, 1) = us_combined;
+    % elseif 
     weights{i}(:, 1) = vs_combined;
     weights{i}(:, 1) = weights{i}(:, 1) ./ norm(weights{i}(:, 1));  % normalise
 end
@@ -102,16 +103,21 @@ if printopt == 1
 end
 while diff > e && success
 
-
     %if no_sparse_matrix(i) % no_sparse_X
     for i = 1:num_matrices
 
         weights_temp = zeros(num_weights(i),  num_matrices);
 
         for j = 1:num_matrices
-            weights_temp(:,j) = covariances{i,j} * weights{j}(:, 1); % it is actually (:,2) when v_temp is updated
-            weights_temp(:,j) = weights_temp(:,j) ./ norm(weights_temp(:,j), 2); % this in the loop or after the loop?
-        end
+            if i < j
+                    weights_temp(:,j) = covariances{i,j} * weights{j}(:, 1); % it is actually (:,2) when v_temp is updated
+                    %weights_temp(:,j) = weights_temp(:,j) ./ norm(weights_temp(:,j), 2); % this in the loop or after the loop?
+            elseif i > j
+                    weights_temp(:,j) = covariances{i,j} * weights{j}(:, 2); % it is actually (:,2) when v_temp is updated
+                    %weights_temp(:,j) = weights_temp(:,j) ./ norm(weights_temp(:,j), 2); % this in the loop or after the loop?
+ 
+            end
+        end 
 
         if ~no_sparse_matrix(i) % if sparse
             weights2 = weights;
