@@ -15,8 +15,8 @@ jupyter-book build ./docs
 
 # add changes to mbSPLS website (hosted from gh-pages branch)
 git checkout gh-pages
-cp -R /docs/_build/html/. .
-cp -R /docs/Downloads .
+cp -R docs/_build/html/. .
+cp -R docs/Downloads .
 git add . 
 git commit -m 'updating manual website'
 git push -u origin gh-pages     
