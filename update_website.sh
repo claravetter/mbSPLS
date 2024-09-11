@@ -17,7 +17,5 @@ jupyter-book build ./docs
 
 git add . 
 git commit -m 'updating manual website'
-git push -u origin gh-pages     
-git checkout main 
 
 echo "Done, changes to website should be visible in about 2min"
