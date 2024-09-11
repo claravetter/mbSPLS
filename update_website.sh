@@ -3,6 +3,7 @@ echo "updating mbSPLS website (jupyter book and github pages)"
 # from mbSPLS directory
 
 # remove current _build folder
+rm -rf ./docs/_sources
 jupyter-book clean ./docs/ --all
 
 # save changes to markdown files to github (as backup)  
@@ -11,7 +12,6 @@ jupyter-book clean ./docs/ --all
 #git push 
 
 # build new html files (_build folder)
-rm -rf .docs/_sources
 jupyter-book build ./docs 
 
 # add changes to mbSPLS website (hosted from gh-pages branch)
