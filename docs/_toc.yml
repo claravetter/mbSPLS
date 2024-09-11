@@ -6,13 +6,13 @@ root: intro
 parts:
   - caption: mbSPLS Toolbox
     chapters:
-        - file: mbspls_1setup
-        - file: mbspls_2run
-        - fule: mbspls_3vis
-        - file: license
+      - file: mbspls_1setup
+      - file: mbspls_2run
+      - fule: mbspls_3vis
+      - file: license
   - caption: sPLS Toolbox
     chapters:
-        - file: spls
+      - file: spls
 #  caption: News
 #       - file: 5.00_1.2_release_notes
 #       - file: 0.1_2024_MLSchool
