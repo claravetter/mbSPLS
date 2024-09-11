@@ -1,4 +1,4 @@
 (mbspls_2run)=
-# How to run the mbSPLS model
+# mbSPLS model training
 
 Add documentation on how to run the mbSPLS model

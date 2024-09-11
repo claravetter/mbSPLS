@@ -1,4 +1,4 @@
 (mbspls_3vis)=
-# Visualise the latent variables
+# Visualisation of latent variables
 
 Add documentation on how to use visualisation script
