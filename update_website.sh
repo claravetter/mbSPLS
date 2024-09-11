@@ -14,7 +14,7 @@ jupyter-book clean ./docs/ --all
 jupyter-book build ./docs 
 
 # add changes to mbSPLS website (hosted from gh-pages branch)
-
+cp -R ./docs/_build/html/. .
 git add . 
 git commit -m 'updating manual website'
 git push
