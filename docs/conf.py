@@ -5,7 +5,7 @@
 ###############################################################################
 author = '<a href="https://www.lmu-klinikum.de/psychiatrie-und-psychotherapie/forschung-research/working-groups/precision-psychiatry/7ef67d79b4ad4804">Section for Precision Psychiatry, Ludwig-Maximilian-University Munich</a> / <a href="https://www.psych.mpg.de/2571270/precision-psychiatry">Precision Psychiatry Group, Max Planck Institute of Psychiatry</a>'
 comments_config = {'hypothesis': False, 'utterances': False}
-copyright = '2022'
+copyright = '2024'
 exclude_patterns = ['**.ipynb_checkpoints', '.DS_Store', 'Thumbs.db', '_build']
 execution_allow_errors = False
 execution_excludepatterns = []
@@ -14,7 +14,7 @@ execution_timeout = 30
 extensions = ['sphinx_togglebutton', 'sphinx_copybutton', 'myst_nb', 'jupyter_book', 'sphinx_thebe', 'sphinx_comments', 'sphinx_external_toc', 'sphinx.ext.intersphinx', 'sphinx_design', 'sphinx_book_theme', 'sphinx_jupyterbook_latex']
 external_toc_exclude_missing = False
 external_toc_path = '_toc.yml'
-html_baseurl = 'https://neurominer-git.github.io/NeuroMiner_1.1/'
+html_baseurl = 'https://claravetter.github.io/mbSPLS/intro.html'
 html_favicon = 'nm_logo2.ico'
 html_logo = 'nm_logo.png'
 html_sourcelink_suffix = ''
