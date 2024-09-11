@@ -11,6 +11,7 @@ jupyter-book clean ./docs/ --all
 #git push 
 
 # build new html files (_build folder)
+rm -rf .docs/_sources
 jupyter-book build ./docs 
 
 # add changes to mbSPLS website (hosted from gh-pages branch)
