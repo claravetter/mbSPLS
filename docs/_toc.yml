@@ -19,7 +19,7 @@ parts:
 #       - file: 0.1_2023_MLSchool
 #       - file: 0.1_2023_MLSchool_AsiaPacific
 #       - file: 0.0_previous_MLSchool
-  - caption: Getting started
+#  - caption: Getting started
 #     chapters:
 #       - file: 1.0_introduction
 #         sections:
