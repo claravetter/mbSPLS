@@ -4,16 +4,22 @@
 format: jb-book
 root: intro
 parts:
-  - caption: News
+  - caption: mbSPLS Toolbox
     chapters:
+        - file: mbspls_1setup
+        - file: mbspls_2run
+        - fule: mbspls_3vis
         - file: license
+  - caption: sPLS Toolbox
+    chapters:
         - file: spls
+#  caption: News
 #       - file: 5.00_1.2_release_notes
 #       - file: 0.1_2024_MLSchool
 #       - file: 0.1_2023_MLSchool
 #       - file: 0.1_2023_MLSchool_AsiaPacific
 #       - file: 0.0_previous_MLSchool
-#   - caption: Getting started
+  - caption: Getting started
 #     chapters:
 #       - file: 1.0_introduction
 #         sections:
