@@ -7,6 +7,7 @@ parts:
   - caption: News
     chapters:
         - file: license
+        - file: spls
 #       - file: 5.00_1.2_release_notes
 #       - file: 0.1_2024_MLSchool
 #       - file: 0.1_2023_MLSchool
