@@ -1,8 +1,8 @@
 # mbSPLS
 
-```{figure} Images/nm_hero_right.png
+```{figure} Images/brain_coral.png
 ---
-name: fig:nm_hero_right
-alt: neurominer logo
+name: fig:brain_coral
+alt: brain coral
 ---
 ```
