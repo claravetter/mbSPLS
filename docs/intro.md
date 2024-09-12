@@ -1,8 +1,8 @@
 # mbSPLS
 
-```{figure} Images/brain_coral.jpg
+```{figure} Images/mbspls_logo.png
 ---
-name: fig:brain_coral
-alt: brain coral
+name: fig:mbspls_logo
+alt: mbspls logo
 ---
 ```
