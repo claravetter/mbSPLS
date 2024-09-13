@@ -45,4 +45,5 @@ html:
 
 sphinx:
   config:
-    html_favicon: coralicon.png # nm_logo2.ico
+    #html_favicon: coralicon.png # nm_logo2.ico
+    html_favicon: mbspls_logo_klein.png # nm_logo2.ico
