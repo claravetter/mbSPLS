@@ -23,6 +23,7 @@ if ~exist(Path2Figures)
     mkdir(Path2Figures)
 end
 
+
 % CHECK WHETHER NUMBER OF TOP FEATURES FOR FIGURES WAS DEFINED (BARPLOT)
 if isempty(varargin)
     maxFeatures = []; 
