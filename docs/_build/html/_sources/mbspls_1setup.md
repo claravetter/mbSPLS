@@ -1,5 +1,5 @@
 (mbspls_1setup)=
-# Setup & Input structure 
+# Data Input 
 
 Add documentation on setup / input template script. 
 
