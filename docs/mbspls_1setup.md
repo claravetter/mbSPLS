@@ -59,7 +59,6 @@ Make sure your input data (i.e., Xs, covariates, sites, Diag and DiagNames) does
 | `max_n_LVs`                                         | Double          | Maximum number of Latent Variables (LVs) to extract. Set to -1 if there is no limit. |
 | `outer_permutations`                                | Double          | Define the number of permutations in the CV2 folds. Default: 1. Note that the toolbox is not optimized for permutations on folds, and permutating the folds would significantly increase computation time and is not recommended. |
 | `inner_permutations`                                | Double          | Define the number of permutations in the CV1 folds. Default: 1. Similar to outer permutations, the toolbox is not optimized for permutations on folds. |
-| `save_CV`                                           | Boolean/Double  | Define whether to save the cross-validation structure. Default: 1. |
 | `matrix_norm`                                       | String/Double   | Define which matrix norm is used to compute the association between latent scores of Xs (used for significance testing of LV). [If > 2 Xs:] `fro`; [If 2 Xs:]  `0` (Correlation coefficient as defined above is used). |
 | `CV`                                                | Structure       | If the cross-validation structure `CV` is already defined, this input sets it directly. |
 | `save_CV`                                           | Boolean/Double  | Define whether to save the cross-validation structure. Default: 0 if `CV` is provided. |
