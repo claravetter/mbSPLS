@@ -16,7 +16,7 @@ Once defined, the `input` and `setup` parameters are saved into a `datafile.mat`
 | `covariates`                | Cell array (double)      | Your covariate(s) (vector/matrix)  |
 | `covariates_names`          | Cell array (string)      | Name(s) of your covariate(s) |
 | `Diag`                      | Double            | Column vector with diagnoses coded via numbers (e.g., `input.Diag = [1, 3, 2, 3, 1]`) |
-| `DiagNames`                 | Cell array (string)        | Column cell array with diagnoses/labels (e.g., `input.DiagNames{'HC', 'ROD', 'CHR', 'HC', 'ROP'}`). |
+| `DiagNames`                 | Cell array (string)        | Column cell array with diagnoses/labels (e.g., `input.DiagNames = {'HC', 'ROD', 'CHR', 'HC', 'ROP'}`). |
 | `sites`                      | Double       | Dummy coded vector for sites. If single-site: column vector of ones. |
 | `final_ID`                   | Cell array (string)   | IDs of your subjects (e.g. `input.final_ID = {'400106', '400678', '410345'})`) |
 | `type_correction`          | String       | Define whether you want to correct for covariates. Options: `corrected`, `uncorrected`. |
