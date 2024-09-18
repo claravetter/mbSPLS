@@ -13,6 +13,12 @@ ADD TEXT HERE
 | Xs_feature_names          | Cell array (strings)      | Names of matrix features  |
 | covariates                | Cell array (doubles)      | Your covariates  |
 | covariates_names          | Cell array (strings)      | Names of your covariates features |
+| Diag                      | Double            | Column vector with diagnoses coded via numbers (e.g., [1 3 2 3 4]) |
+| DiagNames                 | Cell Array (strings)        | Column cell array with diagnoses/labels, e.g., {'HC', 'ROD', 'CHR', 'HC', 'ROP'}. |
+| correction_target         | Cell Array (doubles)            | Define which matrices to remove the covariate effects from (e.g., [1 0 1 0]. |
+| sites                      | Double       | Dummy coded vector for sites. If only one site, enter a column vector of ones, e.g., `ones(height(X), 1)`. |
+| final_ID                   | Cell array (strings)   | ID of your subjects as a cell array, e.g., `cellstr(string(ID))`. |
+| type_correction          | String       | Define whether you want to correct for covariates. Options: 'corrected', 'uncorrected'. |
 
 ::::{important}
 Make sure your input data (i.e., Xs, covariates, sites, diagnosis) does not contain any missing values. 
