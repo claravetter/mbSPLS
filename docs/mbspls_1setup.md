@@ -16,11 +16,10 @@ Once defined, the `input` and `setup` parameters are saved into a `datafile.mat`
 | `covariates`                | Cell array (double)      | Your covariate(s) (vector/matrix)  |
 | `covariates_names`          | Cell array (string)      | Name(s) of your covariate(s) |
 | `Diag`                      | Double            | Column vector with diagnoses coded via numbers (e.g., `input.Diag = [1, 3, 2, 3, 1]`) |
-| `DiagNames`                 | Cell array (string)        | Column cell array with diagnoses/labels (e.g., `input.DiagNames{'HC', 'ROD', 'CHR', 'HC', 'ROP'}`. |
-| `correction_target`         | Cell array (double)            | Define which matrices to remove the covariate effects from (e.g., `input.density = [1 0 1 0]`. |
+| `DiagNames`                 | Cell array (string)        | Column cell array with diagnoses/labels (e.g., `input.DiagNames{'HC', 'ROD', 'CHR', 'HC', 'ROP'}`). |
 | `sites`                      | Double       | Dummy coded vector for sites. If single-site: column vector of ones. |
-| `final_ID`                   | Cell array (string)   | IDs of your subjects (e.g. `input.final_ID = {'400106', '400678', '410345'})` |
-| `type_correction`          | String       | Define whether you want to correct for covariates. Options: 'corrected', 'uncorrected'. |
+| `final_ID`                   | Cell array (string)   | IDs of your subjects (e.g. `input.final_ID = {'400106', '400678', '410345'})`) |
+| `type_correction`          | String       | Define whether you want to correct for covariates. Options: `corrected`, `uncorrected`. |
 
 ::::{important}
 Make sure your input data (i.e., Xs, covariates, sites, Diag and DiagNames) does not contain any missing values. Make sure to either remove the missing values or impute them beforehand. 
@@ -52,6 +51,7 @@ Make sure your input data (i.e., Xs, covariates, sites, Diag and DiagNames) does
 | `final_merge.majority_vote`                         | String          | Only applicable if `final_merge.type` is not set to best! Options: `on` (use majority voting across folds to determine whether a value in u or v should be zero or non-zero), `off` (no majority vote, merging is done for all features). |
 | `correct_limit`                                     | Double          | Define in which iteration of the process covariate correction should be done. Default: 1 (means correction is done before computing the first LV, then no more correction). |
 | `statistical_testing`                               | Double          | Define how the P value is computed during permutation testing: Options: `1` (Counting method, i.e., number of instances where permuted models outperformed optimized model/number of permutations); `2` (AUC method; permuted RHO values are used to compute AUC for optimal RHO value); Note: Option 2 usually gives slightly lower P values. |
+| `cs_method`                               |          | |
 | `cs_method{1}.method`                               | String          | Scaling of features. Default: mean-centering. Possible options: `mean-centering` (i.e., z- tranformation; Default), `min_max` (Scaling [0-1))|
 | `cs_method{1}.correction_subgroup`                  | String          | Define whether to correct the covariates based on the betas of a subgroup, or across all individuals. For subgroup-based correction, use the label, e.g., 'HC' or 'ROD'. Otherwise, leave as an empty string: `''`. |
 | `coun_ts_limit`                                     | Double          | Define after how many non-significant LVs the algorithm should stop (Default: 1; i.e., as soon as one LV is not significant, the operation ends). |
@@ -62,7 +62,7 @@ Make sure your input data (i.e., Xs, covariates, sites, Diag and DiagNames) does
 | `matrix_norm`                                       | String/Double   | Define which matrix norm is used to compute the association between latent scores of Xs (used for significance testing of LV). Default: 'fro' if there are more than 2 Xs; otherwise, 0 (in this case, the correlation coefficient as defined above is used). |
 | `CV`                                                | Structure       | If the cross-validation structure `CV` is already defined, this input sets it directly. |
 | `save_CV`                                           | Boolean/Double  | Define whether to save the cross-validation structure. Default: 0 if `CV` is provided. |
-| `optimization_strategy`                             | String          | Define which search algorithm to use in order to optimize sparsity hyperparameters. Options: (a) `grid_search` (Default), (b) `randomized_search`. |
+| `optimization_strategy`                             | String          | Define which search algorithm to use in order to optimize sparsity hyperparameters. Options: `grid_search` (Default), `randomized_search`. |
 | If `optimization_strategy` == `grid_dynamic.onset`                                |           |  |
 | `grid_dynamic.onset`                                | Double          | Only applicable if `optimization_strategy` is set to 'grid_search'. Choose the marks for grid applications. Default: 1 (means that one grid is defined at the first iteration and then not changed in later iterations). |
 | `density`                                           | Cell array      | Only applicable if `optimization_strategy` is set to 'grid_search'. Define the density for grid applications. Can be a single value for all Xs or specific values per matrix (e.g., `input.density = [10 10 10 10]`|
