@@ -31,7 +31,7 @@ Make sure your input data (i.e., Xs, covariates, sites, Diag and DiagNames) does
 
 | Fieldname                 | Input Format      |          Explanation                                          |
 | --------                  | --------          |            --------                                           |
-| `framework`                                         | Double          | Cross-validation setup: 1 = nested cross-validation, 2 = random hold-out splits, 3 = LOSOCV, 4 = random split-half. |
+| `framework`                                         | Double          | Cross-validation setup: `1` = Nested cross-validation, `2` = random hold-out splits, `3` = LOSOCV, `4` = random split-half. |
 | `outer_folds`                                       | Double          | No. of outer folds (CV2 level); Applicable only for nested cross-validation and Random Hold-Out Splits. |
 | `inner_folds`                                       | Double          | No. of inner folds (CV1 level); Applicable only for nested cross-validation and Random Hold-Out Splits. |
 | `permutation_testing`                               | Double          | No. of permutations for significance testing of each LV (Default: 1000). |
