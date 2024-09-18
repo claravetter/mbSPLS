@@ -33,17 +33,17 @@ Make sure your input data (i.e., Xs, covariates, sites, Diag and DiagNames) does
 | `framework`                                         | Double          | Cross-validation setup: `1` = Nested cross-validation, `2` = random hold-out splits, `3` = LOSOCV, `4` = random split-half. |
 | `outer_folds`                                       | Double          | No. of outer folds (CV2 level); Applicable only for nested cross-validation and Random Hold-Out Splits. |
 | `inner_folds`                                       | Double          | No. of inner folds (CV1 level); Applicable only for nested cross-validation and Random Hold-Out Splits. |
-| `permutation_testing`                               | Double          | No. of permutations for significance testing of each LV (Default: 1000). |
-| `bootstrap_testing`                                 | Double          | No. of bootstrap samples to measure Confidence intervals and bootstrap ratios for feature weights within LV (Default: 500). |
-| `correlation_method`                                | String          | Define which correlation method is used to compute correlation between latent scores of X and Y (used for significance testing of LV). Options: `Spearman` (Default) or `Pearson`. |
-| `selection_train`                                   | Double          | Define how the RHO values between X and Y are collected across the cross-validation structure. Options: `1` = within one CV2 fold) (Default); `2` = across all CV2 folds (Not recommended). |
+| `permutation_testing`                               | Double          | No. of permutations for significance testing of each LV (Default: `1000`). |
+| `bootstrap_testing`                                 | Double          | No. of bootstrap samples to measure Confidence intervals and bootstrap ratios for feature weights within LV (Default: `500`). |
+| `correlation_method`                                | String          | Define which correlation method is used to compute correlation between latent scores of X and Y (used for significance testing of LV). Options: `Spearman` (Default), `Pearson`. |
+| `selection_train`                                   | Double          | Define how the RHO values between X and Y are collected across the cross-validation structure. Options: `1` - Within one CV2 fold (Default); `2` - Across all CV2 folds (Not recommended). |
 | `selection_retrain`                                 | Double          | Define whether you want to pool data from all CV1 folds and retrain the model on these before applying on CV2 testing fold. Options: `1` = retrain on all CV1 folds (Default); `2` = no retraining, use already existing model. |
-| `merge_train`                                       | String          | Define how the RHO values are collected. Options: `mean` or `median` (Default). |
+| `merge_train`                                       | String          | Define how the RHO values are collected. Options: `mean`, `median` (Default). |
 | `merge_retrain`                                     | String          | Define how the best hyperparameters will be chosen on the CV1 level. Options: `best` (Default; i.e., winner takes all), `mean`, `median`, `weighted_mean`. |
 | `validation_set`                                    | Boolean/Double  | Define whether to hold out a validation set. Options: `false` (Default) or a number representing a percentage of the whole sample (e.g., `25`). |
 | `val_stratification`                                | Double          | Define how to extract the validation set. Options: `1`- diagnosis, `2` - sites, `3` - both. |
 | `validation_train`                                  | Double          | Define how to test the model performance on the validation set. Options: `1`: Retrain optimal model on permutations of all samples except the validation set (Default), `2`: use already computed permuted performances from the CV structure |
-| `alpha_value`                                       | Double          | Define overall threshold for significance (Default: 0.05) |
+| `alpha_value`                                       | Double          | Define overall threshold for significance (Default: `0.05`) |
 | `final_merge`                                       |           |  |
 | `final_merge.type`                                  | String          | Define how the final LV model will be chosen on the CV2 level. Options: `mean`, `median`, `weighted_mean`, `best` (Default). |
 | `final_merge.mult_test`                             | String          | Define how correction for multiple testing across CV2 folds is done. Options: `Bonferroni`, `Sidak`, `Holm_Bonferroni`, `Benjamini_Hochberg` (Default), `Benjamini_Yekutieli`, `Storey`, `Fisher`. |
