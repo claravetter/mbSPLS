@@ -8,16 +8,16 @@ ADD TEXT HERE
 | Fieldname                 | Input Format      |          Explanation                                          |
 | --------                  | --------          |            --------                                           |
 | `project_name`              | String            |                                                               |
-| `Xs`                        | Cell array (doubles)      | Your matrices   |
-| `Xs_names`                  | Cell array (strings)      | Names of your matrices                    |
-| `Xs_feature_names`          | Cell array (strings)      | Names of matrix features  |
-| `covariates`                | Cell array (doubles)      | Your covariate(s) (vector/matrix)  |
-| `covariates_names`          | Cell array (strings)      | Name(s) of your covariate(s) |
+| `Xs`                        | Cell array (double)      | Your matrices   |
+| `Xs_names`                  | Cell array (string)      | Names of your matrices                    |
+| `Xs_feature_names`          | Cell array (string)      | Names of matrix features  |
+| `covariates`                | Cell array (double)      | Your covariate(s) (vector/matrix)  |
+| `covariates_names`          | Cell array (string)      | Name(s) of your covariate(s) |
 | `Diag`                      | Double            | Column vector with diagnoses coded via numbers (e.g., [1 3 2 3 1]) |
-| `DiagNames`                 | Cell Array (strings)        | Column cell array with diagnoses/labels, e.g., {'HC', 'ROD', 'CHR', 'HC', 'ROP'}. |
-| `correction_target`         | Cell Array (doubles)            | Define which matrices to remove the covariate effects from (e.g., [1 0 1 0]. |
+| `DiagNames`                 | Cell array (string)        | Column cell array with diagnoses/labels, e.g., {'HC', 'ROD', 'CHR', 'HC', 'ROP'}. |
+| `correction_target`         | Cell array (double)            | Define which matrices to remove the covariate effects from (e.g., [1 0 1 0]. |
 | `sites`                      | Double       | Dummy coded vector for sites. If only one site, enter a column vector of ones, e.g., `ones(height(*YourMatrix*), 1)`. |
-| `final_ID`                   | Cell array (strings)   | IDs of your subjects (e.g. {'400106', '400678', '410345'}) |
+| `final_ID`                   | Cell array (string)   | IDs of your subjects (e.g. {'400106', '400678', '410345'}) |
 | `type_correction`          | String       | Define whether you want to correct for covariates. Options: 'corrected', 'uncorrected'. |
 
 ::::{important}
@@ -60,12 +60,12 @@ Make sure your input data (i.e., Xs, covariates, sites, diagnosis) does not cont
 | `save_CV`                                           | Boolean/Double  | Define whether to save the cross-validation structure. Default: 0 if `CV` is provided. |
 | `optimization_strategy`                             | String          | Define which search algorithm to use in order to optimize sparsity hyperparameters. Possible options: grid_search (default), randomized_search. |
 | `grid_dynamic.onset`                                | Double          | Only applicable if `optimization_strategy` is set to 'grid_search'. Choose the marks for grid applications. Default: 1 (means that one grid is defined at the first iteration and then not changed in later iterations). |
-| `density`                                           | Cell Array      | Only applicable if `optimization_strategy` is set to 'grid_search'. Define the density for grid applications. Can be a single value for all Xs or specific values per matrix. |
-| `grid_dynamic.LVs`                                  | Cell Array      | Only applicable if `optimization_strategy` is set to 'grid_search'. Contains grids created using the specified density values. |
+| `density`                                           | Cell array      | Only applicable if `optimization_strategy` is set to 'grid_search'. Define the density for grid applications. Can be a single value for all Xs or specific values per matrix (e.g., [10 10 10 10]|
+| `grid_dynamic.LVs`                                  | Cell Array      | Only applicable if `optimization_strategy` is set to 'grid_search'. Contains grids created using the specified density values. Is created automatically (`cellfun(@create_grid, input.density)`)|
 | `randomized_search_params.randomized_search_iterations` | Double    | Only applicable if `optimization_strategy` is set to 'randomized_search'. Define the number of iterations for randomized search (Default: 1500). |
 | `randomized_search_params.seed`                     | Double          | Only applicable if `optimization_strategy` is set to 'randomized_search'. Seed for random number generator to ensure reproducibility (Default: 42). |
 | `randomized_search_params.onset`                    | Double          | Only applicable if `optimization_strategy` is set to 'randomized_search'. Define the onset for randomized search (Default: 1). |
-| `randomized_search_params.hyperparam_distributions` | Cell Array      | Only applicable if `optimization_strategy` is set to 'randomized_search'. Defines the distributions for hyperparameters using a uniform distribution. |
+| `randomized_search_params.hyperparam_distributions` | Cell Array      | Only applicable if `optimization_strategy` is set to 'randomized_search'. Defines the distributions for hyperparameters using a uniform distribution. Is created automatically within the for loop. (`makedist('uniform', 1, sqrt(size(input.Xs{num_m},2)))`|
 
 ## Setup
 
