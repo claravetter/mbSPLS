@@ -66,7 +66,7 @@ Make sure your input data (i.e., Xs, covariates, sites, Diag and DiagNames) does
 | If `optimization_strategy` == `grid_dynamic.onset`                                |           |  |
 | `density`                                           | Cell array      | Only applicable if `optimization_strategy` is set to 'grid_search'. Define the density for grid applications. Can be a single value for all Xs or specific values per matrix (e.g., `input.density = [10 10 10 10]`|
 | `grid_dynamic`                                |           |  |
-| > `onset`                                | Double          | Only applicable if `optimization_strategy` is set to 'grid_search'. Choose the marks for grid applications. Default: `1` (means that one grid is defined at the first iteration and then not changed in later iterations). |
+| > `onset`                                | Double          | Only applicable if `optimization_strategy` is set to `grid_search`. Choose the marks for grid applications. Default: `1` (Grid is defined at the first iteration and then not changed in later iterations). |
 | >` LVs`                                  | Cell Array      | Only applicable if `optimization_strategy` is set to 'grid_search'. Contains grids created using the specified density values. Is created automatically (`cellfun(@create_grid, input.density)`)|
 | If `optimization_strategy` == `randomized_search`                            |            | |
 | `randomized_search_params`                            |            | |
