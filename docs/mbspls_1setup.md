@@ -17,7 +17,7 @@ ADD TEXT HERE
 | `DiagNames`                 | Cell Array (strings)        | Column cell array with diagnoses/labels, e.g., {'HC', 'ROD', 'CHR', 'HC', 'ROP'}. |
 | `correction_target`         | Cell Array (doubles)            | Define which matrices to remove the covariate effects from (e.g., [1 0 1 0]. |
 | `sites`                      | Double       | Dummy coded vector for sites. If only one site, enter a column vector of ones, e.g., `ones(height(*YourMatrix*), 1)`. |
-| `final_ID`                   | Cell array (strings)   | IsD of your subjects (e.g. {'400106', '400678', '410345'}) |
+| `final_ID`                   | Cell array (strings)   | IDs of your subjects (e.g. {'400106', '400678', '410345'}) |
 | `type_correction`          | String       | Define whether you want to correct for covariates. Options: 'corrected', 'uncorrected'. |
 
 ::::{important}
