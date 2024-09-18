@@ -52,9 +52,9 @@ Make sure your input data (i.e., Xs, covariates, sites, Diag and DiagNames) does
 | > `majority_vote`                         | String          | Only applicable if `final_merge.type` is not set to best! Options: `on` (use majority voting across folds to determine whether a value in u or v should be zero or non-zero), `off` (no majority vote, merging is done for all features). |
 | `correct_limit`                                     | Double          | Define in which iteration of the process covariate correction should be done. Default: 1 (means correction is done before computing the first LV, then no more correction). |
 | `statistical_testing`                               | Double          | Define how the P value is computed during permutation testing: Options: `1` (Counting method, i.e., number of instances where permuted models outperformed optimized model/number of permutations); `2` (AUC method; permuted RHO values are used to compute AUC for optimal RHO value); Note: Option 2 usually gives slightly lower P values. |
-| `cs_method`                               |          | |
-| `cs_method{1}.method`                               | String          | Scaling of features. Options: `mean-centering` (i.e., z- tranformation; Default), `min_max` (i.e., scaling [0-1))|
-| `cs_method{1}.correction_subgroup`                  | String          | Define whether to correct the covariates based on the betas of a subgroup, or across all individuals. For subgroup-based correction, use the label, e.g., 'HC' or 'ROD'. Otherwise, leave as an empty string: `''`. |
+| `cs_method{1}`                               |          | |
+| > `method`                               | String          | Scaling of features. Options: `mean-centering` (i.e., z- tranformation; Default), `min_max` (i.e., scaling [0-1))|
+| > `correction_subgroup`                  | String          | Define whether to correct the covariates based on the betas of a subgroup, or across all individuals. For subgroup-based correction, use the label, e.g., 'HC' or 'ROD'. Otherwise, leave as an empty string: `''`. |
 | `coun_ts_limit`                                     | Double          | Define after how many non-significant LVs the algorithm should stop (Default: 1; i.e., as soon as one LV is not significant, the operation ends). |
 | `max_n_LVs`                                         | Double          | Maximum number of Latent Variables (LVs) to extract. Set to -1 if there is no limit. |
 | `outer_permutations`                                | Double          | Define the number of permutations in the CV2 folds. Default: 1. Note that the toolbox is not optimized for permutations on folds, and permutating the folds would significantly increase computation time and is not recommended. |
@@ -69,11 +69,12 @@ Make sure your input data (i.e., Xs, covariates, sites, Diag and DiagNames) does
 | `density`                                           | Cell array      | Only applicable if `optimization_strategy` is set to 'grid_search'. Define the density for grid applications. Can be a single value for all Xs or specific values per matrix (e.g., `input.density = [10 10 10 10]`|
 | `grid_dynamic.LVs`                                  | Cell Array      | Only applicable if `optimization_strategy` is set to 'grid_search'. Contains grids created using the specified density values. Is created automatically (`cellfun(@create_grid, input.density)`)|
 | If `optimization_strategy` == `randomized_search`                            |            | |
-| `randomized_search_params.randomized_search_iterations` | Double    | Only applicable if `optimization_strategy` is set to 'randomized_search'. Define the number of iterations for randomized search (Default: 1500). |
-| `randomized_search_params.randomized_search_iterations` | Double    | Only applicable if `optimization_strategy` is set to 'randomized_search'. Define the number of iterations for randomized search (Default: 1500). |
-| `randomized_search_params.seed`                     | Double          | Only applicable if `optimization_strategy` is set to 'randomized_search'. Seed for random number generator to ensure reproducibility (Default: 42). |
-| `randomized_search_params.onset`                    | Double          | Only applicable if `optimization_strategy` is set to 'randomized_search'. Define the onset for randomized search (Default: 1). |
-| `randomized_search_params.hyperparam_distributions` | Cell Array      | Only applicable if `optimization_strategy` is set to 'randomized_search'. Defines the distributions for hyperparameters using a uniform distribution. Is created automatically within the for loop. (`makedist('uniform', 1, sqrt(size(input.Xs{num_m},2)))`|
+| `randomized_search_params`                            |            | |
+| > `randomized_search_iterations` | Double    | Only applicable if `optimization_strategy` is set to 'randomized_search'. Define the number of iterations for randomized search (Default: 1500). |
+| > `randomized_search_iterations` | Double    | Only applicable if `optimization_strategy` is set to 'randomized_search'. Define the number of iterations for randomized search (Default: 1500). |
+| > `seed`                     | Double          | Only applicable if `optimization_strategy` is set to 'randomized_search'. Seed for random number generator to ensure reproducibility (Default: 42). |
+| > `onset`                    | Double          | Only applicable if `optimization_strategy` is set to 'randomized_search'. Define the onset for randomized search (Default: 1). |
+| > `hyperparam_distributions` | Cell Array      | Only applicable if `optimization_strategy` is set to 'randomized_search'. Defines the distributions for hyperparameters using a uniform distribution. Is created automatically within the for loop. (`makedist('uniform', 1, sqrt(size(input.Xs{num_m},2)))`|
 
 ## Setup
 
