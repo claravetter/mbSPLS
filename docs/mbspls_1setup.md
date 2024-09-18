@@ -65,10 +65,10 @@ Make sure your input data (i.e., Xs, covariates, sites, Diag and DiagNames) does
 | `save_CV`                                           | Boolean/Double  | Define whether to save the cross-validation structure. Default: 0 if `CV` is provided. |
 | `optimization_strategy`                             | String          | Define which search algorithm to use in order to optimize sparsity hyperparameters. Options: `grid_search` (Default), `randomized_search`. |
 | If `optimization_strategy` == `grid_dynamic.onset`                                |           |  |
+| `density`                                           | Cell array      | Only applicable if `optimization_strategy` is set to 'grid_search'. Define the density for grid applications. Can be a single value for all Xs or specific values per matrix (e.g., `input.density = [10 10 10 10]`|
 | `grid_dynamic`                                |           |  |
 | > `onset`                                | Double          | Only applicable if `optimization_strategy` is set to 'grid_search'. Choose the marks for grid applications. Default: `1` (means that one grid is defined at the first iteration and then not changed in later iterations). |
 | >` LVs`                                  | Cell Array      | Only applicable if `optimization_strategy` is set to 'grid_search'. Contains grids created using the specified density values. Is created automatically (`cellfun(@create_grid, input.density)`)|
-| `density`                                           | Cell array      | Only applicable if `optimization_strategy` is set to 'grid_search'. Define the density for grid applications. Can be a single value for all Xs or specific values per matrix (e.g., `input.density = [10 10 10 10]`|
 | If `optimization_strategy` == `randomized_search`                            |            | |
 | `randomized_search_params`                            |            | |
 | > `randomized_search_iterations` | Double    | Only applicable if `optimization_strategy` is set to 'randomized_search'. Define the number of iterations for randomized search (Default: 1500). |
