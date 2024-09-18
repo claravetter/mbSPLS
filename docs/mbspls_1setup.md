@@ -9,15 +9,15 @@ ADD TEXT HERE
 | --------                  | --------          |            --------                                           |
 | `project_name`              | String            |                                                               |
 | `Xs`                        | Cell array (doubles)      | Your matrices   |
-| `Xs_names`                  | Cell array (strings)      | Name of your matrices                    |
+| `Xs_names`                  | Cell array (strings)      | Names of your matrices                    |
 | `Xs_feature_names`          | Cell array (strings)      | Names of matrix features  |
-| `covariates`                | Cell array (doubles)      | Your covariates  |
-| `covariates_names`          | Cell array (strings)      | Names of your covariates features |
-| `Diag`                      | Double            | Column vector with diagnoses coded via numbers (e.g., [1 3 2 3 4]) |
+| `covariates`                | Cell array (doubles)      | Your covariate(s) (vector/matrix)  |
+| `covariates_names`          | Cell array (strings)      | Name(s) of your covariate(s) |
+| `Diag`                      | Double            | Column vector with diagnoses coded via numbers (e.g., [1 3 2 3 1]) |
 | `DiagNames`                 | Cell Array (strings)        | Column cell array with diagnoses/labels, e.g., {'HC', 'ROD', 'CHR', 'HC', 'ROP'}. |
 | `correction_target`         | Cell Array (doubles)            | Define which matrices to remove the covariate effects from (e.g., [1 0 1 0]. |
-| `sites`                      | Double       | Dummy coded vector for sites. If only one site, enter a column vector of ones, e.g., `ones(height(X), 1)`. |
-| `final_ID`                   | Cell array (strings)   | ID of your subjects as a cell array, e.g., `cellstr(string(ID))`. |
+| `sites`                      | Double       | Dummy coded vector for sites. If only one site, enter a column vector of ones, e.g., `ones(height(*YourMatrix*), 1)`. |
+| `final_ID`                   | Cell array (strings)   | IsD of your subjects (e.g. {'400106', '400678', '410345'}) |
 | `type_correction`          | String       | Define whether you want to correct for covariates. Options: 'corrected', 'uncorrected'. |
 
 ::::{important}
