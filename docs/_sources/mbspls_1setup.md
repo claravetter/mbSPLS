@@ -1,50 +1,94 @@
 (mbspls_1setup)=
 # Data Input 
 
-Add documentation on setup / input template script. 
+ADD TEXT HERE
 
-```{note}
-Test
-```
-
-::::{important}
-:::{note}
-This text is **standard** _Markdown_
-:::
-::::
-
-## Input
+## Input (Data)
 
 | Fieldname                 | Input Format      |          Explanation                                          |
 | --------                  | --------          |            --------                                           |
-| project_name              | String            |                                                               |
-| standalone_version        | Cell array        | Your matrices (double format)|
-| Xs                        | Cell array (doubles)      | Your matrices (Height: 1; Width: No. of Matrices)  |
-| Xs_names                  | Cell array (strings)      | Name of your matrices (Height: 1; Width: No. of Matrices)                   |
-| Xs_feature_names          | Cell array (strings)      | Names of matrix features (Height: 1; Width: No. of Matrices) |
+| `project_name`              | String            |                                                               |
+| `Xs`                        | Cell array (double)      | Your matrices   |
+| `Xs_names`                  | Cell array (string)      | Names of your matrices                    |
+| `Xs_feature_names`          | Cell array (string)      | Names of matrix features  |
+| `covariates`                | Cell array (double)      | Your covariate(s) (vector/matrix)  |
+| `covariates_names`          | Cell array (string)      | Name(s) of your covariate(s) |
+| `Diag`                      | Double            | Column vector with diagnoses coded via numbers (e.g., [1 3 2 3 1]) |
+| `DiagNames`                 | Cell array (string)        | Column cell array with diagnoses/labels, e.g., {'HC', 'ROD', 'CHR', 'HC', 'ROP'}. |
+| `correction_target`         | Cell array (double)            | Define which matrices to remove the covariate effects from (e.g., [1 0 1 0]. |
+| `sites`                      | Double       | Dummy coded vector for sites. If only one site, enter a column vector of ones, e.g., `ones(height(*YourMatrix*), 1)`. |
+| `final_ID`                   | Cell array (string)   | IDs of your subjects (e.g. {'400106', '400678', '410345'}) |
+| `type_correction`          | String       | Define whether you want to correct for covariates. Options: 'corrected', 'uncorrected'. |
 
 ::::{important}
-Make sure your Xs/Matrices do not contain any missing values. 
-Make sure to either remove the missing values or impute them beforehand. 
+Make sure your input data (i.e., Xs, covariates, sites, diagnosis) does not contain any missing values. Make sure to either remove the missing values or impute them beforehand. 
 ::::
+
+## Input (Machine Learning Framework)
+
+| Fieldname                 | Input Format      |          Explanation                                          |
+| --------                  | --------          |            --------                                           |
+| `framework`                                         | Double          | Cross-validation setup: 1 = nested cross-validation, 2 = random hold-out splits, 3 = LOSOCV, 4 = random split-half. |
+| `outer_folds`                                       | Double          | No. of outer folds (CV2 level); Applicable only for nested cross-validation and Random Hold-Out Splits. |
+| `inner_folds`                                       | Double          | No. of inner folds (CV1 level); Applicable only for nested cross-validation and Random Hold-Out Splits. |
+| `permutation_testing`                               | Double          | No. of permutations for significance testing of each LV (Default: 1000). |
+| `bootstrap_testing`                                 | Double          | No. of bootstrap samples to measure Confidence intervals and bootstrap ratios for feature weights within LV (Default: 500 or 100). |
+| `correlation_method`                                | String          | Define which correlation method is used to compute correlation between latent scores of X and Y (used for significance testing of LV): 'Spearman' (Default) or 'Pearson'. |
+| `selection_train`                                   | Double          | Define how the RHO values between X and Y are collected across the cross-validation structure. Default: 1. Possible options: 1) within one CV2 fold, 2) across all CV2 folds (option 2 not recommended). |
+| `selection_retrain`                                 | Double          | Define whether you want to pool data from all CV1 folds and retrain the model on these before applying on CV2 testing fold. Default: 1. Possible options: 1) retrain on all CV1 folds, 2) no retraining, use already existing model. |
+| `merge_train`                                       | String          | Define how the RHO values are collected. Default: median. Possible options: mean, median. |
+| `merge_retrain`                                     | String          | Define how the best hyperparameters will be chosen on the CV1 level. Default: best (winner takes all). Possible options: mean, median, weighted_mean, best. |
+| `validation_set`                                    | Boolean/Double  | Define whether to hold out a validation set. Default: false. Possible options: false or a number representing a percentage of the whole sample (e.g., 25, 50). |
+| `val_stratification`                                | Double          | Define how to extract the validation set. Options: 1) diagnosis, 2) sites, 3) both. |
+| `validation_train`                                  | Double          | Define how to test the model performance on the validation set. Options: 1) Retrain optimal model on permutations of all samples except the validation set, 2) use already computed permuted performances from the CV structure. Default: 1. |
+| `alpha_value`                                       | Double          | Define overall threshold for significance. Default: 0.05. |
+| `final_merge.type`                                  | String          | Define how the final LV model will be chosen on the CV2 level. Default: best. Possible options: mean, median, weighted_mean, best. |
+| `final_merge.mult_test`                             | String          | Define how correction for multiple testing across CV2 folds is done. Default: Benjamini_Hochberg. Possible options: Bonferroni, Sidak, Holm_Bonferroni, Benjamini_Hochberg, Benjamini_Yekutieli, Storey, Fisher. |
+| `final_merge.significant_only`                      | String          | Only applicable if `final_merge.type` is not set to best! Defines type of CV2 fold merging. Options: on (use only significant folds for merging), off (use all folds for merging). |
+| `final_merge.majority_vote`                         | String          | Only applicable if `final_merge.type` is not set to best! Options: on (use majority voting across folds to determine whether a value in u or v should be zero or non-zero), off (no majority vote, merging is done for all features). |
+| `correct_limit`                                     | Double          | Define in which iteration of the process covariate correction should be done. Default: 1 (means correction is done before computing the first LV, then no more correction). |
+| `statistical_testing`                               | Double          | Define how the P value is computed during permutation testing: 1) Counting method (number of instances where permuted models outperformed optimized model/number of permutations), 2) AUC method (permuted RHO values are used to compute AUC for optimal RHO value). Option 2 usually gives slightly lower P values. |
+| `cs_method{1}.method`                               | String          | Scaling of features. Default: mean-centering. Possible options: mean-centering, min_max (scaling from 0 to 1). Preferred scaling is mean-centering! |
+| `cs_method{1}.correction_subgroup`                  | String          | Define whether to correct the covariates based on the betas of a subgroup, or across all individuals. For subgroup-based correction, use the label, e.g., 'HC' or 'ROD'. Otherwise, leave as an empty string: ''. |
+| `coun_ts_limit`                                     | Double          | Define after how many non-significant LVs the algorithm should stop. Default: 1 (means that as soon as one LV is not significant, the operation ends). |
+| `max_n_LVs`                                         | Double          | Maximum number of Latent Variables (LVs) to extract. Set to -1 if there is no limit. |
+| `outer_permutations`                                | Double          | Define the number of permutations in the CV2 folds. Default: 1. Note that the toolbox is not optimized for permutations on folds, and permutating the folds would significantly increase computation time and is not recommended. |
+| `inner_permutations`                                | Double          | Define the number of permutations in the CV1 folds. Default: 1. Similar to outer permutations, the toolbox is not optimized for permutations on folds. |
+| `save_CV`                                           | Boolean/Double  | Define whether to save the cross-validation structure. Default: 1. |
+| `matrix_norm`                                       | String/Double   | Define which matrix norm is used to compute the association between latent scores of Xs (used for significance testing of LV). Default: 'fro' if there are more than 2 Xs; otherwise, 0 (in this case, the correlation coefficient as defined above is used). |
+| `CV`                                                | Structure       | If the cross-validation structure `CV` is already defined, this input sets it directly. |
+| `save_CV`                                           | Boolean/Double  | Define whether to save the cross-validation structure. Default: 0 if `CV` is provided. |
+| `optimization_strategy`                             | String          | Define which search algorithm to use in order to optimize sparsity hyperparameters. Possible options: grid_search (default), randomized_search. |
+| `grid_dynamic.onset`                                | Double          | Only applicable if `optimization_strategy` is set to 'grid_search'. Choose the marks for grid applications. Default: 1 (means that one grid is defined at the first iteration and then not changed in later iterations). |
+| `density`                                           | Cell array      | Only applicable if `optimization_strategy` is set to 'grid_search'. Define the density for grid applications. Can be a single value for all Xs or specific values per matrix (e.g., [10 10 10 10]|
+| `grid_dynamic.LVs`                                  | Cell Array      | Only applicable if `optimization_strategy` is set to 'grid_search'. Contains grids created using the specified density values. Is created automatically (`cellfun(@create_grid, input.density)`)|
+| `randomized_search_params.randomized_search_iterations` | Double    | Only applicable if `optimization_strategy` is set to 'randomized_search'. Define the number of iterations for randomized search (Default: 1500). |
+| `randomized_search_params.seed`                     | Double          | Only applicable if `optimization_strategy` is set to 'randomized_search'. Seed for random number generator to ensure reproducibility (Default: 42). |
+| `randomized_search_params.onset`                    | Double          | Only applicable if `optimization_strategy` is set to 'randomized_search'. Define the onset for randomized search (Default: 1). |
+| `randomized_search_params.hyperparam_distributions` | Cell Array      | Only applicable if `optimization_strategy` is set to 'randomized_search'. Defines the distributions for hyperparameters using a uniform distribution. Is created automatically within the for loop. (`makedist('uniform', 1, sqrt(size(input.Xs{num_m},2)))`|
 
 ## Setup
 
 | Fieldname                 | Input Format          |          Explanation   |
 | --------                  | --------              |            --------        |
-| date                      | Datefomat             | Default: 'MBSPLS_DEV_Aug2024_correctionscale_nosignflip_R2022a'                    |
-| partition                 | String                | Enter the partition on your server (e.g, jobs-matlab, jobs-cpu-long)                      |
-| max_sim_jobs              | Double                | Define how many parallel jobs are created (Default: 10)                   |
-| parallel_jobs             | Double                | Define how many jobs run in parallel at the same time (soft threshold) (Default: 25)                   |
-| mem_request               | Double                | Memory request for master and slave jobs (in GB; Default: 10)                   |
-| matlab_version            | String                | Define MATLAB runtime engine (e.g, R2022a)                   |
-| matlab_path               | String                | Path to MATLAB folder on your server                   |
-| cache_path                | String                | Path for output text files during hyperopt, permutation, bootstrapping => generally same as scratch space                   |
-| scratch_space             | String                | Path for temporary file storage (hyperopt, permutation, bootstrapping) during analysis                   |
-| compilation_subpath       | String                | Default: 'for_testing'|
-| mbspls_standalone_path    | String                | Path of the SPLS Toolbox|
-| analysis_folder           | String                | Path to your analysis folder, (e.g., fullfile(input.path_core, 'Analysis', input.project_name,  setup.date))|
-| data_folder               | String                | Path to your data folder, (e.g., fullfile(input.path_core, 'Data', input.project_name,  setup.date))|
-| nodes                     | Double                | Default: 1|
-| account                   | String                | Name of your account on your server|
-| user                      | String                | Your username on your server|
+| `standalone_version`     | String         | Default: 'MBSPLS_DEV_Aug2024_correctionscale_nosignflip_R2022a'. |
+| `date`                   | Dateformat     | Date of the analysis or script execution. |
+| `partition`              | String         | Enter the partition on your server (e.g., jobs-matlab, jobs-cpu-long). |
+| `max_sim_jobs`           | Double         | Define how many parallel jobs are created. Default: 10. |
+| `parallel_jobs`          | Double         | Define how many jobs run in parallel at the same time (soft threshold). Default: 25. |
+| `mem_request`            | Double         | Memory request for master and slave jobs (in GB). Default: 10. |
+| `matlab_version`         | String         | Define MATLAB runtime engine (e.g., R2022a). |
+| `matlab_path`            | String         | Path to MATLAB folder on your server. |
+| `cache_path`             | String         | Path for output text files during hyperopt, permutation, bootstrapping (generally the same as scratch space). |
+| `scratch_space`          | String         | Path for temporary file storage (hyperopt, permutation, bootstrapping) during analysis. |
+| `compilation_subpath`    | String         | Default: 'for_testing'. |
+| `mbspls_standalone_path` | String         | Full path to the SPLS Toolbox. |
+| `analysis_folder`        | String         | Path to your analysis folder (e.g., fullfile(input.path_core, 'Analysis', input.project_name, setup.date)). |
+| `data_folder`            | String         | Path to your data folder (e.g., fullfile(input.path_core, 'Data', input.project_name, setup.date)). |
+| `nodes`                  | Double         | Default: 1. |
+| `account`                | String         | Name of your account on your server. |
+| `user`                   | String         | Your username on your server. |
+
+```{note}
+Test
+```

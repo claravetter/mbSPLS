@@ -394,7 +394,8 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#input">Input</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#input-data">Input (Data)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#input-machine-learning-framework">Input (Machine Learning Framework)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
 </ul>
             </nav>
@@ -409,20 +410,9 @@ document.write(`
                   
   <div class="tex2jax_ignore mathjax_ignore section" id="data-input">
 <span id="mbspls-1setup"></span><h1>Data Input<a class="headerlink" href="#data-input" title="Permalink to this heading">#</a></h1>
-<p>Add documentation on setup / input template script.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Test</p>
-</div>
-<div class="admonition important">
-<p class="admonition-title">Important</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This text is <strong>standard</strong> <em>Markdown</em></p>
-</div>
-</div>
-<div class="section" id="input">
-<h2>Input<a class="headerlink" href="#input" title="Permalink to this heading">#</a></h2>
+<p>ADD TEXT HERE</p>
+<div class="section" id="input-data">
+<h2>Input (Data)<a class="headerlink" href="#input-data" title="Permalink to this heading">#</a></h2>
 <table class="colwidths-auto table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Fieldname</p></th>
@@ -431,33 +421,225 @@ document.write(`
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>project_name</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">project_name</span></code></p></td>
 <td><p>String</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>standalone_version</p></td>
-<td><p>Cell array</p></td>
-<td><p>Your matrices (double format)</p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Xs</span></code></p></td>
+<td><p>Cell array (double)</p></td>
+<td><p>Your matrices</p></td>
 </tr>
-<tr class="row-even"><td><p>Xs</p></td>
-<td><p>Cell array (doubles)</p></td>
-<td><p>Your matrices (Height: 1; Width: No. of Matrices)</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Xs_names</span></code></p></td>
+<td><p>Cell array (string)</p></td>
+<td><p>Names of your matrices</p></td>
 </tr>
-<tr class="row-odd"><td><p>Xs_names</p></td>
-<td><p>Cell array (strings)</p></td>
-<td><p>Name of your matrices (Height: 1; Width: No. of Matrices)</p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Xs_feature_names</span></code></p></td>
+<td><p>Cell array (string)</p></td>
+<td><p>Names of matrix features</p></td>
 </tr>
-<tr class="row-even"><td><p>Xs_feature_names</p></td>
-<td><p>Cell array (strings)</p></td>
-<td><p>Names of matrix features (Height: 1; Width: No. of Matrices)</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">covariates</span></code></p></td>
+<td><p>Cell array (double)</p></td>
+<td><p>Your covariate(s) (vector/matrix)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">covariates_names</span></code></p></td>
+<td><p>Cell array (string)</p></td>
+<td><p>Name(s) of your covariate(s)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Diag</span></code></p></td>
+<td><p>Double</p></td>
+<td><p>Column vector with diagnoses coded via numbers (e.g., [1 3 2 3 1])</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">DiagNames</span></code></p></td>
+<td><p>Cell array (string)</p></td>
+<td><p>Column cell array with diagnoses/labels, e.g., {‘HC’, ‘ROD’, ‘CHR’, ‘HC’, ‘ROP’}.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">correction_target</span></code></p></td>
+<td><p>Cell array (double)</p></td>
+<td><p>Define which matrices to remove the covariate effects from (e.g., [1 0 1 0].</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">sites</span></code></p></td>
+<td><p>Double</p></td>
+<td><p>Dummy coded vector for sites. If only one site, enter a column vector of ones, e.g., <code class="docutils literal notranslate"><span class="pre">ones(height(*YourMatrix*),</span> <span class="pre">1)</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">final_ID</span></code></p></td>
+<td><p>Cell array (string)</p></td>
+<td><p>IDs of your subjects (e.g. {‘400106’, ‘400678’, ‘410345’})</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">type_correction</span></code></p></td>
+<td><p>String</p></td>
+<td><p>Define whether you want to correct for covariates. Options: ‘corrected’, ‘uncorrected’.</p></td>
 </tr>
 </tbody>
 </table>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>Make sure your Xs/Matrices do not contain any missing values.
-Make sure to either remove the missing values or impute them beforehand.</p>
+<p>Make sure your input data (i.e., Xs, covariates, sites, diagnosis) does not contain any missing values. Make sure to either remove the missing values or impute them beforehand.</p>
 </div>
+</div>
+<div class="section" id="input-machine-learning-framework">
+<h2>Input (Machine Learning Framework)<a class="headerlink" href="#input-machine-learning-framework" title="Permalink to this heading">#</a></h2>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Fieldname</p></th>
+<th class="head"><p>Input Format</p></th>
+<th class="head"><p>Explanation</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">framework</span></code></p></td>
+<td><p>Double</p></td>
+<td><p>Cross-validation setup: 1 = nested cross-validation, 2 = random hold-out splits, 3 = LOSOCV, 4 = random split-half.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">outer_folds</span></code></p></td>
+<td><p>Double</p></td>
+<td><p>No. of outer folds (CV2 level); Applicable only for nested cross-validation and Random Hold-Out Splits.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">inner_folds</span></code></p></td>
+<td><p>Double</p></td>
+<td><p>No. of inner folds (CV1 level); Applicable only for nested cross-validation and Random Hold-Out Splits.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">permutation_testing</span></code></p></td>
+<td><p>Double</p></td>
+<td><p>No. of permutations for significance testing of each LV (Default: 1000).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bootstrap_testing</span></code></p></td>
+<td><p>Double</p></td>
+<td><p>No. of bootstrap samples to measure Confidence intervals and bootstrap ratios for feature weights within LV (Default: 500 or 100).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">correlation_method</span></code></p></td>
+<td><p>String</p></td>
+<td><p>Define which correlation method is used to compute correlation between latent scores of X and Y (used for significance testing of LV): ‘Spearman’ (Default) or ‘Pearson’.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">selection_train</span></code></p></td>
+<td><p>Double</p></td>
+<td><p>Define how the RHO values between X and Y are collected across the cross-validation structure. Default: 1. Possible options: 1) within one CV2 fold, 2) across all CV2 folds (option 2 not recommended).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">selection_retrain</span></code></p></td>
+<td><p>Double</p></td>
+<td><p>Define whether you want to pool data from all CV1 folds and retrain the model on these before applying on CV2 testing fold. Default: 1. Possible options: 1) retrain on all CV1 folds, 2) no retraining, use already existing model.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">merge_train</span></code></p></td>
+<td><p>String</p></td>
+<td><p>Define how the RHO values are collected. Default: median. Possible options: mean, median.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">merge_retrain</span></code></p></td>
+<td><p>String</p></td>
+<td><p>Define how the best hyperparameters will be chosen on the CV1 level. Default: best (winner takes all). Possible options: mean, median, weighted_mean, best.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">validation_set</span></code></p></td>
+<td><p>Boolean/Double</p></td>
+<td><p>Define whether to hold out a validation set. Default: false. Possible options: false or a number representing a percentage of the whole sample (e.g., 25, 50).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">val_stratification</span></code></p></td>
+<td><p>Double</p></td>
+<td><p>Define how to extract the validation set. Options: 1) diagnosis, 2) sites, 3) both.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">validation_train</span></code></p></td>
+<td><p>Double</p></td>
+<td><p>Define how to test the model performance on the validation set. Options: 1) Retrain optimal model on permutations of all samples except the validation set, 2) use already computed permuted performances from the CV structure. Default: 1.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">alpha_value</span></code></p></td>
+<td><p>Double</p></td>
+<td><p>Define overall threshold for significance. Default: 0.05.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">final_merge.type</span></code></p></td>
+<td><p>String</p></td>
+<td><p>Define how the final LV model will be chosen on the CV2 level. Default: best. Possible options: mean, median, weighted_mean, best.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">final_merge.mult_test</span></code></p></td>
+<td><p>String</p></td>
+<td><p>Define how correction for multiple testing across CV2 folds is done. Default: Benjamini_Hochberg. Possible options: Bonferroni, Sidak, Holm_Bonferroni, Benjamini_Hochberg, Benjamini_Yekutieli, Storey, Fisher.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">final_merge.significant_only</span></code></p></td>
+<td><p>String</p></td>
+<td><p>Only applicable if <code class="docutils literal notranslate"><span class="pre">final_merge.type</span></code> is not set to best! Defines type of CV2 fold merging. Options: on (use only significant folds for merging), off (use all folds for merging).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">final_merge.majority_vote</span></code></p></td>
+<td><p>String</p></td>
+<td><p>Only applicable if <code class="docutils literal notranslate"><span class="pre">final_merge.type</span></code> is not set to best! Options: on (use majority voting across folds to determine whether a value in u or v should be zero or non-zero), off (no majority vote, merging is done for all features).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">correct_limit</span></code></p></td>
+<td><p>Double</p></td>
+<td><p>Define in which iteration of the process covariate correction should be done. Default: 1 (means correction is done before computing the first LV, then no more correction).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">statistical_testing</span></code></p></td>
+<td><p>Double</p></td>
+<td><p>Define how the P value is computed during permutation testing: 1) Counting method (number of instances where permuted models outperformed optimized model/number of permutations), 2) AUC method (permuted RHO values are used to compute AUC for optimal RHO value). Option 2 usually gives slightly lower P values.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">cs_method{1}.method</span></code></p></td>
+<td><p>String</p></td>
+<td><p>Scaling of features. Default: mean-centering. Possible options: mean-centering, min_max (scaling from 0 to 1). Preferred scaling is mean-centering!</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">cs_method{1}.correction_subgroup</span></code></p></td>
+<td><p>String</p></td>
+<td><p>Define whether to correct the covariates based on the betas of a subgroup, or across all individuals. For subgroup-based correction, use the label, e.g., ‘HC’ or ‘ROD’. Otherwise, leave as an empty string: ‘’.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">coun_ts_limit</span></code></p></td>
+<td><p>Double</p></td>
+<td><p>Define after how many non-significant LVs the algorithm should stop. Default: 1 (means that as soon as one LV is not significant, the operation ends).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">max_n_LVs</span></code></p></td>
+<td><p>Double</p></td>
+<td><p>Maximum number of Latent Variables (LVs) to extract. Set to -1 if there is no limit.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">outer_permutations</span></code></p></td>
+<td><p>Double</p></td>
+<td><p>Define the number of permutations in the CV2 folds. Default: 1. Note that the toolbox is not optimized for permutations on folds, and permutating the folds would significantly increase computation time and is not recommended.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">inner_permutations</span></code></p></td>
+<td><p>Double</p></td>
+<td><p>Define the number of permutations in the CV1 folds. Default: 1. Similar to outer permutations, the toolbox is not optimized for permutations on folds.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">save_CV</span></code></p></td>
+<td><p>Boolean/Double</p></td>
+<td><p>Define whether to save the cross-validation structure. Default: 1.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">matrix_norm</span></code></p></td>
+<td><p>String/Double</p></td>
+<td><p>Define which matrix norm is used to compute the association between latent scores of Xs (used for significance testing of LV). Default: ‘fro’ if there are more than 2 Xs; otherwise, 0 (in this case, the correlation coefficient as defined above is used).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">CV</span></code></p></td>
+<td><p>Structure</p></td>
+<td><p>If the cross-validation structure <code class="docutils literal notranslate"><span class="pre">CV</span></code> is already defined, this input sets it directly.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">save_CV</span></code></p></td>
+<td><p>Boolean/Double</p></td>
+<td><p>Define whether to save the cross-validation structure. Default: 0 if <code class="docutils literal notranslate"><span class="pre">CV</span></code> is provided.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">optimization_strategy</span></code></p></td>
+<td><p>String</p></td>
+<td><p>Define which search algorithm to use in order to optimize sparsity hyperparameters. Possible options: grid_search (default), randomized_search.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">grid_dynamic.onset</span></code></p></td>
+<td><p>Double</p></td>
+<td><p>Only applicable if <code class="docutils literal notranslate"><span class="pre">optimization_strategy</span></code> is set to ‘grid_search’. Choose the marks for grid applications. Default: 1 (means that one grid is defined at the first iteration and then not changed in later iterations).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">density</span></code></p></td>
+<td><p>Cell array</p></td>
+<td><p>Only applicable if <code class="docutils literal notranslate"><span class="pre">optimization_strategy</span></code> is set to ‘grid_search’. Define the density for grid applications. Can be a single value for all Xs or specific values per matrix (e.g., [10 10 10 10]</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">grid_dynamic.LVs</span></code></p></td>
+<td><p>Cell Array</p></td>
+<td><p>Only applicable if <code class="docutils literal notranslate"><span class="pre">optimization_strategy</span></code> is set to ‘grid_search’. Contains grids created using the specified density values. Is created automatically (<code class="docutils literal notranslate"><span class="pre">cellfun(&#64;create_grid,</span> <span class="pre">input.density)</span></code>)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">randomized_search_params.randomized_search_iterations</span></code></p></td>
+<td><p>Double</p></td>
+<td><p>Only applicable if <code class="docutils literal notranslate"><span class="pre">optimization_strategy</span></code> is set to ‘randomized_search’. Define the number of iterations for randomized search (Default: 1500).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">randomized_search_params.seed</span></code></p></td>
+<td><p>Double</p></td>
+<td><p>Only applicable if <code class="docutils literal notranslate"><span class="pre">optimization_strategy</span></code> is set to ‘randomized_search’. Seed for random number generator to ensure reproducibility (Default: 42).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">randomized_search_params.onset</span></code></p></td>
+<td><p>Double</p></td>
+<td><p>Only applicable if <code class="docutils literal notranslate"><span class="pre">optimization_strategy</span></code> is set to ‘randomized_search’. Define the onset for randomized search (Default: 1).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">randomized_search_params.hyperparam_distributions</span></code></p></td>
+<td><p>Cell Array</p></td>
+<td><p>Only applicable if <code class="docutils literal notranslate"><span class="pre">optimization_strategy</span></code> is set to ‘randomized_search’. Defines the distributions for hyperparameters using a uniform distribution. Is created automatically within the for loop. (<code class="docutils literal notranslate"><span class="pre">makedist('uniform',</span> <span class="pre">1,</span> <span class="pre">sqrt(size(input.Xs{num_m},2)))</span></code></p></td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="section" id="setup">
 <h2>Setup<a class="headerlink" href="#setup" title="Permalink to this heading">#</a></h2>
@@ -469,72 +651,80 @@ Make sure to either remove the missing values or impute them beforehand.</p>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>date</p></td>
-<td><p>Datefomat</p></td>
-<td><p>Default: ‘MBSPLS_DEV_Aug2024_correctionscale_nosignflip_R2022a’</p></td>
-</tr>
-<tr class="row-odd"><td><p>partition</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">standalone_version</span></code></p></td>
 <td><p>String</p></td>
-<td><p>Enter the partition on your server (e.g, jobs-matlab, jobs-cpu-long)</p></td>
+<td><p>Default: ‘MBSPLS_DEV_Aug2024_correctionscale_nosignflip_R2022a’.</p></td>
 </tr>
-<tr class="row-even"><td><p>max_sim_jobs</p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">date</span></code></p></td>
+<td><p>Dateformat</p></td>
+<td><p>Date of the analysis or script execution.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">partition</span></code></p></td>
+<td><p>String</p></td>
+<td><p>Enter the partition on your server (e.g., jobs-matlab, jobs-cpu-long).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">max_sim_jobs</span></code></p></td>
 <td><p>Double</p></td>
-<td><p>Define how many parallel jobs are created (Default: 10)</p></td>
+<td><p>Define how many parallel jobs are created. Default: 10.</p></td>
 </tr>
-<tr class="row-odd"><td><p>parallel_jobs</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">parallel_jobs</span></code></p></td>
 <td><p>Double</p></td>
-<td><p>Define how many jobs run in parallel at the same time (soft threshold) (Default: 25)</p></td>
+<td><p>Define how many jobs run in parallel at the same time (soft threshold). Default: 25.</p></td>
 </tr>
-<tr class="row-even"><td><p>mem_request</p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">mem_request</span></code></p></td>
 <td><p>Double</p></td>
-<td><p>Memory request for master and slave jobs (in GB; Default: 10)</p></td>
+<td><p>Memory request for master and slave jobs (in GB). Default: 10.</p></td>
 </tr>
-<tr class="row-odd"><td><p>matlab_version</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">matlab_version</span></code></p></td>
 <td><p>String</p></td>
-<td><p>Define MATLAB runtime engine (e.g, R2022a)</p></td>
+<td><p>Define MATLAB runtime engine (e.g., R2022a).</p></td>
 </tr>
-<tr class="row-even"><td><p>matlab_path</p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">matlab_path</span></code></p></td>
 <td><p>String</p></td>
-<td><p>Path to MATLAB folder on your server</p></td>
+<td><p>Path to MATLAB folder on your server.</p></td>
 </tr>
-<tr class="row-odd"><td><p>cache_path</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">cache_path</span></code></p></td>
 <td><p>String</p></td>
-<td><p>Path for output text files during hyperopt, permutation, bootstrapping =&gt; generally same as scratch space</p></td>
+<td><p>Path for output text files during hyperopt, permutation, bootstrapping (generally the same as scratch space).</p></td>
 </tr>
-<tr class="row-even"><td><p>scratch_space</p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">scratch_space</span></code></p></td>
 <td><p>String</p></td>
-<td><p>Path for temporary file storage (hyperopt, permutation, bootstrapping) during analysis</p></td>
+<td><p>Path for temporary file storage (hyperopt, permutation, bootstrapping) during analysis.</p></td>
 </tr>
-<tr class="row-odd"><td><p>compilation_subpath</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">compilation_subpath</span></code></p></td>
 <td><p>String</p></td>
-<td><p>Default: ‘for_testing’</p></td>
+<td><p>Default: ‘for_testing’.</p></td>
 </tr>
-<tr class="row-even"><td><p>mbspls_standalone_path</p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">mbspls_standalone_path</span></code></p></td>
 <td><p>String</p></td>
-<td><p>Path of the SPLS Toolbox</p></td>
+<td><p>Full path to the SPLS Toolbox.</p></td>
 </tr>
-<tr class="row-odd"><td><p>analysis_folder</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">analysis_folder</span></code></p></td>
 <td><p>String</p></td>
-<td><p>Path to your analysis folder, (e.g., fullfile(input.path_core, ‘Analysis’, input.project_name,  setup.date))</p></td>
+<td><p>Path to your analysis folder (e.g., fullfile(input.path_core, ‘Analysis’, input.project_name, setup.date)).</p></td>
 </tr>
-<tr class="row-even"><td><p>data_folder</p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">data_folder</span></code></p></td>
 <td><p>String</p></td>
-<td><p>Path to your data folder, (e.g., fullfile(input.path_core, ‘Data’, input.project_name,  setup.date))</p></td>
+<td><p>Path to your data folder (e.g., fullfile(input.path_core, ‘Data’, input.project_name, setup.date)).</p></td>
 </tr>
-<tr class="row-odd"><td><p>nodes</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">nodes</span></code></p></td>
 <td><p>Double</p></td>
-<td><p>Default: 1</p></td>
+<td><p>Default: 1.</p></td>
 </tr>
-<tr class="row-even"><td><p>account</p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">account</span></code></p></td>
 <td><p>String</p></td>
-<td><p>Name of your account on your server</p></td>
+<td><p>Name of your account on your server.</p></td>
 </tr>
-<tr class="row-odd"><td><p>user</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">user</span></code></p></td>
 <td><p>String</p></td>
-<td><p>Your username on your server</p></td>
+<td><p>Your username on your server.</p></td>
 </tr>
 </tbody>
 </table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Test</p>
+</div>
 </div>
 </div>
 
@@ -605,7 +795,8 @@ Make sure to either remove the missing values or impute them beforehand.</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#input">Input</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#input-data">Input (Data)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#input-machine-learning-framework">Input (Machine Learning Framework)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
 </ul>
   </nav></div>
