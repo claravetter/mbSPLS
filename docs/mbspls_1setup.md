@@ -5,7 +5,8 @@ This section provides a comprehensive overview of the `input` and `setup` parame
 
 Once defined, the `input` and `setup` parameters are saved into a `datafile.mat` file using REPLACE?, which is then utilized in the subsequent [Model Training](mbspls_2run.md) step to ensure a seamless workflow.
 
-## Input (Data)
+## Input
+### Data
 
 | Fieldname                 | Input Format      |          Explanation                                          |
 | --------                  | --------          |            --------                                           |
@@ -26,7 +27,7 @@ Make sure your input data (i.e., Xs, covariates, sites, Diag and DiagNames) does
 ::::
 
 
-## Input (Machine Learning Framework)
+### Machine Learning Framework
 
 | Fieldname                 | Input Format      |          Explanation                                          |
 | --------                  | --------          |            --------                                           |
