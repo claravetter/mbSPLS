@@ -1,7 +1,9 @@
 (mbspls_1setup)=
 # Data Input 
 
-ADD TEXT HERE
+This section provides a comprehensive overview of the `input` and `setup` parameters used in the mb-sPLS toolbox. These parameters enable you to tailor the analysis workflow to your specific needs, including cross-validation settings, model optimization strategies, data scaling methods, and memory management options. Properly configuring these parameters is essential for optimizing the performance and interpretability of your sPLS analysis. Each parameter is outlined with its possible options, default values, and specific role within the toolbox to assist you in the configuration process.
+
+Once defined, the `input` and `setup` parameters are saved into a `datafile.mat` file using XYZ, which is then utilized in the subsequent [Model Training](mbspls_2run.md) step to ensure a seamless workflow.
 
 ## Input (Data)
 
