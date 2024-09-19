@@ -1,9 +1,9 @@
 (license)=
 # License
 
-NeuroMiner is copyright, distributed under the GNU General Public License.
+This mbSPLS implementation is copyright, distributed under the GNU General Public License.
 
-This does not apply to any third-party software used by NeuroMiner. These
+This does not apply to any third-party software used by the mbSPLS implementations. These
 is subject to the original license they were first distributed under.
 
 ---

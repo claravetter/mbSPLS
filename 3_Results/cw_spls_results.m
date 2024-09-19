@@ -26,6 +26,7 @@ if ~exist(Path2Figures)
     mkdir(Path2Figures)
 end
 
+
 % CHECK WHETHER NUMBER OF TOP FEATURES FOR FIGURES WAS DEFINED (BARPLOT)
 if isempty(varargin)
     maxFeatures = []; 
@@ -40,10 +41,8 @@ switch input.type_correction
         correct_log = true;
     case 'correct'
         correct_log = true;
-    case 'uncorrected' 
+    case {'uncorrected','uncorrect'}
         correct_log = false;
-    case 'uncorrect' 
-        correct_log = false;    
 end
 
 % LOOP THROUGH MATRICES
