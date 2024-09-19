@@ -36,7 +36,7 @@ end
 switch input.type_correction
     case 'correct'
         correct_log = true;
-    case 'uncorrected'
+    case {'uncorrected','uncorrect'}
         correct_log = false;
 end
 
