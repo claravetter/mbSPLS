@@ -118,8 +118,8 @@ switch type
                 xlabel('Feature Weights', 'FontSize', 12, 'FontName', 'Arial', 'Interpreter', 'none');
 
                 % Add title with non-bold font
-                if contains(input.Xs_names{subplot_idx}, 'X_')
-                    header = strrep(input.Xs_names{subplot_idx}, 'X_', '');
+                if contains(input.Xs_names{subplot_idx}, '_')
+                    header = strrep(input.Xs_names{subplot_idx}, '_', ' ');
                 else
                     header = input.Xs_names{subplot_idx};
                 end

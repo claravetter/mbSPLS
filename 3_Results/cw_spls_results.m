@@ -1,4 +1,7 @@
 function cw_spls_results(filepath, varargin)
+% TO DO
+% Figures: Number of Matrices
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % LOAD FILEPATH
 if iscellstr(filepath)
@@ -33,10 +36,14 @@ end
 %% BEFORE BOOTSTRAPPING
 % CORRECTION
 switch input.type_correction
+    case 'corrected'
+        correct_log = true;
     case 'correct'
         correct_log = true;
-    case 'uncorrected'
+    case 'uncorrected' 
         correct_log = false;
+    case 'uncorrect' 
+        correct_log = false;    
 end
 
 % LOOP THROUGH MATRICES

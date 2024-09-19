@@ -74,9 +74,9 @@ for lv_idx=1:height(output.final_parameters)%-1)
 
     % Save Table in Excel Sheet
     if isempty(boot)
-        writetable(T, fullfile(finalpath, 'Latent_Scores.xlsx'), 'Sheet', ['LV',num2str(i)], 'WriteRowNames',true)
+        writetable(T, fullfile(finalpath, 'Latent_Scores.xlsx'), 'Sheet', ['LV',num2str(lv_idx)], 'WriteRowNames',true)
     else
-        writetable(T, fullfile(finalpath, ['Latent_Scores_', boot, '.xlsx']),'Sheet', ['LV',num2str(i)], 'WriteRowNames',true)
+        writetable(T, fullfile(finalpath, ['Latent_Scores_', boot, '.xlsx']),'Sheet', ['LV',num2str(lv_idx)], 'WriteRowNames',true)
     end
     LS.(['LV', num2str(lv_idx)]) = T; clear T
 end
