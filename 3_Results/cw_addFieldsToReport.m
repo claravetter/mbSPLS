@@ -11,7 +11,12 @@ function cw_addFieldsToReport(chapter, structData, sectionTitle, fields)
     else
         error('sectionTitle must be a string or character array');
     end
-    
+
+    if contains(sectionTitle, 'Input')
+        para = ['Sample: N = ', num2str(height(structData.Xs{1})), ' [', strjoin(unique(structData.DiagNames), ', '), ']'];
+        add(chapter, para);
+    end
+
     % Get the field names
     % fields = fieldnames(structData);
     for i = 1:numel(fields)
@@ -28,30 +33,57 @@ function cw_addFieldsToReport(chapter, structData, sectionTitle, fields)
                 value = structData.(fieldName);
             end
 
-            if contains(fieldName, 'Xs') 
-                x = 'Matrices: '; yy = cellstr(''); 
+            if strcmp(fieldName, 'Xs') 
+                para = Paragraph('Matrices [Xs]:');
+                add(chapter, para)
                 for x_idx = 1:numel(structData.Xs)
-                    size = ['[', num2str(height(structData.Xs{x_idx})), 'x', num2str(width(structData.Xs{x_idx})), ']'];
-                    y = {[newline, '    Matrix ', num2str(x_idx), ': ', structData.Xs_names{x_idx}, ' ', size]}; 
-                    yy = append(yy, y);
+                    size = ['[', num2str(width(structData.Xs{x_idx})), ' features]'];
+                    y = ['  > Matrix ', num2str(x_idx), ': ', structData.Xs_names{x_idx}, ' ', size]; 
+                    para = Paragraph(y);
+                    para.Style = {OuterMargin('18pt', '0pt', '0pt', '0pt')};
+                    add(chapter, para)
+                    clear para
                 end 
-                valueStr = string(append(x, yy));
+                valueStr = [];
 
                 % valueStr = [ newline, 'Test']
-                        
-            elseif contains(fieldName, 'covariates')
-                idx = [];
-                for v = 1:numel(value)
-                    if isempty(value{v})
-                        idx{v} = '[]';
-                    else
-                        idx{v} = [num2str(height(value{v})), 'x', num2str(width(value{v})), ' ', class(value{v})];
+            elseif strcmp(fieldName, 'covariates') 
+                if sum(cellfun(@isempty, structData.covariates)) == numel(structData.covariates)
+                    para = Paragraph('Covariates: none');
+                    add(chapter, para)
+                else 
+                    para = Paragraph('Covariates:');
+                    add(chapter, para)
+                    for cov_idx = 1:numel(structData.covariates)
+                        if isempty(structData.covariates{cov_idx})
+                            y = ['  > Matrix ', num2str(cov_idx), ': None'];
+                            para = Paragraph(y);
+                            para.Style = {OuterMargin('18pt', '0pt', '0pt', '0pt')};
+                            add(chapter, para)
+                        else
+                            if ~isempty(structData.covariates_names{cov_idx})
+                                y = ['  > Matrix ', num2str(cov_idx), ': ', strjoin(structData.covariates_names{cov_idx}, ', ')];
+                                para = Paragraph(y);
+                                para.Style = {OuterMargin('18pt', '0pt', '0pt', '0pt')};
+                                add(chapter, para)
+                            else
+                                y = ['  > Matrix ', num2str(cov_idx), ': ', num2str(width(structData.covariates{cov_idx})), ' covariates'];
+                                para = Paragraph(y);
+                                para.Style = {OuterMargin('18pt', '0pt', '0pt', '0pt')};
+                                add(chapter, para)
+                            end
+
+                        end
                     end
                 end
-                valueStr = ['[', strjoin(idx, '; '), ']'];
+                valueStr = [];
 
-            elseif contains(fieldName, 'covariates_names') && ~isempty(covariates_names)
-                valueStr = strjoin(value, ', ');
+            elseif contains(fieldName, 'density') && isfield(structData, fieldName)
+                density = structData.(fieldName);
+                % Convert the cell array to a numeric array
+                density = [density{:}];
+                valueStr = ['[', num2str(density, '%d, ')];
+                valueStr(end) = ']';  % Replace the last comma with a closing bracket
 
             elseif contains(fieldName, 'framework')
                 switch value
@@ -71,8 +103,8 @@ function cw_addFieldsToReport(chapter, structData, sectionTitle, fields)
                     case 2
                         valueStr = 'AUC method';
                 end 
-            elseif contains(fieldName, 'DiagNames')
-                valueStr = strjoin(unique(value), ', '); 
+            % elseif contains(fieldName, 'DiagNames')
+            %     valueStr = strjoin(unique(value), ', '); 
             elseif isstring(value) || ischar(value)
                 valueStr = value; 
             elseif (isnumeric(value) && numel(value) > 1) || (iscellstr(value) && numel(value) > 1)
@@ -85,14 +117,16 @@ function cw_addFieldsToReport(chapter, structData, sectionTitle, fields)
                 valueStr = num2str(cell2mat(value));
             end 
 
-            try
-                fieldName(1) = upper(fieldName(1));
-                fieldName = strrep(fieldName, '_', ' ');
-                para = Paragraph([fieldName ': ' valueStr]);
-            catch
-                err
+            if ~isempty(valueStr)
+                try
+                    fieldName(1) = upper(fieldName(1));
+                    fieldName = strrep(fieldName, '_', ' ');
+                    para = Paragraph([fieldName ': ' valueStr]);
+                    add(chapter, para);
+                catch
+                    err
+                end
             end
-            add(chapter, para);
         end
     end
 end

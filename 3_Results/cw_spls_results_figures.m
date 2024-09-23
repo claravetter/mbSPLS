@@ -6,7 +6,7 @@ switch type
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     case 'barplot'
         path = fullfile(path, 'Barplots');
-        if ~exist(path)
+        if ~isfolder(path)
             mkdir(path)
         end 
         % Loop through LVs
@@ -19,7 +19,7 @@ switch type
             num_subplots = min(numel(input.Xs), 4); % Ensure you have at least 2 and at most 4 subplots
 
             % Create a new figure for combining the subplots
-            combined_fig = figure('Units', 'normalized', 'OuterPosition', [0 0 1 1]);
+            combined_fig = figure('Units', 'normalized', 'OuterPosition', [0 0 1 1], 'Visible', 'off');
 
             % Set subplot layout to be a 2x2 grid
             subplot_rows = 2;
@@ -89,22 +89,47 @@ switch type
                 pos_idx = sorted_weights > 0;
                 positive_weights = sorted_weights;
                 positive_weights(~pos_idx) = NaN;
-                barh(y_positions, positive_weights, 'FaceColor', positive_color, 'EdgeColor', 'none');
 
-                hold on
-
-                % Negative Weights
+                % Negative weights
                 neg_idx = sorted_weights < 0;
                 negative_weights = sorted_weights;
                 negative_weights(~neg_idx) = NaN;
-                barh(y_positions, negative_weights, 'FaceColor', negative_color, 'EdgeColor', 'none');
+
+                % Barplos
+                % if numel(sorted_weights) < 5
+                %     barh(y_positions, positive_weights, 'FaceColor', positive_color, 'EdgeColor', 'none', 'BarWidth', 0.5);
+                %     hold on
+                %     barh(y_positions, negative_weights, 'FaceColor', negative_color, 'EdgeColor', 'none', 'BarWidth', 0.5);
+                % else
+                    barh(y_positions, positive_weights, 'FaceColor', positive_color, 'EdgeColor', 'none')
+                    hold on
+                    barh(y_positions, negative_weights, 'FaceColor', negative_color, 'EdgeColor', 'none')
+                % end
+                xlim([-1 1])
+
+                % hold on
+
+                % Negative Weights
+
+                % if numel(sorted_weights) < 5
+                %     barh(y_positions, negative_weights, 'FaceColor', negative_color, 'EdgeColor', 'none', 'BarWidth', 0.5);                
+                % else
+                %     barh(y_positions, negative_weights, 'FaceColor', negative_color, 'EdgeColor', 'none')
+                % end
+
+                % hold off
 
                 % barh(find(pos_idx), sorted_weights(pos_idx), 'FaceColor', positive_color, 'EdgeColor', 'none');
 
                 % Customize the axes
                 ax = gca;
+                % ax.YTick = linspace(1, num_filtered_features, num_filtered_features); % Set y-ticks closer together
                 ax.YTick = 1:num_filtered_features; % Set y-ticks
                 ax.YTickLabel = sorted_feature_names; % Set y-tick labels to sorted feature names
+
+                % if numel(sorted_weights) < 5
+                    % ax.YTick = linspace(1, num_filtered_features, num_filtered_features * 1.5); % Compress tick positions
+                % end
 
                 % end
                 ax.FontSize = 10; % Set smaller font size for axis labels and ticks
@@ -112,7 +137,7 @@ switch type
                 ax.Box = 'off'; % Turn off the box around the plot
 
                 % Ensure feature names are displayed correctly without interpreting underscores
-                ax.TickLabelInterpreter = 'none';
+                % ax.TickLabelInterpreter = 'none';
 
                 % Label the x-axis with non-bold font
                 xlabel('Feature Weights', 'FontSize', 12, 'FontName', 'Arial', 'Interpreter', 'none');
@@ -153,7 +178,7 @@ switch type
             if round(output.final_parameters{lv_idx, matches(output.parameters_names, 'p')}, 3) == 0
                 pvalue = 'P < .001';
             else
-                pvalue = ['P = ', num2str(round(output.final_parameters{lv_idx, matches(output.parameters_names, 'p')}, 3))];
+                pvalue = ['P = ', num2str(round(output.final_parameters{lv_idx, matches(output.parameters_names, 'p')}, 4))];
             end
 
             % RHO
@@ -170,7 +195,9 @@ switch type
             if isempty(maxFeatures)
                 topf4title = '* All features are displayed.';
             else
-                topf4title = ['* Only Top ', num2str(maxFeatures), ' features are displayed.'];
+                topf4title = ['\itNote\rm: Only Top ', num2str(maxFeatures), ' features are displayed.'];
+
+                % topf4title = ['* Only Top ', num2str(maxFeatures), ' features are displayed.'];
             end
 
             % TITLE
@@ -188,7 +215,6 @@ switch type
             end
 
             saveas(combined_fig, figure_name);
-
             close all
         end
 
@@ -216,7 +242,7 @@ switch type
             corrMatrix(triu(true(size(corrMatrix)), 0)) = NaN;
 
             % Create a heatmap from the correlation matrix
-            figure;
+            figure('Visible', 'off');
             h = heatmap(corrMatrix, 'MissingDataLabel', 'NaN');
 
             % Create a custom blue-to-red colormap

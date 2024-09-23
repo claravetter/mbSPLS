@@ -5,7 +5,10 @@ switch type
     % LV FIGURES
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     case 'barplot'
-        path = fullfile(path, 'Latent Variables');
+        path = fullfile(path, 'Barplots');
+        if ~isfolder(path)
+            mkdir(path)
+        end 
         % Loop through LVs
         input = data.input; 
         output = data.output; 
@@ -16,7 +19,7 @@ switch type
             num_subplots = min(numel(input.Xs), 4); % Ensure you have at least 2 and at most 4 subplots
 
             % Create a new figure for combining the subplots
-            combined_fig = figure('Units', 'normalized', 'OuterPosition', [0 0 1 1]);
+            combined_fig = figure('Units', 'normalized', 'OuterPosition', [0 0 1 1], 'Visible', 'off');
 
             % Set subplot layout to be a 2x2 grid
             subplot_rows = 2;
@@ -95,6 +98,9 @@ switch type
                 negative_weights = sorted_weights;
                 negative_weights(~neg_idx) = NaN;
                 barh(y_positions, negative_weights, 'FaceColor', negative_color, 'EdgeColor', 'none');
+                xlim([-1 1])
+
+                hold off
 
                 % barh(find(pos_idx), sorted_weights(pos_idx), 'FaceColor', positive_color, 'EdgeColor', 'none');
 
@@ -115,8 +121,8 @@ switch type
                 xlabel('Feature Weights', 'FontSize', 12, 'FontName', 'Arial', 'Interpreter', 'none');
 
                 % Add title with non-bold font
-                if contains(input.Xs_names{subplot_idx}, 'X_')
-                    header = strrep(input.Xs_names{subplot_idx}, 'X_', '');
+                if contains(input.Xs_names{subplot_idx}, '_')
+                    header = strrep(input.Xs_names{subplot_idx}, '_', ' ');
                 else
                     header = input.Xs_names{subplot_idx};
                 end
@@ -150,7 +156,7 @@ switch type
             if round(output.final_parameters{lv_idx, matches(output.parameters_names, 'p')}, 3) == 0
                 pvalue = 'P < .001';
             else
-                pvalue = ['P = ', num2str(round(output.final_parameters{lv_idx, matches(output.parameters_names, 'p')}, 3))];
+                pvalue = ['P = ', num2str(round(output.final_parameters{lv_idx, matches(output.parameters_names, 'p')}, 4))];
             end
 
             % RHO
@@ -185,7 +191,6 @@ switch type
             end
 
             saveas(combined_fig, figure_name);
-
             close all
         end
 
@@ -193,7 +198,11 @@ switch type
     % HEATMAP
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     case 'heatmap'
-        path = fullfile(path, 'Latent Scores');
+        path = fullfile(path, 'Heatmaps');
+        if ~exist(path)
+            mkdir(path)
+        end 
+
         fields = fieldnames(data);
         for lv_idx = 1:numel(fields)
             X = data.(fields{lv_idx});
@@ -209,7 +218,7 @@ switch type
             corrMatrix(triu(true(size(corrMatrix)), 0)) = NaN;
 
             % Create a heatmap from the correlation matrix
-            figure;
+            figure('Visible', 'off');
             h = heatmap(corrMatrix, 'MissingDataLabel', 'NaN');
 
             % Create a custom blue-to-red colormap
@@ -268,7 +277,8 @@ switch type
 
             % SAVE FIGURE
             saveas(gcf, figure_name);
-            close all clear X
+            close all 
+            clear X
         end
 
 end
