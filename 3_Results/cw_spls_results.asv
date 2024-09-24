@@ -3,6 +3,17 @@ function cw_spls_results(filepath, varargin)
 % Figures: Number of Matrices
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+p = inputParser; 
+
+if filepath()
+addRequired(p, 'filepath', @ischar) 
+addParameter(p, 'maxFeatures', [], @isnumeric);
+addParameter(p, 'report_flag', true, @islogical);
+
+parse(p, filepath, varargin{:});
+maxFeatures = p.Results.maxFeatures;
+report_flag = p.Results.report_flag;
+    
 % LOAD FILEPATH
 if iscellstr(filepath)
     filepath = char(filepath); 
@@ -68,6 +79,8 @@ for matrix_idx = 1:numel(data.input.Xs)
 end
 clear matrix_idx lv_idx
 
+
+if report_flag
 import mlreportgen.report.*
 import mlreportgen.dom.*
 
@@ -90,55 +103,45 @@ titlepg.Title = 'REPORT';
 % titlepg.Subtitle = 'Analysis of Experimental Data';
 titlepg.Author = '  ';
 titlepg.PubDate = '   ';
-% titlepg.Description = ['This report covers the results of the mb-sPLS analysis including data preprocessing, model training, and validation steps.';
 titlepg.Image = '/opt/PrecisionCodeRep/SPLS_Toolbox/mbSPLS/3_Results/mbspls_logo_klein.png'; % Optional
 add(rpt, titlepg);
-% add(rpt, Paragraph(' '))
-% add(rpt, Paragraph(' '))
-% add(rpt, Paragraph(' '))
 desc = Paragraph(['ANALYSIS:', newline, data.input.name]); 
 desc.Style = {HAlign('center')}; 
 add(rpt, desc);
-add(rpt, Paragraph(' '))
-add(rpt, Paragraph(' '))
-add(rpt, Paragraph(' '))
-add(rpt, Paragraph(' '))
-add(rpt, Paragraph(' '))
-add(rpt, Paragraph(' '))
-add(rpt, Paragraph(' '))
-add(rpt, Paragraph(' '))
-add(rpt, Paragraph(' '))
-add(rpt, Paragraph(' '))
+for i = 1:12
+    add(rpt, Paragraph(' '));
+end
+
 desc = Paragraph('© 2024 Section for Precision Psychiatry. All rights reserved.'); 
 desc.Style = {HAlign('center')}; 
 add(rpt, desc);
 
 % // REPORT: TABLE OF CONTENTS
-% Add a table of contents
 toc = TableOfContents;
 add(rpt, toc);
 
 % // REPORT: CHAPTER 1 (SETUP)
 ch1 = Chapter('Title', 'Setup');
-% add(ch1, 'List of setup settings:');
 vars = {'date', 'analysis_folder', 'data_folder', 'standalone_version', ...
     'mbspls_standalone_path', 'matlab_version'};
-cw_addFieldsToReport(ch1, data.setup, 'Setup Parameters', vars);
+cw_addFieldsToReport(ch1, data.setup, 'Settings', vars);
 add(rpt, ch1); 
 
 % // REPORT: CHAPTER 1 (INPUT)
-% Create a chapter for input settings
-ch1 = Chapter('Title', 'Input');
-vars = {'Xs', 'covariates', ...
-    'DiagNames', 'framework', 'outer_folds', 'inner_folds', ...
+% Input Data
+ch2 = Chapter('Title', 'Input');
+vars = {'Xs', 'covariates'};
+cw_addFieldsToReport(ch2, data.input, 'Input Data', vars); clear vars
+add(ch2, Paragraph(' '))
+
+% Machine Learning Framework
+vars = {'framework', 'outer_folds', 'inner_folds', ...
     'permutation_testing', 'bootstrap_testing',...
     'optimization_strategy', 'density', 'correlation_method', ...
     'mult_test', 'statistical_testing'};
 
-cw_addFieldsToReport(ch1, data.input, 'Input Parameters', vars); 
-add(rpt, ch1);
-
-
+cw_addFieldsToReport(ch2, data.input, 'Machine Learning Framework', vars); clear vars 
+add(rpt, ch2);
 
 % // REPORT: CHAPTER 3 (RESULTS) 
 ch3 = Chapter('Title', 'Results');
@@ -155,7 +158,7 @@ end
 
 cw_create_table_for_pdf(ch3, T)
 add(rpt, ch3)
-
+end 
 % LATENT SCORES
 [LS] = cv_cw_spls_get_latent_scores(data.input, data.output, correct_log, [], Path2Tables);
 % [AUTOMATICALLY SAVES TABLE]
@@ -305,8 +308,11 @@ for p = 1:numel(plotType)
     clear path2figures
 end
 
+if reprot_flag
 add(rpt, ch4);
+
 
 % FINISH UP REPORT
 close(rpt);
 rptview(rpt);
+end

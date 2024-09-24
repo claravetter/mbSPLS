@@ -3,6 +3,16 @@ function cw_spls_results(filepath, varargin)
 % Figures: Number of Matrices
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+p = inputParser; 
+
+addRequired(p, 'filepath', @ischar) 
+addParameter(p, 'maxFeatures', [], @isnumeric);
+addParameter(p, 'report_flag', true, @islogical);
+
+parse(p, filepath, varargin{:});
+maxFeatures = p.Results.maxFeatures;
+report_flag = p.Results.report_flag;
+    
 % LOAD FILEPATH
 if iscellstr(filepath)
     filepath = char(filepath); 
@@ -36,11 +46,11 @@ if ~exist(Path2Report)
 end
 
 % CHECK WHETHER NUMBER OF TOP FEATURES FOR FIGURES WAS DEFINED (BARPLOT)
-if isempty(varargin)
-    maxFeatures = []; 
-else 
-    maxFeatures = varargin{1}; 
-end 
+% if isempty(varargin)
+%     maxFeatures = []; 
+% else 
+%     maxFeatures = varargin{1}; 
+% end 
 
 %% BEFORE BOOTSTRAPPING
 % CORRECTION
@@ -68,6 +78,8 @@ for matrix_idx = 1:numel(data.input.Xs)
 end
 clear matrix_idx lv_idx
 
+
+if report_flag
 import mlreportgen.report.*
 import mlreportgen.dom.*
 
@@ -145,7 +157,7 @@ end
 
 cw_create_table_for_pdf(ch3, T)
 add(rpt, ch3)
-
+end 
 % LATENT SCORES
 [LS] = cv_cw_spls_get_latent_scores(data.input, data.output, correct_log, [], Path2Tables);
 % [AUTOMATICALLY SAVES TABLE]
@@ -295,8 +307,11 @@ for p = 1:numel(plotType)
     clear path2figures
 end
 
+if reprot_flag
 add(rpt, ch4);
+
 
 % FINISH UP REPORT
 close(rpt);
 rptview(rpt);
+end
