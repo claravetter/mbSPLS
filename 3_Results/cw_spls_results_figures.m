@@ -105,7 +105,7 @@ switch type
                     hold on
                     barh(y_positions, negative_weights, 'FaceColor', negative_color, 'EdgeColor', 'none')
                 % end
-                xlim([-1 1])
+                % xlim([-1 1])
 
                 % hold on
 
