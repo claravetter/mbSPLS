@@ -89,25 +89,47 @@ switch type
                 pos_idx = sorted_weights > 0;
                 positive_weights = sorted_weights;
                 positive_weights(~pos_idx) = NaN;
-                barh(y_positions, positive_weights, 'FaceColor', positive_color, 'EdgeColor', 'none');
 
-                hold on
-
-                % Negative Weights
+                % Negative weights
                 neg_idx = sorted_weights < 0;
                 negative_weights = sorted_weights;
                 negative_weights(~neg_idx) = NaN;
-                barh(y_positions, negative_weights, 'FaceColor', negative_color, 'EdgeColor', 'none');
-                xlim([-1 1])
 
-                hold off
+                % Barplos
+                % if numel(sorted_weights) < 5
+                %     barh(y_positions, positive_weights, 'FaceColor', positive_color, 'EdgeColor', 'none', 'BarWidth', 0.5);
+                %     hold on
+                %     barh(y_positions, negative_weights, 'FaceColor', negative_color, 'EdgeColor', 'none', 'BarWidth', 0.5);
+                % else
+                    barh(y_positions, positive_weights, 'FaceColor', positive_color, 'EdgeColor', 'none')
+                    hold on
+                    barh(y_positions, negative_weights, 'FaceColor', negative_color, 'EdgeColor', 'none')
+                % end
+                % xlim([-1 1])
+
+                % hold on
+
+                % Negative Weights
+
+                % if numel(sorted_weights) < 5
+                %     barh(y_positions, negative_weights, 'FaceColor', negative_color, 'EdgeColor', 'none', 'BarWidth', 0.5);                
+                % else
+                %     barh(y_positions, negative_weights, 'FaceColor', negative_color, 'EdgeColor', 'none')
+                % end
+
+                % hold off
 
                 % barh(find(pos_idx), sorted_weights(pos_idx), 'FaceColor', positive_color, 'EdgeColor', 'none');
 
                 % Customize the axes
                 ax = gca;
+                % ax.YTick = linspace(1, num_filtered_features, num_filtered_features); % Set y-ticks closer together
                 ax.YTick = 1:num_filtered_features; % Set y-ticks
                 ax.YTickLabel = sorted_feature_names; % Set y-tick labels to sorted feature names
+
+                % if numel(sorted_weights) < 5
+                    % ax.YTick = linspace(1, num_filtered_features, num_filtered_features * 1.5); % Compress tick positions
+                % end
 
                 % end
                 ax.FontSize = 10; % Set smaller font size for axis labels and ticks
@@ -115,7 +137,7 @@ switch type
                 ax.Box = 'off'; % Turn off the box around the plot
 
                 % Ensure feature names are displayed correctly without interpreting underscores
-                ax.TickLabelInterpreter = 'none';
+                % ax.TickLabelInterpreter = 'none';
 
                 % Label the x-axis with non-bold font
                 xlabel('Feature Weights', 'FontSize', 12, 'FontName', 'Arial', 'Interpreter', 'none');
@@ -164,16 +186,18 @@ switch type
 
             if isempty(mode)
                 mode4title = '';
-                suffix4saving = '_barplot_h.png';
+                suffix4saving = '_barplot_h.';
+                % suffix4saving = '_barplot_h.png';
             else
                 mode4title = [' (', mode, ')'];
-                suffix4saving = ['_' mode, '_barplot_h.png'];
+                suffix4saving = ['_' mode, '_barplot_h.'];
+                % suffix4saving = ['_' mode, '_barplot_h.png'];
             end
 
             if isempty(maxFeatures)
                 topf4title = '* All features are displayed.';
             else
-                topf4title = ['* Only Top ', num2str(maxFeatures), ' features are displayed.'];
+                topf4title = ['\itNote\rm: Only Top ', num2str(maxFeatures), ' features are displayed.'];
             end
 
             % TITLE
@@ -184,13 +208,17 @@ switch type
                 ' | Boot: ', num2str(input.bootstrap_testing), newline, topf4title], ...
                 'FontSize', 16, 'FontName', 'Arial', 'FontWeight', 'normal')
 
-            if ~isempty(maxFeatures)
-                figure_name = fullfile(path, ['LV', num2str(lv_idx), '_top', num2str(maxFeatures), 'Feat', suffix4saving])       ;
-            else
-                figure_name = fullfile(path, ['LV', num2str(lv_idx), suffix4saving]);
-            end
+            filetype = {'eps', 'png'};
 
-            saveas(combined_fig, figure_name);
+            for f = 1:numel(filetype)
+                if ~isempty(maxFeatures)
+                    figure_name = fullfile(path, ['LV', num2str(lv_idx), '_top', num2str(maxFeatures), 'Feat', suffix4saving])       ;
+                else
+                    figure_name = fullfile(path, ['LV', num2str(lv_idx), suffix4saving, filetype{f}]);
+                end
+
+                saveas(combined_fig, figure_name);
+            end
             close all
         end
 

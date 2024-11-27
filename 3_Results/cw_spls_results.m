@@ -8,10 +8,12 @@ p = inputParser;
 addRequired(p, 'filepath', @ischar)
 addParameter(p, 'maxFeatures', [], @isnumeric);
 addParameter(p, 'report_flag', true, @islogical);
+% addParameter(p, 'figureFormat', 'png', @ischar);
 
 parse(p, filepath, varargin{:});
 maxFeatures = p.Results.maxFeatures;
 report_flag = p.Results.report_flag;
+% figureFormat = p.Results.figureFormat; 
 
 % LOAD FILEPATH
 if iscellstr(filepath)
@@ -158,6 +160,7 @@ if report_flag
     cw_create_table_for_pdf(ch3, T)
     add(rpt, ch3)
 end
+
 % LATENT SCORES
 [LS] = cv_cw_spls_get_latent_scores(data.input, data.output, correct_log, [], Path2Tables);
 % [AUTOMATICALLY SAVES TABLE]
