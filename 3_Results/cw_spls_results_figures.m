@@ -1,4 +1,4 @@
-function cw_spls_results_figures(data, mode, type, path, maxFeatures)
+function cw_spls_results_figures(data, mode, type, path, maxFeatures, flip_flag)
 
 switch type
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -30,11 +30,15 @@ switch type
                 feature_names = input.Xs_feature_names{1, subplot_idx}.';
                 feature_weights = output.final_parameters{lv_idx, 3}{1, subplot_idx};
                 feature_names = strrep(feature_names, '_', ' ');
-
+                if flip_flag
+                    f_invert = @(x)(-1*x);
+                    feature_weights = f_invert(feature_weights);
+                end
                 % Filter out the features with weight equal to 0
                 nonzero_indices = feature_weights ~= 0;
                 filtered_feature_names = feature_names(nonzero_indices);
                 filtered_feature_weights = feature_weights(nonzero_indices);
+
 
                 % Sort the features by weight
                 [sorted_weights, sort_idx] = sort(filtered_feature_weights, 'descend');

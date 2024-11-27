@@ -1,4 +1,4 @@
-function cw_spls_results_figures(data, mode, type, path, maxFeatures)
+function cw_spls_results_figures(data, mode, type, path, maxFeatures, flip_flag)
 
 switch type
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -36,6 +36,10 @@ switch type
                 filtered_feature_names = feature_names(nonzero_indices);
                 filtered_feature_weights = feature_weights(nonzero_indices);
 
+                if flip_flag
+                    f_invert = @(x)(-1*x);
+                    feature_weights = f_invert(feature_weights);
+                end
                 % Sort the features by weight
                 [sorted_weights, sort_idx] = sort(filtered_feature_weights, 'descend');
                 sorted_feature_names = filtered_feature_names(sort_idx);
@@ -89,25 +93,47 @@ switch type
                 pos_idx = sorted_weights > 0;
                 positive_weights = sorted_weights;
                 positive_weights(~pos_idx) = NaN;
-                barh(y_positions, positive_weights, 'FaceColor', positive_color, 'EdgeColor', 'none');
 
-                hold on
-
-                % Negative Weights
+                % Negative weights
                 neg_idx = sorted_weights < 0;
                 negative_weights = sorted_weights;
                 negative_weights(~neg_idx) = NaN;
-                barh(y_positions, negative_weights, 'FaceColor', negative_color, 'EdgeColor', 'none');
-                xlim([-1 1])
 
-                hold off
+                % Barplos
+                % if numel(sorted_weights) < 5
+                %     barh(y_positions, positive_weights, 'FaceColor', positive_color, 'EdgeColor', 'none', 'BarWidth', 0.5);
+                %     hold on
+                %     barh(y_positions, negative_weights, 'FaceColor', negative_color, 'EdgeColor', 'none', 'BarWidth', 0.5);
+                % else
+                    barh(y_positions, positive_weights, 'FaceColor', positive_color, 'EdgeColor', 'none')
+                    hold on
+                    barh(y_positions, negative_weights, 'FaceColor', negative_color, 'EdgeColor', 'none')
+                % end
+                % xlim([-1 1])
+
+                % hold on
+
+                % Negative Weights
+
+                % if numel(sorted_weights) < 5
+                %     barh(y_positions, negative_weights, 'FaceColor', negative_color, 'EdgeColor', 'none', 'BarWidth', 0.5);                
+                % else
+                %     barh(y_positions, negative_weights, 'FaceColor', negative_color, 'EdgeColor', 'none')
+                % end
+
+                % hold off
 
                 % barh(find(pos_idx), sorted_weights(pos_idx), 'FaceColor', positive_color, 'EdgeColor', 'none');
 
                 % Customize the axes
                 ax = gca;
+                % ax.YTick = linspace(1, num_filtered_features, num_filtered_features); % Set y-ticks closer together
                 ax.YTick = 1:num_filtered_features; % Set y-ticks
                 ax.YTickLabel = sorted_feature_names; % Set y-tick labels to sorted feature names
+
+                % if numel(sorted_weights) < 5
+                    % ax.YTick = linspace(1, num_filtered_features, num_filtered_features * 1.5); % Compress tick positions
+                % end
 
                 % end
                 ax.FontSize = 10; % Set smaller font size for axis labels and ticks
@@ -115,7 +141,7 @@ switch type
                 ax.Box = 'off'; % Turn off the box around the plot
 
                 % Ensure feature names are displayed correctly without interpreting underscores
-                ax.TickLabelInterpreter = 'none';
+                % ax.TickLabelInterpreter = 'none';
 
                 % Label the x-axis with non-bold font
                 xlabel('Feature Weights', 'FontSize', 12, 'FontName', 'Arial', 'Interpreter', 'none');
@@ -173,7 +199,9 @@ switch type
             if isempty(maxFeatures)
                 topf4title = '* All features are displayed.';
             else
-                topf4title = ['* Only Top ', num2str(maxFeatures), ' features are displayed.'];
+                topf4title = ['\itNote\rm: Only Top ', num2str(maxFeatures), ' features are displayed.'];
+
+                % topf4title = ['* Only Top ', num2str(maxFeatures), ' features are displayed.'];
             end
 
             % TITLE
