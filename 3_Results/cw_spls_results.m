@@ -8,12 +8,20 @@ p = inputParser;
 addRequired(p, 'filepath', @ischar)
 addParameter(p, 'maxFeatures', [], @isnumeric);
 addParameter(p, 'report_flag', true, @islogical);
+<<<<<<< HEAD
 addParameter(p, 'flip_flag', false, @islogical);
+=======
+% addParameter(p, 'figureFormat', 'png', @ischar);
+>>>>>>> 425177cda89d488866e6bc144babfd6bad759ca3
 
 parse(p, filepath, varargin{:});
 maxFeatures = p.Results.maxFeatures;
 report_flag = p.Results.report_flag;
+<<<<<<< HEAD
 flip_flag = p.Results.flip_flag;
+=======
+% figureFormat = p.Results.figureFormat; 
+>>>>>>> 425177cda89d488866e6bc144babfd6bad759ca3
 
 % LOAD FILEPATH
 if iscellstr(filepath)
@@ -177,6 +185,7 @@ if report_flag
     cw_create_table_for_pdf(ch3, T)
     add(rpt, ch3)
 end
+
 % LATENT SCORES
 
 

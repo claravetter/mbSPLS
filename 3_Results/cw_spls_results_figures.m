@@ -190,19 +190,21 @@ switch type
 
             if isempty(mode)
                 mode4title = '';
-                suffix4saving = '_barplot_h.png';
+                suffix4saving = '_barplot_h.';
+                % suffix4saving = '_barplot_h.png';
             else
                 mode4title = [' (', mode, ')'];
-                suffix4saving = ['_' mode, '_barplot_h.png'];
+                suffix4saving = ['_' mode, '_barplot_h.'];
+                % suffix4saving = ['_' mode, '_barplot_h.png'];
             end
 
             if isempty(maxFeatures)
                 topf4title = '* All features are displayed.';
             else
                 topf4title = ['\itNote\rm: Only Top ', num2str(maxFeatures), ' features are displayed.'];
-
-                % topf4title = ['* Only Top ', num2str(maxFeatures), ' features are displayed.'];
             end
+
+            % set(combined_fig,'Position', get(0,'Screensize'));
 
             % TITLE
             sgtitle(['// LV', num2str(lv_idx), mode4title, ' //', newline, ...
@@ -212,13 +214,30 @@ switch type
                 ' | Boot: ', num2str(input.bootstrap_testing), newline, topf4title], ...
                 'FontSize', 16, 'FontName', 'Arial', 'FontWeight', 'normal')
 
-            if ~isempty(maxFeatures)
-                figure_name = fullfile(path, ['LV', num2str(lv_idx), '_top', num2str(maxFeatures), 'Feat', suffix4saving])       ;
-            else
-                figure_name = fullfile(path, ['LV', num2str(lv_idx), suffix4saving]);
-            end
+            filetypes = {'eps', 'png'};
 
-            saveas(combined_fig, figure_name);
+            for f = 1:numel(filetypes)
+                filetype = filetypes{f};
+                subpath = fullfile(path, filetype);
+
+                if ~isfolder(subpath)
+                    mkdir(subpath)
+                end
+
+                if ~isempty(maxFeatures)
+                    figure_name = fullfile(subpath, ['LV', num2str(lv_idx), '_top', num2str(maxFeatures), 'Feat', suffix4saving, filetype])       ;
+                else
+                    figure_name = fullfile(subpath, ['LV', num2str(lv_idx), suffix4saving, filetype]);
+                end
+
+                switch filetype
+                    case 'png'
+                        saveas(combined_fig, figure_name);
+                    case 'eps'
+                        saveas(combined_fig, figure_name, 'epsc');
+                end
+                clear filetype subpath
+            end
             close all
         end
 
