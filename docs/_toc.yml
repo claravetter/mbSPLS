@@ -11,8 +11,11 @@ parts:
       - file: mbspls_3vis
       - file: license
   - caption: sPLS Toolbox
-    chapters:
-      - file: spls
+    chapters: 
+      - file: spls_1setup
+      - file: spls_2run
+      - file: spls_3vis
+      - file: license
   - caption: Additional
     chapters: 
       - file: references
