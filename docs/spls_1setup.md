@@ -10,19 +10,17 @@ Once defined, the `input` and `setup` parameters are saved into a `datafile.mat`
 
 | Fieldname                 | Input Format      |          Explanation                                          |
 | --------                  | --------          |            --------                                           |
-| `project_name`              | String            | Define a project name (e.g., `input.project_name = 'YOURPROJECTNAME'`).                                                    |
-
+| `project_name`              | String            | Define a project name (e.g., `input.project_name = 'YOURPROJECTNAME'`).|
 | `X`                        | Double      | Define your 1st matrix (e.g., `input.X = '300x20 double'`). |
 | `X_names`                  | Cell array (string)      | Define the names of your featurees in X (e.g., `input.X_names = '1x20 cell'`) (or leave empty).|
 | `Y`                        | Cell array (double)      | Define your 2nd matrix (e.g., `input.Y = '300x15 double'`). |
 | `Y_names`                  | Cell array (string)      | Define the names of your featurees in X (e.g., `input.X_names = '1x15 cell'`) (or leave empty).|
-
 | `type_correction`          | String       | Define whether you want to correct for covariates. Options: `corrected`, `uncorrected`. |
 | `covariates`                | Double      | If you would like to correct for covariates, define your covariate(s) (vector/matrix) (e.g., `input.covariates = 300x3 double`) or leave empty if you don't have any covariates.|
 | `covariates_names`          | Cell array (string)      | If you would like to correct for covarites, define the name(s) of your covariate(s) (e.g., `input.covariate_names = {'PC1'}, {'PC2'}, {'PC3'}`). If you would like to correct for e.g., sites, you would have to create a dummy-coded vector (0,1) for each site, so that the number of columns in your covariate matrix equals the number of sites, you would like to correct for.|
 | `correction_target`          | String       | Define which matrix you would like to remove the covariate effects from. Options: `1`- X, `2`- Y, `3`- X and Y. |
 | `Diag`                      | Double            | Column vector with diagnoses coded via numbers (e.g., `input.Diag = [1, 3, 2, 3, 1, ...]`). It should have the same length as the number of participants. |
-| `DiagNames`                 | Cell array (string)        | Column cell array with diagnoses/labels (e.g., `input.DiagNames = {'HC', 'ROD', 'CHR', 'HC', 'ROP', ...}`). |
+| `DiagNames`                 | Cell array (string)        | Column cell array with diagnoses/labels (e.g., `input.DiagNames = {'HC', 'ROD', 'CHR', 'HC', 'ROP', ...}`).|
 | `sites`                      | Double       | Dummy coded vector for sites. If single-site: column vector of ones. (e.g., `input.Diag = [1, 3, 2, 3, 1, ...]`). It should have the same length as the number of participants. |
 | `sites_names`                      | Cell array (string)       | Define the name(s) of your site(s) (e.g., `input.sites_names = {'LMU', 'LMU', 'Yale', 'LMU', ... }`). It should have the same length as the number of participants.|
 | `final_ID`                   | Cell array (string)   | Define the IDs of your subjects (e.g. `input.final_ID = {'400106', '400678', '410345', ...})`). It should have the same length as the number of participants.|
