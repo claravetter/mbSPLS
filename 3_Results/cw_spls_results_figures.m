@@ -90,10 +90,16 @@ switch type
                 positive_weights = sorted_weights;
                 positive_weights(~pos_idx) = NaN;
 
+
+
                 % Negative weights
                 neg_idx = sorted_weights < 0;
                 negative_weights = sorted_weights;
                 negative_weights(~neg_idx) = NaN;
+
+                % Remove later:
+                % positive_weights = -positive_weights; 
+                % negative_weights = - negative_weights; 
 
                 % Barplos
                 % if numel(sorted_weights) < 5

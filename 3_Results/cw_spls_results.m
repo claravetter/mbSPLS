@@ -174,7 +174,7 @@ cw_spls_results_figures(data, [], 'barplot', Path2Figures, maxFeatures)
 clear input output setup clear data
 
 %% WITH BOOTSTRAPPING
-boot_options = {'CI', 'BS'};
+boot_options = {'BS', 'CI'};
 for ii=1:numel(boot_options)
     % GET RESULTS AFTER BOOTSTRAPPING
     % [boot_results_file, input, output] = cv_cw_mbspls_bootstrap_pruning(filepath, boot_options{ii});

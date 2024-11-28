@@ -90,6 +90,9 @@ switch type
                 positive_weights = sorted_weights;
                 positive_weights(~pos_idx) = NaN;
 
+                % Remove later:
+                positive_weights = -positive_weights; 
+
                 % Negative weights
                 neg_idx = sorted_weights < 0;
                 negative_weights = sorted_weights;
@@ -200,6 +203,8 @@ switch type
                 topf4title = ['\itNote\rm: Only Top ', num2str(maxFeatures), ' features are displayed.'];
             end
 
+            % set(combined_fig,'Position', get(0,'Screensize'));
+
             % TITLE
             sgtitle(['// LV', num2str(lv_idx), mode4title, ' //', newline, ...
                 pvalue, ' | Frobenius Norm = ', RHO, ...
@@ -208,16 +213,29 @@ switch type
                 ' | Boot: ', num2str(input.bootstrap_testing), newline, topf4title], ...
                 'FontSize', 16, 'FontName', 'Arial', 'FontWeight', 'normal')
 
-            filetype = {'eps', 'png'};
+            filetypes = {'eps', 'png'};
 
-            for f = 1:numel(filetype)
-                if ~isempty(maxFeatures)
-                    figure_name = fullfile(path, ['LV', num2str(lv_idx), '_top', num2str(maxFeatures), 'Feat', suffix4saving])       ;
-                else
-                    figure_name = fullfile(path, ['LV', num2str(lv_idx), suffix4saving, filetype{f}]);
+            for f = 1:numel(filetypes)
+                filetype = filetypes{f};
+                subpath = fullfile(path, filetype);
+
+                if ~isfolder(subpath)
+                    mkdir(subpath)
                 end
 
-                saveas(combined_fig, figure_name);
+                if ~isempty(maxFeatures)
+                    figure_name = fullfile(subpath, ['LV', num2str(lv_idx), '_top', num2str(maxFeatures), 'Feat', suffix4saving, filetype])       ;
+                else
+                    figure_name = fullfile(subpath, ['LV', num2str(lv_idx), suffix4saving, filetype]);
+                end
+
+                switch filetype
+                    case 'png'
+                        saveas(combined_fig, figure_name);
+                    case 'eps'
+                        saveas(combined_fig, figure_name, 'epsc');
+                end
+                clear filetype subpath
             end
             close all
         end
