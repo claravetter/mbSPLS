@@ -1,4 +1,4 @@
-function cw_spls_results_figures(data, mode, type, path, maxFeatures)
+function cw_spls_results_figures(data, mode, type, path, maxFeatures, flip_flag)
 
 switch type
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -36,6 +36,10 @@ switch type
                 filtered_feature_names = feature_names(nonzero_indices);
                 filtered_feature_weights = feature_weights(nonzero_indices);
 
+                if flip_flag
+                    f_invert = @(x)(-1*x);
+                    feature_weights = f_invert(feature_weights);
+                end
                 % Sort the features by weight
                 [sorted_weights, sort_idx] = sort(filtered_feature_weights, 'descend');
                 sorted_feature_names = filtered_feature_names(sort_idx);
@@ -201,6 +205,11 @@ switch type
                 topf4title = '* All features are displayed.';
             else
                 topf4title = ['\itNote\rm: Only Top ', num2str(maxFeatures), ' features are displayed.'];
+<<<<<<< HEAD
+
+                % topf4title = ['* Only Top ', num2str(maxFeatures), ' features are displayed.'];
+=======
+>>>>>>> 425177cda89d488866e6bc144babfd6bad759ca3
             end
 
             % set(combined_fig,'Position', get(0,'Screensize'));

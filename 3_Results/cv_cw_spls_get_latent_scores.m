@@ -1,5 +1,5 @@
 %% DP function to get latent scores from SPLS results
-function [LS] = cv_cw_spls_get_latent_scores(input, output, correct, boot, finalpath)
+function [LS] = cv_cw_spls_get_latent_scores(input, output, correct, boot, finalpath, flip_flag)
 
 % load(results_file);
 latent_scores_all =[]; latent_scores_names = []; RHO_all=[];
@@ -54,6 +54,12 @@ for lv_idx=1:height(output.final_parameters)%-1)
     log_weights = matches(output.parameters_names, 'weights');
     weights = output.final_parameters{lv_idx,log_weights};
 
+    if flip_flag
+        f_invert = @(x)(-1*x);
+        for num_m = 1:length(weights)
+            weights{num_m} = f_invert(weights{num_m});
+        end
+    end
     [RHO, lVs, weights] = cv_mbspls_projection(OUT_matrices.train, weights, input.correlation_method, input.matrix_norm);
 
     Xs = cv_mbspls_proj_def(Xs, weights);

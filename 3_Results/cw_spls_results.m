@@ -8,12 +8,20 @@ p = inputParser;
 addRequired(p, 'filepath', @ischar)
 addParameter(p, 'maxFeatures', [], @isnumeric);
 addParameter(p, 'report_flag', true, @islogical);
+<<<<<<< HEAD
+addParameter(p, 'flip_flag', false, @islogical);
+=======
 % addParameter(p, 'figureFormat', 'png', @ischar);
+>>>>>>> 425177cda89d488866e6bc144babfd6bad759ca3
 
 parse(p, filepath, varargin{:});
 maxFeatures = p.Results.maxFeatures;
 report_flag = p.Results.report_flag;
+<<<<<<< HEAD
+flip_flag = p.Results.flip_flag;
+=======
 % figureFormat = p.Results.figureFormat; 
+>>>>>>> 425177cda89d488866e6bc144babfd6bad759ca3
 
 % LOAD FILEPATH
 if iscellstr(filepath)
@@ -27,13 +35,21 @@ end
 [folderpath, ~, ~] = fileparts(filepath);
 
 % CREATE FOLDER FOR TABLES [IN ANALYSIS FOLDER]
-Path2Tables = fullfile(folderpath, 'Tables');
+if flip_flag
+    Path2Tables = fullfile(folderpath, 'Tables_Flipped_Weights');
+else
+    Path2Tables = fullfile(folderpath, 'Tables');
+end
 if ~exist(Path2Tables)
     mkdir(Path2Tables)
 end
 
 % CREATE FOLDER FOR FIGURES [IN ANALYSIS FOLDER]
-Path2Figures = fullfile(folderpath, 'Figures');
+if flip_flag
+    Path2Figures = fullfile(folderpath, 'Figures_Flipped_Weights');
+else
+    Path2Figures = fullfile(folderpath, 'Figures');
+end
 if ~exist(Path2Figures)
     mkdir(Path2Figures)
 end
@@ -41,8 +57,11 @@ end
 % CREATE FOLDER FOR REPORT
 % path2test = '/opt/PrecisionCodeRep/SPLS_Toolbox/mbSPLS/3_Results/';
 % Path2Report = fullfile(path2test, 'Reports');
-
-Path2Report = fullfile(folderpath, 'Reports');
+if flip_flag
+    Path2Report = fullfile(folderpath, 'Reports_Flipped_Weights');
+else
+    Path2Report = fullfile(folderpath, 'Reports');
+end
 if ~exist(Path2Report)
     mkdir(Path2Report)
 end
@@ -71,10 +90,16 @@ for matrix_idx = 1:numel(data.input.Xs)
     for lv_idx = 1:height(data.output.final_parameters)
         % SAVE FEATURE NAMES IN TABLE
         T.VariableName = data.input.Xs_feature_names{1, matrix_idx}.';
-        T.(['LV', num2str(lv_idx)]) = data.output.final_parameters{lv_idx, 3}{1, matrix_idx};
+        temp_weights = data.output.final_parameters{lv_idx, 3}{1, matrix_idx}; 
+        if flip_flag
+            f_invert = @(x)(-1*x);
+            temp_weights= f_invert(temp_weights);
+        end
+        T.(['LV', num2str(lv_idx)]) = temp_weights;
     end
 
     % SAVE TABLE AS EXCEL FILE (SHEET)
+    
     writetable(T, fullfile(Path2Tables, 'LV_results.xlsx'), 'Sheet', data.input.Xs_names{matrix_idx})
     clear T
 end
@@ -162,15 +187,17 @@ if report_flag
 end
 
 % LATENT SCORES
-[LS] = cv_cw_spls_get_latent_scores(data.input, data.output, correct_log, [], Path2Tables);
+
+
+[LS] = cv_cw_spls_get_latent_scores(data.input, data.output, correct_log, [], Path2Tables, flip_flag);
 % [AUTOMATICALLY SAVES TABLE]
 
 % FIGURES: HEATMAP [LATENT SCORES]
-cw_spls_results_figures(LS, [], 'heatmap', Path2Figures)
+cw_spls_results_figures(LS, [], 'heatmap', Path2Figures, flip_flag)
 clear LS
 
 % FIGURES: BARPLOTS [LATENT VARIABLES]
-cw_spls_results_figures(data, [], 'barplot', Path2Figures, maxFeatures)
+cw_spls_results_figures(data, [], 'barplot', Path2Figures, maxFeatures,flip_flag)
 clear input output setup clear data
 
 %% WITH BOOTSTRAPPING
@@ -187,7 +214,12 @@ for ii=1:numel(boot_options)
         % LOOP THROUGH LATENT VARIABLES
         for lv_idx = 1:height(BS_output.final_parameters)
             T.VariableName = BS_input.Xs_feature_names{1, matrix_idx}.';
-            T.(['LV', num2str(lv_idx)]) = BS_output.final_parameters{lv_idx, matches(BS_output.parameters_names, 'weights')}{1, matrix_idx};
+            temp_weights = BS_output.final_parameters{lv_idx, matches(BS_output.parameters_names, 'weights')}{1, matrix_idx}; 
+            if flip_flag
+                f_invert = @(x)(-1*x);
+                temp_weights= f_invert(temp_weights);
+            end
+            T.(['LV', num2str(lv_idx)]) = temp_weights;
         end
 
         % SAVE AS EXCEL FILE
@@ -196,7 +228,7 @@ for ii=1:numel(boot_options)
     end
 
     % LATENT SCORES
-    [LS] = cv_cw_spls_get_latent_scores(BS_input, BS_output, correct_log, boot_options{ii}, Path2Tables);
+    [LS] = cv_cw_spls_get_latent_scores(BS_input, BS_output, correct_log, boot_options{ii}, Path2Tables, flip_flag);
     % [LS] = cv_cw_spls_get_latent_scores(boot_results_file, correct_log, boot_options{ii});
 
     % FIGURES: HEATMAP [LATENT SCORES]
@@ -204,7 +236,7 @@ for ii=1:numel(boot_options)
 
     % FIGURES: BARPLOTS [LATENT VARIABLES]
     BS_data.input = BS_input; BS_data.output = BS_output;
-    cw_spls_results_figures(BS_data, boot_options{ii}, 'barplot', Path2Figures, maxFeatures)
+    cw_spls_results_figures(BS_data, boot_options{ii}, 'barplot', Path2Figures, maxFeatures, flip_flag)
     clear boot_results_file LS BS_input BS_output BS_data
 end
 

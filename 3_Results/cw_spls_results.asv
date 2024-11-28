@@ -3,20 +3,20 @@ function cw_spls_results(filepath, varargin)
 % Figures: Number of Matrices
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-p = inputParser; 
+p = inputParser;
 
-if filepath()
-addRequired(p, 'filepath', @ischar) 
+addRequired(p, 'filepath', @ischar)
 addParameter(p, 'maxFeatures', [], @isnumeric);
 addParameter(p, 'report_flag', true, @islogical);
+addParameter(p, 'flip_flag', false, @islogical);
 
 parse(p, filepath, varargin{:});
 maxFeatures = p.Results.maxFeatures;
 report_flag = p.Results.report_flag;
-    
+
 % LOAD FILEPATH
 if iscellstr(filepath)
-    filepath = char(filepath); 
+    filepath = char(filepath);
     data = load(filepath);
 elseif ~iscell(filepath) && (ischar(filepath) || istring(filepath))
     data = load(filepath);
@@ -26,12 +26,19 @@ end
 [folderpath, ~, ~] = fileparts(filepath);
 
 % CREATE FOLDER FOR TABLES [IN ANALYSIS FOLDER]
-Path2Tables = fullfile(folderpath, 'Tables');
+if flip_flag
+    Path2Tables = fullfile(folderpath, 'Tables_Flipped_Weights');
+else
+    Path2Tables = fullfile(folderpath, 'Tables');
+end
 if ~exist(Path2Tables)
     mkdir(Path2Tables)
 end
 
 % CREATE FOLDER FOR FIGURES [IN ANALYSIS FOLDER]
+if flip_flag
+    Path2Tables = fullfile(folderpath, 'Tables_Flipped_Weights');
+else
 Path2Figures = fullfile(folderpath, 'Figures');
 if ~exist(Path2Figures)
     mkdir(Path2Figures)
@@ -47,11 +54,11 @@ if ~exist(Path2Report)
 end
 
 % CHECK WHETHER NUMBER OF TOP FEATURES FOR FIGURES WAS DEFINED (BARPLOT)
-if isempty(varargin)
-    maxFeatures = []; 
-else 
-    maxFeatures = varargin{1}; 
-end 
+% if isempty(varargin)
+%     maxFeatures = [];
+% else
+%     maxFeatures = varargin{1};
+% end
 
 %% BEFORE BOOTSTRAPPING
 % CORRECTION
@@ -74,93 +81,96 @@ for matrix_idx = 1:numel(data.input.Xs)
     end
 
     % SAVE TABLE AS EXCEL FILE (SHEET)
+    
     writetable(T, fullfile(Path2Tables, 'LV_results.xlsx'), 'Sheet', data.input.Xs_names{matrix_idx})
-    clear T 
+    clear T
 end
 clear matrix_idx lv_idx
 
 
 if report_flag
-import mlreportgen.report.*
-import mlreportgen.dom.*
+    import mlreportgen.report.*
+    import mlreportgen.dom.*
 
-% [folderpath, ~, ~] = fileparts(filepath);
+    % [folderpath, ~, ~] = fileparts(filepath);
 
-% folderpath = '/opt/PrecisionCodeRep/SPLS_Toolbox/mbSPLS/3_Results';
+    % folderpath = '/opt/PrecisionCodeRep/SPLS_Toolbox/mbSPLS/3_Results';
 
-% Define the path where you want to save the report
-outputFileName = [date, '_Report.pdf'];
+    % Define the path where you want to save the report
+    outputFileName = [date, '_Report.pdf'];
 
-% Combine the path and filename
-fullFilePath = fullfile(Path2Report, outputFileName);
+    % Combine the path and filename
+    fullFilePath = fullfile(Path2Report, outputFileName);
 
-% // REPORT 
-rpt = Report(fullFilePath, 'pdf');
+    % // REPORT
+    rpt = Report(fullFilePath, 'pdf');
 
-% // REPORT: TITLE PAGE
-titlepg = TitlePage;
-titlepg.Title = 'REPORT';
-% titlepg.Subtitle = 'Analysis of Experimental Data';
-titlepg.Author = '  ';
-titlepg.PubDate = '   ';
-titlepg.Image = '/opt/PrecisionCodeRep/SPLS_Toolbox/mbSPLS/3_Results/mbspls_logo_klein.png'; % Optional
-add(rpt, titlepg);
-desc = Paragraph(['ANALYSIS:', newline, data.input.name]); 
-desc.Style = {HAlign('center')}; 
-add(rpt, desc);
-for i = 1:12
-    add(rpt, Paragraph(' '));
+    % // REPORT: TITLE PAGE
+    titlepg = TitlePage;
+    titlepg.Title = 'REPORT';
+    % titlepg.Subtitle = 'Analysis of Experimental Data';
+    titlepg.Author = '  ';
+    titlepg.PubDate = '   ';
+    titlepg.Image = '/opt/PrecisionCodeRep/SPLS_Toolbox/mbSPLS/3_Results/mbspls_logo_klein.png'; % Optional
+    add(rpt, titlepg);
+    desc = Paragraph(['ANALYSIS:', newline, data.input.name]);
+    desc.Style = {HAlign('center')};
+    add(rpt, desc);
+    for i = 1:12
+        add(rpt, Paragraph(' '));
+    end
+
+    desc = Paragraph('© 2024 Section for Precision Psychiatry. All rights reserved.');
+    desc.Style = {HAlign('center')};
+    add(rpt, desc);
+
+    % // REPORT: TABLE OF CONTENTS
+    toc = TableOfContents;
+    add(rpt, toc);
+
+    % // REPORT: CHAPTER 1 (SETUP)
+    ch1 = Chapter('Title', 'Setup');
+    vars = {'date', 'analysis_folder', 'data_folder', 'standalone_version', ...
+        'mbspls_standalone_path', 'matlab_version'};
+    cw_addFieldsToReport(ch1, data.setup, 'Settings', vars);
+    add(rpt, ch1);
+
+    % // REPORT: CHAPTER 1 (INPUT)
+    % Input Data
+    ch2 = Chapter('Title', 'Input');
+    vars = {'Xs', 'covariates'};
+    cw_addFieldsToReport(ch2, data.input, 'Input Data', vars); clear vars
+    add(ch2, Paragraph(' '))
+
+    % Machine Learning Framework
+    vars = {'framework', 'outer_folds', 'inner_folds', ...
+        'permutation_testing', 'bootstrap_testing',...
+        'optimization_strategy', 'density', 'correlation_method', ...
+        'mult_test', 'statistical_testing'};
+
+    cw_addFieldsToReport(ch2, data.input, 'Machine Learning Framework', vars); clear vars
+    add(rpt, ch2);
+
+    % // REPORT: CHAPTER 3 (RESULTS)
+    ch3 = Chapter('Title', 'Results');
+    add(ch3, Paragraph(' '))
+
+    T = table([], [], [], [], 'VariableNames', {'LV', 'P value', 'Frobenius Norm', 'R2'});
+
+    for lv_idx = 1:height(data.output.final_parameters)
+        T.LV(lv_idx) = lv_idx;
+        T.("P value")(lv_idx) = data.output.final_parameters{lv_idx, matches(data.output.parameters_names, 'p')};
+        T.("Frobenius Norm")(lv_idx) = data.output.final_parameters{lv_idx, matches(data.output.parameters_names, 'RHO')};
+        T.R2(lv_idx) = 1;
+    end
+
+    cw_create_table_for_pdf(ch3, T)
+    add(rpt, ch3)
 end
-
-desc = Paragraph('© 2024 Section for Precision Psychiatry. All rights reserved.'); 
-desc.Style = {HAlign('center')}; 
-add(rpt, desc);
-
-% // REPORT: TABLE OF CONTENTS
-toc = TableOfContents;
-add(rpt, toc);
-
-% // REPORT: CHAPTER 1 (SETUP)
-ch1 = Chapter('Title', 'Setup');
-vars = {'date', 'analysis_folder', 'data_folder', 'standalone_version', ...
-    'mbspls_standalone_path', 'matlab_version'};
-cw_addFieldsToReport(ch1, data.setup, 'Settings', vars);
-add(rpt, ch1); 
-
-% // REPORT: CHAPTER 1 (INPUT)
-% Input Data
-ch2 = Chapter('Title', 'Input');
-vars = {'Xs', 'covariates'};
-cw_addFieldsToReport(ch2, data.input, 'Input Data', vars); clear vars
-add(ch2, Paragraph(' '))
-
-% Machine Learning Framework
-vars = {'framework', 'outer_folds', 'inner_folds', ...
-    'permutation_testing', 'bootstrap_testing',...
-    'optimization_strategy', 'density', 'correlation_method', ...
-    'mult_test', 'statistical_testing'};
-
-cw_addFieldsToReport(ch2, data.input, 'Machine Learning Framework', vars); clear vars 
-add(rpt, ch2);
-
-% // REPORT: CHAPTER 3 (RESULTS) 
-ch3 = Chapter('Title', 'Results');
-add(ch3, Paragraph(' '))
-
-T = table([], [], [], [], 'VariableNames', {'LV', 'P value', 'Frobenius Norm', 'R2'});
-
-for lv_idx = 1:height(data.output.final_parameters)
-    T.LV(lv_idx) = lv_idx;
-    T.("P value")(lv_idx) = data.output.final_parameters{lv_idx, matches(data.output.parameters_names, 'p')};
-    T.("Frobenius Norm")(lv_idx) = data.output.final_parameters{lv_idx, matches(data.output.parameters_names, 'RHO')};
-    T.R2(lv_idx) = 1;
-end
-
-cw_create_table_for_pdf(ch3, T)
-add(rpt, ch3)
-end 
 % LATENT SCORES
-[LS] = cv_cw_spls_get_latent_scores(data.input, data.output, correct_log, [], Path2Tables);
+
+
+[LS] = cv_cw_spls_get_latent_scores(data.input, data.output, correct_log, [], Path2Tables, flip_flag);
 % [AUTOMATICALLY SAVES TABLE]
 
 % FIGURES: HEATMAP [LATENT SCORES]
@@ -308,11 +318,11 @@ for p = 1:numel(plotType)
     clear path2figures
 end
 
-if reprot_flag
-add(rpt, ch4);
+if report_flag
+    add(rpt, ch4);
 
 
-% FINISH UP REPORT
-close(rpt);
-rptview(rpt);
+    % FINISH UP REPORT
+    close(rpt);
+    rptview(rpt);
 end
