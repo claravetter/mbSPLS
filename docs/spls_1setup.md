@@ -3,7 +3,7 @@
 
 This section provides a comprehensive overview of the `input` and `setup` parameters used in the sPLS toolbox. These parameters enable you to tailor the analysis workflow to your specific needs, including cross-validation settings, model optimization strategies, data scaling methods, and memory management options. Properly configuring these parameters is essential for optimizing the performance and interpretability of your mb-sPLS analysis. Each parameter is outlined with its possible options, default values, and specific role within the toolbox to assist you in the configuration process.
 
-Once defined, the `input` and `setup` parameters are saved into a `datafile.mat` file using REPLACE?, which is then utilized in the subsequent [Model Training](spls_2run.md).
+Once defined, the `input` and `setup` parameters are saved into a `datafile.mat` file using `<placeholder>`, which is then utilized in the subsequent [Model Training](spls_2run.md).
 
 ## Input
 ### Data
@@ -11,12 +11,10 @@ Once defined, the `input` and `setup` parameters are saved into a `datafile.mat`
 | Fieldname                 | Input Format      |          Explanation                                          |
 | --------                  | --------          |            --------                                           |
 | `project_name`              | String            | Define a project name (e.g., `input.project_name = 'YOURPROJECTNAME'`).                                                    |
-
 | `X`                        | Double      | Define your 1st matrix (e.g., `input.X = '300x20 double'`). |
 | `X_names`                  | Cell array (string)      | Define the names of your featurees in X (e.g., `input.X_names = '1x20 cell'`) (or leave empty).|
 | `Y`                        | Cell array (double)      | Define your 2nd matrix (e.g., `input.Y = '300x15 double'`). |
 | `Y_names`                  | Cell array (string)      | Define the names of your featurees in X (e.g., `input.X_names = '1x15 cell'`) (or leave empty).|
-
 | `type_correction`          | String       | Define whether you want to correct for covariates. Options: `corrected`, `uncorrected`. |
 | `covariates`                | Double      | If you would like to correct for covariates, define your covariate(s) (vector/matrix) (e.g., `input.covariates = 300x3 double`) or leave empty if you don't have any covariates.|
 | `covariates_names`          | Cell array (string)      | If you would like to correct for covarites, define the name(s) of your covariate(s) (e.g., `input.covariate_names = {'PC1'}, {'PC2'}, {'PC3'}`). If you would like to correct for e.g., sites, you would have to create a dummy-coded vector (0,1) for each site, so that the number of columns in your covariate matrix equals the number of sites, you would like to correct for.|
@@ -63,11 +61,10 @@ If X and Y do not have the same number of features, X has to be the matrix that 
 | `statistical_testing`                               | Double          | Define how the P value is computed during permutation testing: Options: `1` (Counting method, i.e., number of instances where permuted models outperformed optimized model/number of permutations); `2` (AUC method; permuted RHO values are used to compute AUC for optimal RHO value); Note: Option 2 usually gives slightly lower P values. |
 | `cs_method{1}`                               |          | |
 | > `method`                               | String          | Scaling of features. Options: `mean-centering` (i.e., z- tranformation; Default), `min_max` (i.e., scaling [0-1])|
-| > `correction_subgroup`                  | String          | Define whether to correct the covariates based on the betas of a subgroup, or across all individuals. For subgroup-based correction, use the label, e.g., 'HC' or 'ROD'. Otherwise, leave as an empty string: `''`. |
-| `coun_ts_limit`                                     | Double          | Define after how many non-significant LVs the algorithm should stop (Default: 1; i.e., as soon as one LV is not significant, the operation ends). |
+| > `correction_subgroup`                  | String          | Define whether to correct the covariates based on the betas of a subgroup, or across all individuals. For subgroup-based correction, use the label, e.g., `'HC'` or `'ROD'`. Otherwise, leave as an empty string: `''`. |
+| `coun_ts_limit`                                     | Double          | Define after how many non-significant LVs the algorithm should stop (Default: `1`; i.e., as soon as one LV is not significant, the operation ends). |
 | `outer_permutations`                                | Double          | Define the number of permutations in the CV2 folds (Default: `1`). Note that the toolbox is not yet optimized for permutations on folds, and permutating the folds would significantly increase computation time and is not recommended. |
 | `inner_permutations`                                | Double          | Define the number of permutations in the CV1 folds (Default: `1`). Similar to outer permutations, the toolbox is not yet optimized for permutations on folds. |
-
 | `grid_dynamic`                                |           |  |
 | > `onset`                                | Double          | Choose the marks for grid applications. Default: `1` (Grid is defined at the first iteration and then not changed in later iterations). |
 | >` LV_1.x`                                  | Struct      | `'start'` defines the lower limit of the hyperparameter search (i.e., 1 means start is at value 1, 10 means it starts at the lower 10 percentile of the grid, etc.) (Default: `1`); `'end'` defines the upper limit of the hyperparameter search (i.e., 0 means all the way to the end, 10 means to stop at the upper 10 percentile, etc.) (Default: `0`)|
@@ -77,8 +74,8 @@ If X and Y do not have the same number of features, X has to be the matrix that 
 
 | Fieldname                 | Input Format          |          Explanation   |
 | --------                  | --------              |            --------        |
-| `date`                   | Dateformat     | Date of the analysis or script execution. |
-| `spls_standalone_path`     | String         | Enter the name of the spls toolbox version (e.g., `setup.spls_standalone_path = '/data/core-psy-pronia/opt/SPLS_Toolbox_Dev_2023_CORE'`). |
+| `date`                    | Dateformat     | Date of the analysis or script execution. |
+| `spls_standalone_path`    | String         | Enter the name of the spls toolbox version (e.g., `setup.spls_standalone_path = '/data/core-psy-pronia/opt/SPLS_Toolbox_Dev_2023_CORE'`). |
 | `analysis_folder`        | String         | Define the path to your analysis folder (e.g., `setup.analysis_folder = '/data/core-psy-archive/projects/YourProjectFolder'`). |
 | `partition`              | String         | Enter the partition on your server (e.g., `setup.partition = 'jobs-cpu-long'`). |
 | `max_sim_jobs`           | Double         | Define how many parallel jobs are created (Default: `10`). |
