@@ -3,7 +3,7 @@
 
 This section provides a comprehensive overview of the `input` and `setup` parameters used in the sPLS toolbox. These parameters enable you to tailor the analysis workflow to your specific needs, including cross-validation settings, model optimization strategies, data scaling methods, and memory management options. Properly configuring these parameters is essential for optimizing the performance and interpretability of your mb-sPLS analysis. Each parameter is outlined with its possible options, default values, and specific role within the toolbox to assist you in the configuration process.
 
-Once defined, the `input` and `setup` parameters are saved into a `datafile.mat` file using REPLACE?, which is then utilized in the subsequent [Model Training](spls_2run.md).
+Once defined, the `input` and `setup` parameters are saved into a `datafile.mat` file using `<placeholder>`, which is then utilized in the subsequent [Model Training](spls_2run.md).
 
 ## Input
 ### Data
@@ -26,9 +26,9 @@ Once defined, the `input` and `setup` parameters are saved into a `datafile.mat`
 | `final_ID`                   | Cell array (string)   | Define the IDs of your subjects (e.g. `input.final_ID = {'400106', '400678', '410345', ...})`). It should have the same length as the number of participants.|
 
 ::::{important}
-Make sure your input data (i.e., Xs, covariates, sites, Diag and DiagNames) does not contain any missing values. Make sure to either remove the missing values or impute them beforehand. 
+Make sure your input data (i.e.,  `input.Xs`, `input.covariates`, `input.sites`, `input.Diag` and `input.DiagNames`) does not contain any missing values. Make sure to either remove the missing values or impute them beforehand. 
 
-If X and Y do not have the same number of features, X has to be the matrix that has more features.
+If `input.X` and `input.Y` do not have the same number of features, `input.X` has to be the matrix that has more features.
 ::::
 
 
