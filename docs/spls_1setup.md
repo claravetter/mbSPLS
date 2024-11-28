@@ -12,7 +12,7 @@ Once defined, the `input` and `setup` parameters are saved into a `datafile.mat`
 | --------                  | --------          |            --------                                           |
 | `project_name`              | String            | Define a project name (e.g., `input.project_name = 'YOURPROJECTNAME'`).|
 | `X`                        | Double      | Define your 1st matrix (e.g., `input.X = '300x20 double'`). |
-| `X_names`                  | Cell array (string)      | Define the names of your featurees in X (e.g., `input.X_names = '1x20 cell'`) (or leave empty).|
+| `X_names`                  | Cell array (string)      | Define the names of your features in X (e.g., `input.X_names = '1x20 cell'`) (or leave empty).|
 | `Y`                        | Cell array (double)      | Define your 2nd matrix (e.g., `input.Y = '300x15 double'`). |
 | `Y_names`                  | Cell array (string)      | Define the names of your featurees in X (e.g., `input.X_names = '1x15 cell'`) (or leave empty).|
 | `type_correction`          | String       | Define whether you want to correct for covariates. Options: `corrected`, `uncorrected`. |
@@ -65,7 +65,6 @@ If X and Y do not have the same number of features, X has to be the matrix that 
 | `coun_ts_limit`                                     | Double          | Define after how many non-significant LVs the algorithm should stop (Default: 1; i.e., as soon as one LV is not significant, the operation ends). |
 | `outer_permutations`                                | Double          | Define the number of permutations in the CV2 folds (Default: `1`). Note that the toolbox is not yet optimized for permutations on folds, and permutating the folds would significantly increase computation time and is not recommended. |
 | `inner_permutations`                                | Double          | Define the number of permutations in the CV1 folds (Default: `1`). Similar to outer permutations, the toolbox is not yet optimized for permutations on folds. |
-
 | `grid_dynamic`                                |           |  |
 | > `onset`                                | Double          | Choose the marks for grid applications. Default: `1` (Grid is defined at the first iteration and then not changed in later iterations). |
 | >` LV_1.x`                                  | Struct      | `'start'` defines the lower limit of the hyperparameter search (i.e., 1 means start is at value 1, 10 means it starts at the lower 10 percentile of the grid, etc.) (Default: `1`); `'end'` defines the upper limit of the hyperparameter search (i.e., 0 means all the way to the end, 10 means to stop at the upper 10 percentile, etc.) (Default: `0`)|
