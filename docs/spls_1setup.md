@@ -26,7 +26,7 @@ Once defined, the `input` and `setup` parameters are saved into a `datafile.mat`
 | `final_ID`                   | Cell array (string)   | Define the IDs of your subjects (e.g. `input.final_ID = {'400106', '400678', '410345', ...})`). It should have the same length as the number of participants.|
 
 ::::{important}
-Make sure your input data (i.e., Xs, covariates, sites, Diag and DiagNames) does not contain any missing values. Make sure to either remove the missing values or impute them beforehand. 
+Make sure your input data (i.e., `input.Xs`, `input.covariates`, `input.sites`, `input.Diag` and `input.DiagNames`) does not contain any missing values. Make sure to either remove the missing values or impute them beforehand. 
 
 If X and Y do not have the same number of features, X has to be the matrix that has more features.
 ::::
