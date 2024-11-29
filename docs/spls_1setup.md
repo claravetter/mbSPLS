@@ -82,13 +82,14 @@ If `input.X` and `input.Y` do not have the same number of features, `input.X` ha
 | `parallel_jobs`          | Double         | Define how many jobs run in parallel at the same time (soft threshold) (Default: `25`). |
 | `mem_request`            | Double         | Define the memory request for master and slave jobs (in GB) (Default: `10`). |
 | `matlab_version`         | String         | Define MATLAB runtime engine (e.g., `R2022a`). |
-| `matlab_path`            | String         | Define path to MATLAB folder on your server. |
+| `matlab_path`            | String         | Define path to MATLAB folder on your server (e.g., `input.matlab_path = '/data/core-psy-pronia/opt/matlab/v912'`).|
 | `cache_path`             | String         | Path for output text files during hyperopt, permutation, bootstrapping (generally the same as scratch space) (e.g., `setup.cache_path = '/data/core-psy-pronia/opt/temp/YourUsername'`) |
 | `scratch_space`          | String         | Path for temporary file storage (hyperopt, permutation, bootstrapping) during analysis.  (e.g., `setup.scratch_path = '/data/core-psy-pronia/opt/temp/YourUsername'`) |
 | `compilation_subpath`    | String         | Default: `'for_testing'`. |
 | `nodes`                  | Double         | Default: `1`. |
-| `account`                | String         | Name of your account on your server. (e.g., `input.account = 'account1'`)|
-| `user`                   | String         | Your username on your server (e.g., `input.user = 'user1'`)|
+| `queue_name`             | String         | Default: `''`; Leave empty for now. |
+| `account`                | String         | Name of your account on your server. (e.g., `input.account = 'core-psy'`)|
+| `user`                   | String         | Your username on your server (e.g., `input.user = 'clweyer'`)|
 
 ```{note}
 Test
