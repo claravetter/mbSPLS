@@ -416,7 +416,7 @@ document.write(`
   <div class="tex2jax_ignore mathjax_ignore section" id="data-input">
 <span id="spls-1setup"></span><h1>Data Input<a class="headerlink" href="#data-input" title="Permalink to this heading">#</a></h1>
 <p>This section provides a comprehensive overview of the <code class="docutils literal notranslate"><span class="pre">input</span></code> and <code class="docutils literal notranslate"><span class="pre">setup</span></code> parameters used in the sPLS toolbox. These parameters enable you to tailor the analysis workflow to your specific needs, including cross-validation settings, model optimization strategies, data scaling methods, and memory management options. Properly configuring these parameters is essential for optimizing the performance and interpretability of your mb-sPLS analysis. Each parameter is outlined with its possible options, default values, and specific role within the toolbox to assist you in the configuration process.</p>
-<p>Once defined, the <code class="docutils literal notranslate"><span class="pre">input</span></code> and <code class="docutils literal notranslate"><span class="pre">setup</span></code> parameters are saved into a <code class="docutils literal notranslate"><span class="pre">datafile.mat</span></code> file using REPLACE?, which is then utilized in the subsequent <a class="reference internal" href="spls_2run.html"><span class="doc std std-doc">Model Training</span></a>.</p>
+<p>Once defined, the <code class="docutils literal notranslate"><span class="pre">input</span></code> and <code class="docutils literal notranslate"><span class="pre">setup</span></code> parameters are saved into a <code class="docutils literal notranslate"><span class="pre">datafile.mat</span></code> file using <code class="docutils literal notranslate"><span class="pre">&lt;placeholder&gt;</span></code>, which is then utilized in the subsequent <a class="reference internal" href="spls_2run.html"><span class="doc std std-doc">Model Training</span></a>.</p>
 <div class="section" id="input">
 <h2>Input<a class="headerlink" href="#input" title="Permalink to this heading">#</a></h2>
 <div class="section" id="data">
@@ -433,25 +433,64 @@ document.write(`
 <td><p>String</p></td>
 <td><p>Define a project name (e.g., <code class="docutils literal notranslate"><span class="pre">input.project_name</span> <span class="pre">=</span> <span class="pre">'YOURPROJECTNAME'</span></code>).</p></td>
 </tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">X</span></code></p></td>
+<td><p>Double</p></td>
+<td><p>Define your 1st matrix (e.g., <code class="docutils literal notranslate"><span class="pre">input.X</span> <span class="pre">=</span> <span class="pre">'300x20</span> <span class="pre">double'</span></code>).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">X_names</span></code></p></td>
+<td><p>Cell array (string)</p></td>
+<td><p>Define the names of your features in <code class="docutils literal notranslate"><span class="pre">input.X</span></code> (e.g., <code class="docutils literal notranslate"><span class="pre">input.X_names</span> <span class="pre">=</span> <span class="pre">'1x20</span> <span class="pre">cell'</span></code>) (or leave empty).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Y</span></code></p></td>
+<td><p>Cell array (double)</p></td>
+<td><p>Define your 2nd matrix (e.g., <code class="docutils literal notranslate"><span class="pre">input.Y</span> <span class="pre">=</span> <span class="pre">'300x15</span> <span class="pre">double'</span></code>).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Y_names</span></code></p></td>
+<td><p>Cell array (string)</p></td>
+<td><p>Define the names of your features in <code class="docutils literal notranslate"><span class="pre">input.Y</span></code> (e.g., <code class="docutils literal notranslate"><span class="pre">input.Y_names</span> <span class="pre">=</span> <span class="pre">'1x15</span> <span class="pre">cell'</span></code>) (or leave empty).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">type_correction</span></code></p></td>
+<td><p>String</p></td>
+<td><p>Define whether you want to correct for covariates. Options: <code class="docutils literal notranslate"><span class="pre">corrected</span></code>, <code class="docutils literal notranslate"><span class="pre">uncorrected</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">covariates</span></code></p></td>
+<td><p>Double</p></td>
+<td><p>If you would like to correct for covariates, define your covariate(s) (vector/matrix) (e.g., <code class="docutils literal notranslate"><span class="pre">input.covariates</span> <span class="pre">=</span> <span class="pre">300x3</span> <span class="pre">double</span></code>) or leave empty if you don’t have any covariates.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">covariates_names</span></code></p></td>
+<td><p>Cell array (string)</p></td>
+<td><p>If you would like to correct for covariates, define the name(s) of your covariate(s) (e.g., <code class="docutils literal notranslate"><span class="pre">input.covariate_names</span> <span class="pre">=</span> <span class="pre">{'PC1'},</span> <span class="pre">{'PC2'},</span> <span class="pre">{'PC3'}</span></code>). If you would like to correct for e.g., sites, you would have to create a dummy-coded vector (0,1) for each site, so that the number of columns in your covariate matrix equals the number of sites, you would like to correct for.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">correction_target</span></code></p></td>
+<td><p>String</p></td>
+<td><p>Define which matrix you would like to remove the covariate effects from. Options: <code class="docutils literal notranslate"><span class="pre">1</span></code>- X, <code class="docutils literal notranslate"><span class="pre">2</span></code>- Y, <code class="docutils literal notranslate"><span class="pre">3</span></code>- X and Y.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Diag</span></code></p></td>
+<td><p>Double</p></td>
+<td><p>Define a column vector with diagnoses/labels coded via numbers (e.g., <code class="docutils literal notranslate"><span class="pre">input.Diag</span> <span class="pre">=</span> <span class="pre">[1,</span> <span class="pre">3,</span> <span class="pre">2,</span> <span class="pre">3,</span> <span class="pre">1,</span> <span class="pre">...]</span></code>). It should have the same length as the number of participants.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">DiagNames</span></code></p></td>
+<td><p>Cell array (string)</p></td>
+<td><p>Column cell array with diagnoses/labels (e.g., <code class="docutils literal notranslate"><span class="pre">input.DiagNames</span> <span class="pre">=</span> <span class="pre">{'HC',</span> <span class="pre">'ROD',</span> <span class="pre">'CHR',</span> <span class="pre">'HC',</span> <span class="pre">'ROP',</span> <span class="pre">...}</span></code>).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">sites</span></code></p></td>
+<td><p>Double</p></td>
+<td><p>Dummy coded vector for sites. If single-site: column vector of ones. (e.g., <code class="docutils literal notranslate"><span class="pre">input.Diag</span> <span class="pre">=</span> <span class="pre">[1,</span> <span class="pre">3,</span> <span class="pre">2,</span> <span class="pre">3,</span> <span class="pre">1,</span> <span class="pre">...]</span></code>). It should have the same length as the number of participants.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">sites_names</span></code></p></td>
+<td><p>Cell array (string)</p></td>
+<td><p>Define the name(s) of your site(s) (e.g., <code class="docutils literal notranslate"><span class="pre">input.sites_names</span> <span class="pre">=</span> <span class="pre">{'LMU',</span> <span class="pre">'LMU',</span> <span class="pre">'Yale',</span> <span class="pre">'LMU',</span> <span class="pre">...</span> <span class="pre">}</span></code>). It should have the same length as the number of participants.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">final_ID</span></code></p></td>
+<td><p>Cell array (string)</p></td>
+<td><p>Define the IDs of your subjects (e.g. <code class="docutils literal notranslate"><span class="pre">input.final_ID</span> <span class="pre">=</span> <span class="pre">{'400106',</span> <span class="pre">'400678',</span> <span class="pre">'410345',</span> <span class="pre">...})</span></code>). It should have the same length as the number of participants.</p></td>
+</tr>
 </tbody>
 </table>
-<p>| <code class="docutils literal notranslate"><span class="pre">X</span></code>                        | Double      | Define your 1st matrix (e.g., <code class="docutils literal notranslate"><span class="pre">input.X</span> <span class="pre">=</span> <span class="pre">'300x20</span> <span class="pre">double'</span></code>). |
-| <code class="docutils literal notranslate"><span class="pre">X_names</span></code>                  | Cell array (string)      | Define the names of your featurees in X (e.g., <code class="docutils literal notranslate"><span class="pre">input.X_names</span> <span class="pre">=</span> <span class="pre">'1x20</span> <span class="pre">cell'</span></code>) (or leave empty).|
-| <code class="docutils literal notranslate"><span class="pre">Y</span></code>                        | Cell array (double)      | Define your 2nd matrix (e.g., <code class="docutils literal notranslate"><span class="pre">input.Y</span> <span class="pre">=</span> <span class="pre">'300x15</span> <span class="pre">double'</span></code>). |
-| <code class="docutils literal notranslate"><span class="pre">Y_names</span></code>                  | Cell array (string)      | Define the names of your featurees in X (e.g., <code class="docutils literal notranslate"><span class="pre">input.X_names</span> <span class="pre">=</span> <span class="pre">'1x15</span> <span class="pre">cell'</span></code>) (or leave empty).|</p>
-<p>| <code class="docutils literal notranslate"><span class="pre">type_correction</span></code>          | String       | Define whether you want to correct for covariates. Options: <code class="docutils literal notranslate"><span class="pre">corrected</span></code>, <code class="docutils literal notranslate"><span class="pre">uncorrected</span></code>. |
-| <code class="docutils literal notranslate"><span class="pre">covariates</span></code>                | Double      | If you would like to correct for covariates, define your covariate(s) (vector/matrix) (e.g., <code class="docutils literal notranslate"><span class="pre">input.covariates</span> <span class="pre">=</span> <span class="pre">300x3</span> <span class="pre">double</span></code>) or leave empty if you don’t have any covariates.|
-| <code class="docutils literal notranslate"><span class="pre">covariates_names</span></code>          | Cell array (string)      | If you would like to correct for covarites, define the name(s) of your covariate(s) (e.g., <code class="docutils literal notranslate"><span class="pre">input.covariate_names</span> <span class="pre">=</span> <span class="pre">{'PC1'},</span> <span class="pre">{'PC2'},</span> <span class="pre">{'PC3'}</span></code>). If you would like to correct for e.g., sites, you would have to create a dummy-coded vector (0,1) for each site, so that the number of columns in your covariate matrix equals the number of sites, you would like to correct for.|
-| <code class="docutils literal notranslate"><span class="pre">correction_target</span></code>          | String       | Define which matrix you would like to remove the covariate effects from. Options: <code class="docutils literal notranslate"><span class="pre">1</span></code>- X, <code class="docutils literal notranslate"><span class="pre">2</span></code>- Y, <code class="docutils literal notranslate"><span class="pre">3</span></code>- X and Y. |
-| <code class="docutils literal notranslate"><span class="pre">Diag</span></code>                      | Double            | Column vector with diagnoses coded via numbers (e.g., <code class="docutils literal notranslate"><span class="pre">input.Diag</span> <span class="pre">=</span> <span class="pre">[1,</span> <span class="pre">3,</span> <span class="pre">2,</span> <span class="pre">3,</span> <span class="pre">1,</span> <span class="pre">...]</span></code>). It should have the same length as the number of participants. |
-| <code class="docutils literal notranslate"><span class="pre">DiagNames</span></code>                 | Cell array (string)        | Column cell array with diagnoses/labels (e.g., <code class="docutils literal notranslate"><span class="pre">input.DiagNames</span> <span class="pre">=</span> <span class="pre">{'HC',</span> <span class="pre">'ROD',</span> <span class="pre">'CHR',</span> <span class="pre">'HC',</span> <span class="pre">'ROP',</span> <span class="pre">...}</span></code>). |
-| <code class="docutils literal notranslate"><span class="pre">sites</span></code>                      | Double       | Dummy coded vector for sites. If single-site: column vector of ones. (e.g., <code class="docutils literal notranslate"><span class="pre">input.Diag</span> <span class="pre">=</span> <span class="pre">[1,</span> <span class="pre">3,</span> <span class="pre">2,</span> <span class="pre">3,</span> <span class="pre">1,</span> <span class="pre">...]</span></code>). It should have the same length as the number of participants. |
-| <code class="docutils literal notranslate"><span class="pre">sites_names</span></code>                      | Cell array (string)       | Define the name(s) of your site(s) (e.g., <code class="docutils literal notranslate"><span class="pre">input.sites_names</span> <span class="pre">=</span> <span class="pre">{'LMU',</span> <span class="pre">'LMU',</span> <span class="pre">'Yale',</span> <span class="pre">'LMU',</span> <span class="pre">...</span> <span class="pre">}</span></code>). It should have the same length as the number of participants.|
-| <code class="docutils literal notranslate"><span class="pre">final_ID</span></code>                   | Cell array (string)   | Define the IDs of your subjects (e.g. <code class="docutils literal notranslate"><span class="pre">input.final_ID</span> <span class="pre">=</span> <span class="pre">{'400106',</span> <span class="pre">'400678',</span> <span class="pre">'410345',</span> <span class="pre">...})</span></code>). It should have the same length as the number of participants.|</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>Make sure your input data (i.e., Xs, covariates, sites, Diag and DiagNames) does not contain any missing values. Make sure to either remove the missing values or impute them beforehand.</p>
-<p>If X and Y do not have the same number of features, X has to be the matrix that has more features.</p>
+<p>Make sure your input data (i.e., <code class="docutils literal notranslate"><span class="pre">input.X</span></code>, <code class="docutils literal notranslate"><span class="pre">input.Y</span></code>, <code class="docutils literal notranslate"><span class="pre">input.covariates</span></code>, <code class="docutils literal notranslate"><span class="pre">input.sites</span></code>, <code class="docutils literal notranslate"><span class="pre">input.Diag</span></code> and <code class="docutils literal notranslate"><span class="pre">input.DiagNames</span></code>) does not contain any missing values. Make sure to either remove the missing values or impute them beforehand.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">input.X</span></code> and <code class="docutils literal notranslate"><span class="pre">input.Y</span></code> do not have the same number of features, <code class="docutils literal notranslate"><span class="pre">input.X</span></code> has to be the matrix that has more features.</p>
 </div>
 </div>
 <div class="section" id="machine-learning-framework">
@@ -562,11 +601,11 @@ document.write(`
 </tr>
 <tr class="row-even"><td><p>&gt; <code class="docutils literal notranslate"><span class="pre">correction_subgroup</span></code></p></td>
 <td><p>String</p></td>
-<td><p>Define whether to correct the covariates based on the betas of a subgroup, or across all individuals. For subgroup-based correction, use the label, e.g., ‘HC’ or ‘ROD’. Otherwise, leave as an empty string: <code class="docutils literal notranslate"><span class="pre">''</span></code>.</p></td>
+<td><p>Define whether to correct the covariates based on the betas of a subgroup, or across all individuals. For subgroup-based correction, use the label, e.g., <code class="docutils literal notranslate"><span class="pre">'HC'</span></code> or <code class="docutils literal notranslate"><span class="pre">'ROD'</span></code>. Otherwise, leave as an empty string: <code class="docutils literal notranslate"><span class="pre">''</span></code>.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">coun_ts_limit</span></code></p></td>
 <td><p>Double</p></td>
-<td><p>Define after how many non-significant LVs the algorithm should stop (Default: 1; i.e., as soon as one LV is not significant, the operation ends).</p></td>
+<td><p>Define after how many non-significant LVs the algorithm should stop (Default: <code class="docutils literal notranslate"><span class="pre">1</span></code>; i.e., as soon as one LV is not significant, the operation ends).</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">outer_permutations</span></code></p></td>
 <td><p>Double</p></td>
@@ -576,12 +615,24 @@ document.write(`
 <td><p>Double</p></td>
 <td><p>Define the number of permutations in the CV1 folds (Default: <code class="docutils literal notranslate"><span class="pre">1</span></code>). Similar to outer permutations, the toolbox is not yet optimized for permutations on folds.</p></td>
 </tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">grid_dynamic</span></code></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>&gt; <code class="docutils literal notranslate"><span class="pre">onset</span></code></p></td>
+<td><p>Double</p></td>
+<td><p>Choose the marks for grid applications. Default: <code class="docutils literal notranslate"><span class="pre">1</span></code> (Grid is defined at the first iteration and then not changed in later iterations).</p></td>
+</tr>
+<tr class="row-even"><td><p>&gt;<code class="docutils literal notranslate"> <span class="pre">LV_1.x</span></code></p></td>
+<td><p>Struct</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'start'</span></code> defines the lower limit of the hyperparameter search (i.e., 1 means start is at value 1, 10 means it starts at the lower 10 percentile of the grid, etc.) (Default: <code class="docutils literal notranslate"><span class="pre">1</span></code>); <code class="docutils literal notranslate"><span class="pre">'end'</span></code> defines the upper limit of the hyperparameter search (i.e., 0 means all the way to the end, 10 means to stop at the upper 10 percentile, etc.) (Default: <code class="docutils literal notranslate"><span class="pre">0</span></code>)</p></td>
+</tr>
+<tr class="row-odd"><td><p>&gt;<code class="docutils literal notranslate"> <span class="pre">LV_1.y</span></code></p></td>
+<td><p>Struct</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'start'</span></code> defines the lower limit of the hyperparameter search (i.e., 1 means start is at value 1, 10 means it starts at the lower 10 percentile of the grid, etc.); <code class="docutils literal notranslate"><span class="pre">'end'</span></code> defines the upper limit of the hyperparameter search (i.e., 0 means all the way to the end, 10 means to stop at the upper 10 percentile, etc.)</p></td>
+</tr>
 </tbody>
 </table>
-<p>| <code class="docutils literal notranslate"><span class="pre">grid_dynamic</span></code>                                |           |  |
-| &gt; <code class="docutils literal notranslate"><span class="pre">onset</span></code>                                | Double          | Choose the marks for grid applications. Default: <code class="docutils literal notranslate"><span class="pre">1</span></code> (Grid is defined at the first iteration and then not changed in later iterations). |
-| &gt;<code class="docutils literal notranslate"> <span class="pre">LV_1.x</span></code>                                  | Struct      | <code class="docutils literal notranslate"><span class="pre">'start'</span></code> defines the lower limit of the hyperparameter search (i.e., 1 means start is at value 1, 10 means it starts at the lower 10 percentile of the grid, etc.) (Default: <code class="docutils literal notranslate"><span class="pre">1</span></code>); <code class="docutils literal notranslate"><span class="pre">'end'</span></code> defines the upper limit of the hyperparameter search (i.e., 0 means all the way to the end, 10 means to stop at the upper 10 percentile, etc.) (Default: <code class="docutils literal notranslate"><span class="pre">0</span></code>)|
-| &gt;<code class="docutils literal notranslate"> <span class="pre">LV_1.y</span></code>                                  | Struct      | <code class="docutils literal notranslate"><span class="pre">'start'</span></code> defines the lower limit of the hyperparameter search (i.e., 1 means start is at value 1, 10 means it starts at the lower 10 percentile of the grid, etc.); <code class="docutils literal notranslate"><span class="pre">'end'</span></code> defines the upper limit of the hyperparameter search (i.e., 0 means all the way to the end, 10 means to stop at the upper 10 percentile, etc.)|</p>
 </div>
 </div>
 <div class="section" id="setup">
@@ -628,7 +679,7 @@ document.write(`
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">matlab_path</span></code></p></td>
 <td><p>String</p></td>
-<td><p>Define path to MATLAB folder on your server.</p></td>
+<td><p>Define path to MATLAB folder on your server (e.g., <code class="docutils literal notranslate"><span class="pre">input.matlab_path</span> <span class="pre">=</span> <span class="pre">'/data/core-psy-pronia/opt/matlab/v912'</span></code>).</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">cache_path</span></code></p></td>
 <td><p>String</p></td>
@@ -646,20 +697,20 @@ document.write(`
 <td><p>Double</p></td>
 <td><p>Default: <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">account</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">queue_name</span></code></p></td>
 <td><p>String</p></td>
-<td><p>Name of your account on your server. (e.g., <code class="docutils literal notranslate"><span class="pre">input.account</span> <span class="pre">=</span> <span class="pre">'account1'</span></code>)</p></td>
+<td><p>Default: <code class="docutils literal notranslate"><span class="pre">''</span></code>; Leave empty for now.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">user</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">account</span></code></p></td>
 <td><p>String</p></td>
-<td><p>Your username on your server (e.g., <code class="docutils literal notranslate"><span class="pre">input.user</span> <span class="pre">=</span> <span class="pre">'user1'</span></code>)</p></td>
+<td><p>Name of your account on your server. (e.g., <code class="docutils literal notranslate"><span class="pre">input.account</span> <span class="pre">=</span> <span class="pre">'core-psy'</span></code>)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">user</span></code></p></td>
+<td><p>String</p></td>
+<td><p>Your username on your server (e.g., <code class="docutils literal notranslate"><span class="pre">input.user</span> <span class="pre">=</span> <span class="pre">'clweyer'</span></code>)</p></td>
 </tr>
 </tbody>
 </table>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Test</p>
-</div>
 </div>
 </div>
 

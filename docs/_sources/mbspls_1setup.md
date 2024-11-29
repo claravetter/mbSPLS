@@ -3,18 +3,18 @@
 
 This section provides a comprehensive overview of the `input` and `setup` parameters used in the mb-sPLS toolbox. These parameters enable you to tailor the analysis workflow to your specific needs, including cross-validation settings, model optimization strategies, data scaling methods, and memory management options. Properly configuring these parameters is essential for optimizing the performance and interpretability of your mb-sPLS analysis. Each parameter is outlined with its possible options, default values, and specific role within the toolbox to assist you in the configuration process.
 
-Once defined, the `input` and `setup` parameters are saved into a `datafile.mat` file using REPLACE?, which is then utilized in the subsequent [Model Training](mbspls_2run.md).
+Once defined, the `input` and `setup` parameters are saved into a `datafile.mat` file using `<placeholder>`, which is then utilized in the subsequent [Model Training](mbspls_2run.md).
 
 ## Input
 ### Data
 
 | Fieldname                 | Input Format      |          Explanation                                          |
 | --------                  | --------          |            --------                                           |
-| `project_name`              | String            | Define a project name (e.g., `input.project_name = 'YOURPROJECTNAME'`).                                                    |
-| `Xs`                        | Cell array (double)      | Your matrices (e.g., `input.Xs = '{50x20 double} {50x30 double}`). The length of `input.Xs`should equal your number of matrices. |
-| `Xs_names`                  | Cell array (string)      | Cell array with the names of your matrices (e.g., `input.Xs_names = {'Matrix1'}, {'Matrix2'}`. The length of `input.Xs_names` should equal the number of matrices. )                    |
-| `Xs_feature_names`          | Cell array (string)      | Cell array with the names of matrix features (e.g., `input.Xs_feature_names = {1x20 cell} {1x30 cell}`. The length of `input.Xs_features_names` should equal the number of matrices. )                    |
-| `covariates`                | Cell array (double)      | Your covariate(s) (vector/matrix)  |
+| `project_name`              | String            | Define a project name (e.g., `input.project_name = 'YOURPROJECTNAME'`).|
+| `Xs`                        | Cell array (double)      | Define your matrices (e.g., `input.Xs = '{50x20 double} {50x30 double}`). The length of `input.Xs`should equal your number of matrices. |
+| `Xs_names`                  | Cell array (string)      | Define the names of your matrices (e.g., `input.Xs_names = {'Matrix1'}, {'Matrix2'}`. The length of `input.Xs_names` should equal the number of matrices. )                    |
+| `Xs_feature_names`          | Cell array (string)      | Define the feature names of matrices (e.g., `input.Xs_feature_names = {1x20 cell} {1x30 cell}`. The length of `input.Xs_features_names` should equal the number of matrices. )                    |
+| `covariates`                | Cell array (double)      | Define your covariate(s) (vector/matrix)  |
 | `covariates_names`          | Cell array (string)      | Name(s) of your covariate(s) |
 | `Diag`                      | Double            | Column vector with diagnoses coded via numbers (e.g., `input.Diag = [1, 3, 2, 3, 1]`) |
 | `DiagNames`                 | Cell array (string)        | Column cell array with diagnoses/labels (e.g., `input.DiagNames = {'HC', 'ROD', 'CHR', 'HC', 'ROP'}`). |
@@ -23,7 +23,7 @@ Once defined, the `input` and `setup` parameters are saved into a `datafile.mat`
 | `type_correction`          | String       | Define whether you want to correct for covariates. Options: `corrected`, `uncorrected`. |
 
 ::::{important}
-Make sure your input data (i.e., Xs, covariates, sites, Diag and DiagNames) does not contain any missing values. Make sure to either remove the missing values or impute them beforehand. 
+Make sure your input data (i.e., `input.Xs`, `input.covariates`, `input.sites`, `input.Diag` and `input.DiagNames`) does not contain any missing values. Make sure to either remove the missing values or impute them beforehand. 
 ::::
 
 
