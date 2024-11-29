@@ -91,6 +91,3 @@ If `input.X` and `input.Y` do not have the same number of features, `input.X` ha
 | `account`                | String         | Name of your account on your server. (e.g., `input.account = 'core-psy'`)|
 | `user`                   | String         | Your username on your server (e.g., `input.user = 'clweyer'`)|
 
-```{note}
-Test
-```
