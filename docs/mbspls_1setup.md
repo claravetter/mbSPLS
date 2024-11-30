@@ -5,6 +5,8 @@ This section provides a comprehensive overview of the `input` and `setup` parame
 
 Once defined, the `input` and `setup` parameters are saved into a `datafile.mat` file using `<placeholder>`, which is then utilized in the subsequent [Model Training](mbspls_2run.md).
 
+---
+
 ## Input
 ### Data
 
@@ -75,6 +77,8 @@ Make sure your input data (i.e., `input.Xs`, `input.covariates`, `input.sites`, 
 | > `seed`                     | Double          | Only applicable if `optimization_strategy` is set to 'randomized_search'. Seed for random number generator to ensure reproducibility (Default: 42). |
 | > `onset`                    | Double          | Only applicable if `optimization_strategy` is set to 'randomized_search'. Define the onset for randomized search (Default: 1). |
 | > `hyperparam_distributions` | Cell Array      | Only applicable if `optimization_strategy` is set to 'randomized_search'. Defines the distributions for hyperparameters using a uniform distribution. Is created automatically within the for loop. (`makedist('uniform', 1, sqrt(size(input.Xs{num_m},2)))`|
+
+---
 
 ## Setup
 
