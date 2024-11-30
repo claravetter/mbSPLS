@@ -3,7 +3,7 @@
 
 ADAPT (took it from ChatGPT) 
 
-The Sparse Partial Least Squares (sPLS) toolbox implements a modular training framework orchestrated by a **main job** that coordinates multiple **slave jobs**. These slave jobs are dedicated to specific tasks: **hyperparameter optimization**, **permutation testing**, and **bootstrapping**. Intermediate results for each step are stored in `input.scratch_space`. 
+During model training, a **main job** coordinates multiple **slave jobs**. These slave jobs are dedicated to specific tasks: **hyperparameter optimization**, **permutation testing**, and **bootstrapping**.  
 
 ---
 
@@ -35,5 +35,4 @@ Bootstrap samples are created by sampling the original data with replacement, an
 
 ---
 
-
-For more information, please consult [References](references.md).
+Temporary files and results for each step are stored in `input.scratch_space`. For more information and references, please see [References](references.md).
