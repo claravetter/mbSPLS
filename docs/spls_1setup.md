@@ -67,8 +67,8 @@ If `input.X` and `input.Y` do not have the same number of features, `input.X` ha
 | `inner_permutations`                                | Double          | Define the number of permutations in the CV1 folds (Default: `1`). Similar to outer permutations, the toolbox is not yet optimized for permutations on folds. |
 | `grid_dynamic`                                |           |  |
 | > `onset`                                | Double          | Choose the marks for grid applications. Default: `1` (Grid is defined at the first iteration and then not changed in later iterations). |
-| >` LV_1.x`                                  | Struct      | `'start'` defines the lower limit of the hyperparameter search (i.e., 1 means start is at value 1, 10 means it starts at the lower 10 percentile of the grid, etc.) (Default: `1`); `'end'` defines the upper limit of the hyperparameter search (i.e., 0 means all the way to the end, 10 means to stop at the upper 10 percentile, etc.) (Default: `0`)|
-| >` LV_1.y`                                  | Struct      | `'start'` defines the lower limit of the hyperparameter search (i.e., 1 means start is at value 1, 10 means it starts at the lower 10 percentile of the grid, etc.); `'end'` defines the upper limit of the hyperparameter search (i.e., 0 means all the way to the end, 10 means to stop at the upper 10 percentile, etc.)|
+| > `LV_1.x`                                  | Struct      | `'start'` defines the lower limit of the hyperparameter search (i.e., 1 means start is at value 1, 10 means it starts at the lower 10 percentile of the grid, etc.) (Default: `1`); `'end'` defines the upper limit of the hyperparameter search (i.e., 0 means all the way to the end, 10 means to stop at the upper 10 percentile, etc.) (Default: `0`)|
+| > `LV_1.y`                                  | Struct      | `'start'` defines the lower limit of the hyperparameter search (i.e., 1 means start is at value 1, 10 means it starts at the lower 10 percentile of the grid, etc.); `'end'` defines the upper limit of the hyperparameter search (i.e., 0 means all the way to the end, 10 means to stop at the upper 10 percentile, etc.)|
 
 ## Setup
 
