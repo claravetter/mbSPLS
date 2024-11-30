@@ -11,16 +11,16 @@ Once defined, the `input` and `setup` parameters are saved into a `datafile.mat`
 | Fieldname                 | Input Format      |          Explanation                                          |
 | --------                  | --------          |            --------                                           |
 | `project_name`              | String          | Define a project name (e.g., `input.project_name = 'YOURPROJECTNAME'`).                                             |
-| `X`                        | Double           | Define your 1st matrix (e.g., `input.X = '300x20 double'`). |
-| `X_names`                  | Cell array (string)      | Define the names of your features in `input.X` (e.g., `input.X_names = '1x20 cell'`) (or leave empty).|
-| `Y`                        | Cell array (double)      | Define your 2nd matrix (e.g., `input.Y = '300x15 double'`). |
-| `Y_names`                  | Cell array (string)      | Define the names of your features in `input.Y` (e.g., `input.Y_names = '1x15 cell'`) (or leave empty).|
+| `X`                        | Double/Path           | Define matrix X (e.g., `input.X = '300x20 double'`, `input.X = 'PathTuDatafile.mat'`).|
+| `X_names`                  | Cell array (string)      | Define the names of features in `input.X` (e.g., `input.X_names = '1x20 cell'`) (or leave empty).|
+| `Y`                        | Double/Path      | Define matrix Y (e.g., `input.Y = '300x15 double'`, `input.Y = 'PathTuDatafile.mat'`). |
+| `Y_names`                  | Cell array (string)      | Define the names of features in `input.Y` (e.g., `input.Y_names = '1x15 cell'`) (or leave empty).|
 | `type_correction`          | String       | Define whether you want to correct for covariates. Options: `corrected`, `uncorrected`. |
-| `covariates`                | Double      | If you would like to correct for covariates, define your covariate(s) (vector/matrix) (e.g., `input.covariates = 300x3 double`) or leave empty if you don't have any covariates.|
-| `covariates_names`          | Cell array (string)      | If you would like to correct for covariates, define the name(s) of your covariate(s) (e.g., `input.covariate_names = {'PC1'}, {'PC2'}, {'PC3'}`). If you would like to correct for e.g., sites, you would have to create a dummy-coded vector (0,1) for each site, so that the number of columns in your covariate matrix equals the number of sites, you would like to correct for.|
-| `correction_target`          | String       | Define which matrix you would like to remove the covariate effects from. Options: `1`- X, `2`- Y, `3`- X and Y. |
+| `covariates`                | Double      | If you would like to correct for covariates, define your covariate(s) (vector/matrix) (e.g., `input.covariates = 300x3 double`) or leave empty if you don't have any covariates. If you would like to correct for e.g., sites, you would have to create a dummy-coded vector (0,1) for each site, so that the number of columns in `input.covariates` equals the number of sites you would like to correct for.|
+| `covariates_names`          | Cell array (string)      | If you would like to correct for covariates, define the name(s) of your covariate(s) (e.g., `input.covariate_names = {'PC1'}, {'PC2'}, {'PC3'}`, `input.covariate_names = {'Site1'}, {'Site2'}, {'Site3'}`). The length of `input.covariate_names`should equal the number of columns in `input.covariates`. |
+| `correction_target`          | Double       | Define which matrix you would like to remove the covariate effects from. Options: `1`- X, `2`- Y, `3`- X and Y. |
 | `Diag`                      | Double            | Define a column vector with diagnoses/labels coded via numbers (e.g., `input.Diag = [1, 3, 2, 3, 1, ...]`). It should have the same length as the number of participants.|
-| `DiagNames`                 | Cell array (string)        | Column cell array with diagnoses/labels (e.g., `input.DiagNames = {'HC', 'ROD', 'CHR', 'HC', 'ROP', ...}`).|
+| `DiagNames`                 | Cell array (string)        | Column cell array with diagnoses/labels (e.g., `input.DiagNames = {'HC', 'ROD', 'CHR', 'HC', 'ROP', ...}`). It should have the same length as the number of participants.|
 | `sites`                      | Double       | Dummy coded vector for sites. If single-site: column vector of ones. (e.g., `input.Diag = [1, 3, 2, 3, 1, ...]`). It should have the same length as the number of participants. |
 | `sites_names`                      | Cell array (string)       | Define the name(s) of your site(s) (e.g., `input.sites_names = {'LMU', 'LMU', 'Yale', 'LMU', ... }`). It should have the same length as the number of participants.|
 | `final_ID`                   | Cell array (string)   | Define the IDs of your subjects (e.g. `input.final_ID = {'400106', '400678', '410345', ...})`). It should have the same length as the number of participants.|
@@ -38,10 +38,10 @@ If `input.X` and `input.Y` do not have the same number of features, `input.X` ha
 | Fieldname                 | Input Format      |          Explanation                                          |
 | --------                  | --------          |            --------                                           |
 | `framework`                                         | Double          | Cross-validation setup: `1` = Nested cross-validation, `2` = random hold-out splits, `3` = LOSOCV, `4` = random split-half. |
-| `density`                                       | Double          | Defines the number of data points which are tested during the grid (Range: 0 to 100) (e.g., `input.density = 20` means that between start and end point, 20 equidistant values are tested for the hyperparameter.)|
-| `outer_folds`                                       | Double          | No. of outer folds (CV2 level); Applicable only for nested cross-validation and Random Hold-Out Splits. (Default: `5`, `10`)|
-| `inner_folds`                                       | Double          | No. of inner folds (CV1 level); Applicable only for nested cross-validation and Random Hold-Out Splits. (Default: `5`, `10`)|
-| `permutation_testing`                               | Double          | No. of permutations for significance testing of each LV (Default: `1000`). |
+| `density`                                       | Double          | Define the number of data points which are tested during the grid (Range: 0 to 100) (e.g., `input.density = 20` means that between start and end point, 20 equidistant values are tested for the hyperparameter.)|
+| `outer_folds`                                       | Double          | Define the number of outer folds (CV2 level); Applicable only for nested cross-validation and Random Hold-Out Splits. (Default: `5`, `10`)|
+| `inner_folds`                                       | Double          | Define the number  of inner folds (CV1 level); Applicable only for nested cross-validation and Random Hold-Out Splits. (Default: `5`, `10`)|
+| `permutation_testing`                               | Double          | Define the number of permutations for significance testing of each LV (Default: `1000`). |
 | `bootstrap_testing`                                 | Double          | No. of bootstrap samples to measure Confidence intervals and bootstrap ratios for feature weights within LV (Default: `500`). |
 | `correlation_method`                                | String          | Define which correlation method is used to compute correlation between latent scores of X and Y (used for significance testing of LV). Options: `Spearman` (Default), `Pearson`. |
 | `selection_train`                                   | Double          | Define how the RHO values between X and Y are collected across the cross-validation structure. Options: `1` - Within one CV2 fold (Default); `2` - Across all CV2 folds (Not recommended). |
