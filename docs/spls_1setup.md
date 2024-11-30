@@ -11,9 +11,9 @@ Once defined, the `input` and `setup` parameters are saved into a `datafile.mat`
 | Fieldname                 | Input Format      |          Explanation                                          |
 | --------                  | --------          |            --------                                           |
 | `project_name`              | String          | Define a project name (e.g., `input.project_name = 'YOURPROJECTNAME'`).                                             |
-| `X`                        | Double/Path           | Define matrix X (e.g., `input.X = '300x20 double'`, `input.X = 'PathTuDatafile.mat'`).|
+| `X`                        | Double/Path           | Define matrix X (e.g., `input.X = '300x20 double'`, `input.X = 'PathToDatafile.mat'`).|
 | `X_names`                  | Cell array (string)      | Define the names of features in `input.X` (e.g., `input.X_names = '1x20 cell'`) (or leave empty).|
-| `Y`                        | Double/Path      | Define matrix Y (e.g., `input.Y = '300x15 double'`, `input.Y = 'PathTuDatafile.mat'`). |
+| `Y`                        | Double/Path      | Define matrix Y (e.g., `input.Y = '300x15 double'`, `input.Y = 'PathToDatafile.mat'`). |
 | `Y_names`                  | Cell array (string)      | Define the names of features in `input.Y` (e.g., `input.Y_names = '1x15 cell'`) (or leave empty).|
 | `type_correction`          | String       | Define whether you want to correct for covariates. Options: `corrected`, `uncorrected`. |
 | `covariates`                | Double      | If you would like to correct for covariates, define your covariate(s) (vector/matrix) (e.g., `input.covariates = 300x3 double`) or leave empty if you don't have any covariates. If you would like to correct for e.g., sites, you would have to create a dummy-coded vector (0,1) for each site, so that the number of columns in `input.covariates` equals the number of sites you would like to correct for.|
