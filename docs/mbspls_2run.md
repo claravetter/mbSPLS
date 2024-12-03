@@ -1,7 +1,7 @@
 (mbspls_2run)=
 # Model Training
 
-The function `<placeholder>`creates a slurm script with the following structure:
+The function `<placeholder>`creates a slurm script, which submits the `datafile.mat` that was create in  with the following structure:
 
 ```bash
 #!/bin/sh 
