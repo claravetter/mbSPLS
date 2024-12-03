@@ -1,6 +1,8 @@
 function cw_spls_results(filepath, varargin)
 % TO DO
 % Figures: Number of Matrices
+% Documentation: https://de.mathworks.com/help/matlab/matlab_prog/add-help-for-your-program.html
+% Change names of functions, add names in the beginning of functions
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 p = inputParser;
@@ -16,7 +18,7 @@ maxFeatures = p.Results.maxFeatures;
 report_flag = p.Results.report_flag;
 flip_flag = p.Results.flip_flag;
 
-figureFormat = p.Results.figureFormat; 
+% figureFormat = p.Results.figureFormat; 
 
 % LOAD FILEPATH
 if iscellstr(filepath)
@@ -196,7 +198,7 @@ cw_spls_results_figures(data, [], 'barplot', Path2Figures, maxFeatures,flip_flag
 clear input output setup clear data
 
 %% WITH BOOTSTRAPPING
-boot_options = {'CI', 'BS'};
+boot_options = {'BS', 'CI'};
 for ii=1:numel(boot_options)
     % GET RESULTS AFTER BOOTSTRAPPING
     % [boot_results_file, input, output] = cv_cw_mbspls_bootstrap_pruning(filepath, boot_options{ii});
