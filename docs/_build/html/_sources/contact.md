@@ -5,7 +5,7 @@ Feel free to reach out to us if you are interested in applying SPLS or MB-SPLS i
 
 _Contact details are provided in alphabetical order_
 
-**Dr. Dr. David Popovic**  
+**MD PhD David Popovic**  
 Senior physician at Max-Planck Institute for Psychiatry Munich, Germany  
 [david_popovic@psych.mpg.de](mailto:david_popovic@psych.mpg.de)  
 [Max-Planck Institute Page](https://www.psych.mpg.de/person/127698)
