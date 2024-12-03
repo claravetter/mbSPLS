@@ -13,14 +13,13 @@ The function `<placeholder>`creates a slurm script, which submits the `datafile.
 #SBATCH --ntasks=1 
 #SBATCH --job-name JobName # (e.g., mbspls_main)
 #SBATCH --mem=MemoryAmount # (e.g., 10GB)
-
 $PMODE
-export MCR_CACHE_ROOT=PathToCache # (e.g., /path/to/cache)
+export MCR_CACHE_ROOT=PathToCache # (e.g., /data/core-psy-archive/projects/CW_NfL/Cache )
 export LD_LIBRARY_PATH=PathToMatlabRuntime # (e.g., /path/to/matlab/runtime/glnxa64:/path/to/matlab/bin/glnxa64:/path/to/matlab/sys/os/glnxa64)
 cd PathToWorkingDirectory # (e.g., /data/core-psy-archive/projects/CW_NfL/Analysis/PRS_auto_BLOOD_PROTEOMIC_SOCIO/02-Dec-2024)
 
-/Path/To/Toolbox/ # (e.g., /data/core-psy-archive/projects/CV_mbspls/mbspls/MBSPLS_DEV_Oct2024_R2023b/for_testing/MBSPLS_DEV_Oct2024_R2023b) 
-/Path/To/Datafile # (e.g., /data/core-psy-archive/projects/CW_NfL/Data/PRS_auto_BLOOD_PROTEOMIC_SOCIO/02-Dec-2024/02-Dec-2024_CW_mbspls_PRS_auto_BLOOD_PROTEOMIC_SOCIO_5x5_1000perm_100boot_Benjamini_Hochberg_fro_matrixnorm_grid_search_20_20_20_20_datafile.mat)
+/Path/To/Toolbox # (e.g., /data/core-psy-archive/projects/CV_mbspls/mbspls/MBSPLS_DEV_Oct2024_R2023b/for_testing/MBSPLS_DEV_Oct2024_R2023b) 
+/Path/To/Datafile.mat # (e.g., /data/core-psy-archive/projects/CW_NfL/Data/PRS_auto_BLOOD_PROTEOMIC_SOCIO/02-Dec-2024/02-Dec-2024_CW_mbspls_PRS_auto_BLOOD_PROTEOMIC_SOCIO_5x5_1000perm_100boot_Benjamini_Hochberg_fro_matrixnorm_grid_search_20_20_20_20_datafile.mat)
 ```
 
 | **Input**                       | **Description**                                                                                                   |
