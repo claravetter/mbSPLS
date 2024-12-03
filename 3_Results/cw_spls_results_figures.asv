@@ -30,16 +30,15 @@ switch type
                 feature_names = input.Xs_feature_names{1, subplot_idx}.';
                 feature_weights = output.final_parameters{lv_idx, 3}{1, subplot_idx};
                 feature_names = strrep(feature_names, '_', ' ');
-
+                if flip_flag
+                    f_invert = @(x)(-1*x);
+                    feature_weights = f_invert(feature_weights);
+                end
                 % Filter out the features with weight equal to 0
                 nonzero_indices = feature_weights ~= 0;
                 filtered_feature_names = feature_names(nonzero_indices);
                 filtered_feature_weights = feature_weights(nonzero_indices);
 
-                if flip_flag
-                    f_invert = @(x)(-1*x);
-                    feature_weights = f_invert(feature_weights);
-                end
                 % Sort the features by weight
                 [sorted_weights, sort_idx] = sort(filtered_feature_weights, 'descend');
                 sorted_feature_names = filtered_feature_names(sort_idx);
@@ -94,13 +93,16 @@ switch type
                 positive_weights = sorted_weights;
                 positive_weights(~pos_idx) = NaN;
 
-                % Remove later:
-                positive_weights = -positive_weights; 
+
 
                 % Negative weights
                 neg_idx = sorted_weights < 0;
                 negative_weights = sorted_weights;
                 negative_weights(~neg_idx) = NaN;
+
+                % Remove later:
+                % positive_weights = -positive_weights; 
+                % negative_weights = - negative_weights; 
 
                 % Barplos
                 % if numel(sorted_weights) < 5
@@ -205,11 +207,6 @@ switch type
                 topf4title = '* All features are displayed.';
             else
                 topf4title = ['\itNote\rm: Only Top ', num2str(maxFeatures), ' features are displayed.'];
-<<<<<<< HEAD
-
-                % topf4title = ['* Only Top ', num2str(maxFeatures), ' features are displayed.'];
-=======
->>>>>>> 425177cda89d488866e6bc144babfd6bad759ca3
             end
 
             % set(combined_fig,'Position', get(0,'Screensize'));

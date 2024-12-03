@@ -39,7 +39,6 @@ switch type
                 filtered_feature_names = feature_names(nonzero_indices);
                 filtered_feature_weights = feature_weights(nonzero_indices);
 
-
                 % Sort the features by weight
                 [sorted_weights, sort_idx] = sort(filtered_feature_weights, 'descend');
                 sorted_feature_names = filtered_feature_names(sort_idx);
