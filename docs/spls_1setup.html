@@ -89,13 +89,13 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'mbspls_1setup';</script>
-    <link rel="canonical" href="https://claravetter.github.io/mbSPLS/mbspls_1setup.html" />
+    <script>DOCUMENTATION_OPTIONS.pagename = 'spls_1setup';</script>
+    <link rel="canonical" href="https://claravetter.github.io/mbSPLS/spls_1setup.html" />
     <link rel="shortcut icon" href="_static/mbspls_logo_klein.png"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Model Training" href="mbspls_2run.html" />
-    <link rel="prev" title="mbSPLS" href="intro.html" />
+    <link rel="next" title="Model Training" href="spls_2run.html" />
+    <link rel="prev" title="Visualisation" href="mbspls_3vis.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -187,14 +187,14 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">mbSPLS Toolbox</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Data Input</a></li>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="mbspls_1setup.html">Data Input</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mbspls_2run.html">Model Training</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mbspls_3vis.html">Visualisation</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">sPLS Toolbox</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="spls_1setup.html">Data Input</a></li>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Data Input</a></li>
 <li class="toctree-l1"><a class="reference internal" href="spls_2run.html">Model Training</a></li>
 <li class="toctree-l1"><a class="reference internal" href="spls_3vis.html">Visualisation</a></li>
 </ul>
@@ -274,7 +274,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/claravetter/mbSPLS/issues/new?title=Issue%20on%20page%20%2Fmbspls_1setup.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/claravetter/mbSPLS/issues/new?title=Issue%20on%20page%20%2Fspls_1setup.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -304,7 +304,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="_sources/mbspls_1setup.md" target="_blank"
+      <li><a href="_sources/spls_1setup.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -414,9 +414,9 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <div class="tex2jax_ignore mathjax_ignore section" id="data-input">
-<span id="mbspls-1setup"></span><h1>Data Input<a class="headerlink" href="#data-input" title="Permalink to this heading">#</a></h1>
-<p>This section provides a comprehensive overview of the <code class="docutils literal notranslate"><span class="pre">input</span></code> and <code class="docutils literal notranslate"><span class="pre">setup</span></code> parameters used in the mb-sPLS toolbox. These parameters enable you to tailor the analysis workflow to your specific needs, including cross-validation settings, model optimization strategies, data scaling methods, and memory management options. Properly configuring these parameters is essential for optimizing the performance and interpretability of your mb-sPLS analysis. Each parameter is outlined with its possible options, default values, and specific role within the toolbox to assist you in the configuration process.</p>
-<p>Once defined, the <code class="docutils literal notranslate"><span class="pre">input</span></code> and <code class="docutils literal notranslate"><span class="pre">setup</span></code> parameters are saved into a <code class="docutils literal notranslate"><span class="pre">datafile.mat</span></code> file using <code class="docutils literal notranslate"><span class="pre">&lt;placeholder&gt;</span></code>, which is then utilized in the subsequent <a class="reference internal" href="mbspls_2run.html"><span class="doc std std-doc">Model Training</span></a>.</p>
+<span id="spls-1setup"></span><h1>Data Input<a class="headerlink" href="#data-input" title="Permalink to this heading">#</a></h1>
+<p>This section provides a comprehensive overview of the <code class="docutils literal notranslate"><span class="pre">input</span></code> and <code class="docutils literal notranslate"><span class="pre">setup</span></code> parameters used in the sPLS toolbox. These parameters enable you to tailor the analysis workflow to your specific needs, including cross-validation settings, model optimization strategies, data scaling methods, and memory management options. Properly configuring these parameters is essential for optimizing the performance and interpretability of your mb-sPLS analysis. Each parameter is outlined with its possible options, default values, and specific role within the toolbox to assist you in the configuration process.</p>
+<p>Once defined, the <code class="docutils literal notranslate"><span class="pre">input</span></code> and <code class="docutils literal notranslate"><span class="pre">setup</span></code> parameters are saved into a <code class="docutils literal notranslate"><span class="pre">datafile.mat</span></code> file using <code class="docutils literal notranslate"><span class="pre">&lt;placeholder&gt;</span></code>, which is then utilized in the subsequent <a class="reference internal" href="spls_2run.html"><span class="doc std std-doc">Model Training</span></a>.</p>
 <div class="section" id="input">
 <h2>Input<a class="headerlink" href="#input" title="Permalink to this heading">#</a></h2>
 <div class="section" id="data">
@@ -433,51 +433,64 @@ document.write(`
 <td><p>String</p></td>
 <td><p>Define a project name (e.g., <code class="docutils literal notranslate"><span class="pre">input.project_name</span> <span class="pre">=</span> <span class="pre">'YOURPROJECTNAME'</span></code>).</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Xs</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">X</span></code></p></td>
+<td><p>Double</p></td>
+<td><p>Define your 1st matrix (e.g., <code class="docutils literal notranslate"><span class="pre">input.X</span> <span class="pre">=</span> <span class="pre">'300x20</span> <span class="pre">double'</span></code>).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">X_names</span></code></p></td>
+<td><p>Cell array (string)</p></td>
+<td><p>Define the names of your features in <code class="docutils literal notranslate"><span class="pre">input.X</span></code> (e.g., <code class="docutils literal notranslate"><span class="pre">input.X_names</span> <span class="pre">=</span> <span class="pre">'1x20</span> <span class="pre">cell'</span></code>) (or leave empty).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Y</span></code></p></td>
 <td><p>Cell array (double)</p></td>
-<td><p>Define your matrices (e.g., <code class="docutils literal notranslate"><span class="pre">input.Xs</span> <span class="pre">=</span> <span class="pre">'{50x20</span> <span class="pre">double}</span> <span class="pre">{50x30</span> <span class="pre">double}</span></code>). The length of <code class="docutils literal notranslate"><span class="pre">input.Xs</span></code>should equal your number of matrices.</p></td>
+<td><p>Define your 2nd matrix (e.g., <code class="docutils literal notranslate"><span class="pre">input.Y</span> <span class="pre">=</span> <span class="pre">'300x15</span> <span class="pre">double'</span></code>).</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Xs_names</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Y_names</span></code></p></td>
 <td><p>Cell array (string)</p></td>
-<td><p>Define the names of your matrices (e.g., <code class="docutils literal notranslate"><span class="pre">input.Xs_names</span> <span class="pre">=</span> <span class="pre">{'Matrix1'},</span> <span class="pre">{'Matrix2'}</span></code>. The length of <code class="docutils literal notranslate"><span class="pre">input.Xs_names</span></code> should equal the number of matrices. )</p></td>
+<td><p>Define the names of your features in <code class="docutils literal notranslate"><span class="pre">input.Y</span></code> (e.g., <code class="docutils literal notranslate"><span class="pre">input.Y_names</span> <span class="pre">=</span> <span class="pre">'1x15</span> <span class="pre">cell'</span></code>) (or leave empty).</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Xs_feature_names</span></code></p></td>
-<td><p>Cell array (string)</p></td>
-<td><p>Define the feature names of matrices (e.g., <code class="docutils literal notranslate"><span class="pre">input.Xs_feature_names</span> <span class="pre">=</span> <span class="pre">{1x20</span> <span class="pre">cell}</span> <span class="pre">{1x30</span> <span class="pre">cell}</span></code>. The length of <code class="docutils literal notranslate"><span class="pre">input.Xs_features_names</span></code> should equal the number of matrices. )</p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">type_correction</span></code></p></td>
+<td><p>String</p></td>
+<td><p>Define whether you want to correct for covariates. Options: <code class="docutils literal notranslate"><span class="pre">corrected</span></code>, <code class="docutils literal notranslate"><span class="pre">uncorrected</span></code>.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">covariates</span></code></p></td>
-<td><p>Cell array (double)</p></td>
-<td><p>Define your covariate(s) (vector/matrix)</p></td>
+<td><p>Double</p></td>
+<td><p>If you would like to correct for covariates, define your covariate(s) (vector/matrix) (e.g., <code class="docutils literal notranslate"><span class="pre">input.covariates</span> <span class="pre">=</span> <span class="pre">300x3</span> <span class="pre">double</span></code>) or leave empty if you don’t have any covariates.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">covariates_names</span></code></p></td>
 <td><p>Cell array (string)</p></td>
-<td><p>Name(s) of your covariate(s)</p></td>
+<td><p>If you would like to correct for covariates, define the name(s) of your covariate(s) (e.g., <code class="docutils literal notranslate"><span class="pre">input.covariate_names</span> <span class="pre">=</span> <span class="pre">{'PC1'},</span> <span class="pre">{'PC2'},</span> <span class="pre">{'PC3'}</span></code>). If you would like to correct for e.g., sites, you would have to create a dummy-coded vector (0,1) for each site, so that the number of columns in your covariate matrix equals the number of sites, you would like to correct for.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Diag</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">correction_target</span></code></p></td>
+<td><p>String</p></td>
+<td><p>Define which matrix you would like to remove the covariate effects from. Options: <code class="docutils literal notranslate"><span class="pre">1</span></code>- X, <code class="docutils literal notranslate"><span class="pre">2</span></code>- Y, <code class="docutils literal notranslate"><span class="pre">3</span></code>- X and Y.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Diag</span></code></p></td>
 <td><p>Double</p></td>
-<td><p>Column vector with diagnoses coded via numbers (e.g., <code class="docutils literal notranslate"><span class="pre">input.Diag</span> <span class="pre">=</span> <span class="pre">[1,</span> <span class="pre">3,</span> <span class="pre">2,</span> <span class="pre">3,</span> <span class="pre">1]</span></code>)</p></td>
+<td><p>Define a column vector with diagnoses/labels coded via numbers (e.g., <code class="docutils literal notranslate"><span class="pre">input.Diag</span> <span class="pre">=</span> <span class="pre">[1,</span> <span class="pre">3,</span> <span class="pre">2,</span> <span class="pre">3,</span> <span class="pre">1,</span> <span class="pre">...]</span></code>). It should have the same length as the number of participants.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">DiagNames</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">DiagNames</span></code></p></td>
 <td><p>Cell array (string)</p></td>
-<td><p>Column cell array with diagnoses/labels (e.g., <code class="docutils literal notranslate"><span class="pre">input.DiagNames</span> <span class="pre">=</span> <span class="pre">{'HC',</span> <span class="pre">'ROD',</span> <span class="pre">'CHR',</span> <span class="pre">'HC',</span> <span class="pre">'ROP'}</span></code>).</p></td>
+<td><p>Column cell array with diagnoses/labels (e.g., <code class="docutils literal notranslate"><span class="pre">input.DiagNames</span> <span class="pre">=</span> <span class="pre">{'HC',</span> <span class="pre">'ROD',</span> <span class="pre">'CHR',</span> <span class="pre">'HC',</span> <span class="pre">'ROP',</span> <span class="pre">...}</span></code>).</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">sites</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">sites</span></code></p></td>
 <td><p>Double</p></td>
-<td><p>Dummy coded vector for sites. If single-site: column vector of ones.</p></td>
+<td><p>Dummy coded vector for sites. If single-site: column vector of ones. (e.g., <code class="docutils literal notranslate"><span class="pre">input.Diag</span> <span class="pre">=</span> <span class="pre">[1,</span> <span class="pre">3,</span> <span class="pre">2,</span> <span class="pre">3,</span> <span class="pre">1,</span> <span class="pre">...]</span></code>). It should have the same length as the number of participants.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">sites_names</span></code></p></td>
+<td><p>Cell array (string)</p></td>
+<td><p>Define the name(s) of your site(s) (e.g., <code class="docutils literal notranslate"><span class="pre">input.sites_names</span> <span class="pre">=</span> <span class="pre">{'LMU',</span> <span class="pre">'LMU',</span> <span class="pre">'Yale',</span> <span class="pre">'LMU',</span> <span class="pre">...</span> <span class="pre">}</span></code>). It should have the same length as the number of participants.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">final_ID</span></code></p></td>
 <td><p>Cell array (string)</p></td>
-<td><p>IDs of your subjects (e.g. <code class="docutils literal notranslate"><span class="pre">input.final_ID</span> <span class="pre">=</span> <span class="pre">{'400106',</span> <span class="pre">'400678',</span> <span class="pre">'410345'})</span></code>)</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">type_correction</span></code></p></td>
-<td><p>String</p></td>
-<td><p>Define whether you want to correct for covariates. Options: <code class="docutils literal notranslate"><span class="pre">corrected</span></code>, <code class="docutils literal notranslate"><span class="pre">uncorrected</span></code>.</p></td>
+<td><p>Define the IDs of your subjects (e.g. <code class="docutils literal notranslate"><span class="pre">input.final_ID</span> <span class="pre">=</span> <span class="pre">{'400106',</span> <span class="pre">'400678',</span> <span class="pre">'410345',</span> <span class="pre">...})</span></code>). It should have the same length as the number of participants.</p></td>
 </tr>
 </tbody>
 </table>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>Make sure your input data (i.e., <code class="docutils literal notranslate"><span class="pre">input.Xs</span></code>, <code class="docutils literal notranslate"><span class="pre">input.covariates</span></code>, <code class="docutils literal notranslate"><span class="pre">input.sites</span></code>, <code class="docutils literal notranslate"><span class="pre">input.Diag</span></code> and <code class="docutils literal notranslate"><span class="pre">input.DiagNames</span></code>) does not contain any missing values. Make sure to either remove the missing values or impute them beforehand.</p>
+<p>Make sure your input data (i.e., <code class="docutils literal notranslate"><span class="pre">input.X</span></code>, <code class="docutils literal notranslate"><span class="pre">input.Y</span></code>, <code class="docutils literal notranslate"><span class="pre">input.covariates</span></code>, <code class="docutils literal notranslate"><span class="pre">input.sites</span></code>, <code class="docutils literal notranslate"><span class="pre">input.Diag</span></code> and <code class="docutils literal notranslate"><span class="pre">input.DiagNames</span></code>) does not contain any missing values. Make sure to either remove the missing values or impute them beforehand.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">input.X</span></code> and <code class="docutils literal notranslate"><span class="pre">input.Y</span></code> do not have the same number of features, <code class="docutils literal notranslate"><span class="pre">input.X</span></code> has to be the matrix that has more features.</p>
 </div>
 </div>
 <div class="section" id="machine-learning-framework">
@@ -494,137 +507,113 @@ document.write(`
 <td><p>Double</p></td>
 <td><p>Cross-validation setup: <code class="docutils literal notranslate"><span class="pre">1</span></code> = Nested cross-validation, <code class="docutils literal notranslate"><span class="pre">2</span></code> = random hold-out splits, <code class="docutils literal notranslate"><span class="pre">3</span></code> = LOSOCV, <code class="docutils literal notranslate"><span class="pre">4</span></code> = random split-half.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">outer_folds</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">density</span></code></p></td>
 <td><p>Double</p></td>
-<td><p>No. of outer folds (CV2 level); Applicable only for nested cross-validation and Random Hold-Out Splits.</p></td>
+<td><p>Defines the number of data points which are tested during the grid (Range: 0 to 100) (e.g., <code class="docutils literal notranslate"><span class="pre">input.density</span> <span class="pre">=</span> <span class="pre">20</span></code> means that between start and end point, 20 equidistant values are tested for the hyperparameter.)</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">inner_folds</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">outer_folds</span></code></p></td>
 <td><p>Double</p></td>
-<td><p>No. of inner folds (CV1 level); Applicable only for nested cross-validation and Random Hold-Out Splits.</p></td>
+<td><p>No. of outer folds (CV2 level); Applicable only for nested cross-validation and Random Hold-Out Splits. (Default: <code class="docutils literal notranslate"><span class="pre">5</span></code>, <code class="docutils literal notranslate"><span class="pre">10</span></code>)</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">permutation_testing</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">inner_folds</span></code></p></td>
+<td><p>Double</p></td>
+<td><p>No. of inner folds (CV1 level); Applicable only for nested cross-validation and Random Hold-Out Splits. (Default: <code class="docutils literal notranslate"><span class="pre">5</span></code>, <code class="docutils literal notranslate"><span class="pre">10</span></code>)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">permutation_testing</span></code></p></td>
 <td><p>Double</p></td>
 <td><p>No. of permutations for significance testing of each LV (Default: <code class="docutils literal notranslate"><span class="pre">1000</span></code>).</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bootstrap_testing</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bootstrap_testing</span></code></p></td>
 <td><p>Double</p></td>
 <td><p>No. of bootstrap samples to measure Confidence intervals and bootstrap ratios for feature weights within LV (Default: <code class="docutils literal notranslate"><span class="pre">500</span></code>).</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">correlation_method</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">correlation_method</span></code></p></td>
 <td><p>String</p></td>
 <td><p>Define which correlation method is used to compute correlation between latent scores of X and Y (used for significance testing of LV). Options: <code class="docutils literal notranslate"><span class="pre">Spearman</span></code> (Default), <code class="docutils literal notranslate"><span class="pre">Pearson</span></code>.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">selection_train</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">selection_train</span></code></p></td>
 <td><p>Double</p></td>
 <td><p>Define how the RHO values between X and Y are collected across the cross-validation structure. Options: <code class="docutils literal notranslate"><span class="pre">1</span></code> - Within one CV2 fold (Default); <code class="docutils literal notranslate"><span class="pre">2</span></code> - Across all CV2 folds (Not recommended).</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">selection_retrain</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">selection_retrain</span></code></p></td>
 <td><p>Double</p></td>
 <td><p>Define whether you want to pool data from all CV1 folds and retrain the model on these before applying on CV2 testing fold. Options: <code class="docutils literal notranslate"><span class="pre">1</span></code> = retrain on all CV1 folds (Default); <code class="docutils literal notranslate"><span class="pre">2</span></code> = no retraining, use already existing model.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">merge_train</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">merge_train</span></code></p></td>
 <td><p>String</p></td>
 <td><p>Define how the RHO values are collected. Options: <code class="docutils literal notranslate"><span class="pre">mean</span></code>, <code class="docutils literal notranslate"><span class="pre">median</span></code> (Default).</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">merge_retrain</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">merge_retrain</span></code></p></td>
 <td><p>String</p></td>
 <td><p>Define how the best hyperparameters will be chosen on the CV1 level. Options: <code class="docutils literal notranslate"><span class="pre">best</span></code> (Default; i.e., winner takes all), <code class="docutils literal notranslate"><span class="pre">mean</span></code>, <code class="docutils literal notranslate"><span class="pre">median</span></code>, <code class="docutils literal notranslate"><span class="pre">weighted_mean</span></code>.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">validation_set</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">validation_set</span></code></p></td>
 <td><p>Boolean/Double</p></td>
 <td><p>Define whether to hold out a validation set. Options: <code class="docutils literal notranslate"><span class="pre">false</span></code> (Default) or a number representing a percentage of the whole sample (e.g., <code class="docutils literal notranslate"><span class="pre">25</span></code>).</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">val_stratification</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">val_stratification</span></code></p></td>
 <td><p>Double</p></td>
 <td><p>Define how to extract the validation set. Options: <code class="docutils literal notranslate"><span class="pre">1</span></code>- diagnosis, <code class="docutils literal notranslate"><span class="pre">2</span></code> - sites, <code class="docutils literal notranslate"><span class="pre">3</span></code> - both.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">validation_train</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">validation_train</span></code></p></td>
 <td><p>Double</p></td>
 <td><p>Define how to test the model performance on the validation set. Options: <code class="docutils literal notranslate"><span class="pre">1</span></code>: Retrain optimal model on permutations of all samples except the validation set (Default), <code class="docutils literal notranslate"><span class="pre">2</span></code>: use already computed permuted performances from the CV structure</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">alpha_value</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">alpha_value</span></code></p></td>
 <td><p>Double</p></td>
 <td><p>Define overall threshold for significance (Default: <code class="docutils literal notranslate"><span class="pre">0.05</span></code>)</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">final_merge</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">final_merge</span></code></p></td>
 <td><p></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>&gt; <code class="docutils literal notranslate"><span class="pre">type</span></code></p></td>
+<tr class="row-even"><td><p>&gt; <code class="docutils literal notranslate"><span class="pre">type</span></code></p></td>
 <td><p>String</p></td>
 <td><p>Define how the final LV model will be chosen on the CV2 level. Options: <code class="docutils literal notranslate"><span class="pre">mean</span></code>, <code class="docutils literal notranslate"><span class="pre">median</span></code>, <code class="docutils literal notranslate"><span class="pre">weighted_mean</span></code>, <code class="docutils literal notranslate"><span class="pre">best</span></code> (Default).</p></td>
 </tr>
-<tr class="row-even"><td><p>&gt; <code class="docutils literal notranslate"><span class="pre">mult_test</span></code></p></td>
+<tr class="row-odd"><td><p>&gt; <code class="docutils literal notranslate"><span class="pre">mult_test</span></code></p></td>
 <td><p>String</p></td>
 <td><p>Define how correction for multiple testing across CV2 folds is done. Options: <code class="docutils literal notranslate"><span class="pre">Bonferroni</span></code>, <code class="docutils literal notranslate"><span class="pre">Sidak</span></code>, <code class="docutils literal notranslate"><span class="pre">Holm_Bonferroni</span></code>, <code class="docutils literal notranslate"><span class="pre">Benjamini_Hochberg</span></code> (Default), <code class="docutils literal notranslate"><span class="pre">Benjamini_Yekutieli</span></code>, <code class="docutils literal notranslate"><span class="pre">Storey</span></code>, <code class="docutils literal notranslate"><span class="pre">Fisher</span></code>.</p></td>
 </tr>
-<tr class="row-odd"><td><p>&gt; <code class="docutils literal notranslate"><span class="pre">significant_only</span></code></p></td>
+<tr class="row-even"><td><p>&gt; <code class="docutils literal notranslate"><span class="pre">significant_only</span></code></p></td>
 <td><p>String</p></td>
 <td><p>Only applicable if <code class="docutils literal notranslate"><span class="pre">final_merge.type</span></code> is not set to best! Defines type of CV2 fold merging. Options: <code class="docutils literal notranslate"><span class="pre">on</span></code> (use only significant folds for merging), <code class="docutils literal notranslate"><span class="pre">off</span></code> (use all folds for merging).</p></td>
 </tr>
-<tr class="row-even"><td><p>&gt; <code class="docutils literal notranslate"><span class="pre">majority_vote</span></code></p></td>
+<tr class="row-odd"><td><p>&gt; <code class="docutils literal notranslate"><span class="pre">majority_vote</span></code></p></td>
 <td><p>String</p></td>
 <td><p>Only applicable if <code class="docutils literal notranslate"><span class="pre">final_merge.type</span></code> is not set to best! Options: <code class="docutils literal notranslate"><span class="pre">on</span></code> (use majority voting across folds to determine whether a value in u or v should be zero or non-zero), <code class="docutils literal notranslate"><span class="pre">off</span></code> (no majority vote, merging is done for all features).</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">correct_limit</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">correct_limit</span></code></p></td>
 <td><p>Double</p></td>
 <td><p>Define in which iteration of the process covariate correction should be done. Default: 1 (means correction is done before computing the first LV, then no more correction).</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">statistical_testing</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">statistical_testing</span></code></p></td>
 <td><p>Double</p></td>
 <td><p>Define how the P value is computed during permutation testing: Options: <code class="docutils literal notranslate"><span class="pre">1</span></code> (Counting method, i.e., number of instances where permuted models outperformed optimized model/number of permutations); <code class="docutils literal notranslate"><span class="pre">2</span></code> (AUC method; permuted RHO values are used to compute AUC for optimal RHO value); Note: Option 2 usually gives slightly lower P values.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">cs_method{1}</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">cs_method{1}</span></code></p></td>
 <td><p></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>&gt; <code class="docutils literal notranslate"><span class="pre">method</span></code></p></td>
+<tr class="row-odd"><td><p>&gt; <code class="docutils literal notranslate"><span class="pre">method</span></code></p></td>
 <td><p>String</p></td>
-<td><p>Scaling of features. Options: <code class="docutils literal notranslate"><span class="pre">mean-centering</span></code> (i.e., z- tranformation; Default), <code class="docutils literal notranslate"><span class="pre">min_max</span></code> (i.e., scaling [0-1))</p></td>
+<td><p>Scaling of features. Options: <code class="docutils literal notranslate"><span class="pre">mean-centering</span></code> (i.e., z- tranformation; Default), <code class="docutils literal notranslate"><span class="pre">min_max</span></code> (i.e., scaling [0-1])</p></td>
 </tr>
-<tr class="row-odd"><td><p>&gt; <code class="docutils literal notranslate"><span class="pre">correction_subgroup</span></code></p></td>
+<tr class="row-even"><td><p>&gt; <code class="docutils literal notranslate"><span class="pre">correction_subgroup</span></code></p></td>
 <td><p>String</p></td>
-<td><p>Define whether to correct the covariates based on the betas of a subgroup, or across all individuals. For subgroup-based correction, use the label, e.g., ‘HC’ or ‘ROD’. Otherwise, leave as an empty string: <code class="docutils literal notranslate"><span class="pre">''</span></code>.</p></td>
+<td><p>Define whether to correct the covariates based on the betas of a subgroup, or across all individuals. For subgroup-based correction, use the label, e.g., <code class="docutils literal notranslate"><span class="pre">'HC'</span></code> or <code class="docutils literal notranslate"><span class="pre">'ROD'</span></code>. Otherwise, leave as an empty string: <code class="docutils literal notranslate"><span class="pre">''</span></code>.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">coun_ts_limit</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">coun_ts_limit</span></code></p></td>
 <td><p>Double</p></td>
-<td><p>Define after how many non-significant LVs the algorithm should stop (Default: 1; i.e., as soon as one LV is not significant, the operation ends).</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">max_n_LVs</span></code></p></td>
-<td><p>Double</p></td>
-<td><p>Maximum number of Latent Variables (LVs) to extract. Set to -1 if there is no limit.</p></td>
+<td><p>Define after how many non-significant LVs the algorithm should stop (Default: <code class="docutils literal notranslate"><span class="pre">1</span></code>; i.e., as soon as one LV is not significant, the operation ends).</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">outer_permutations</span></code></p></td>
 <td><p>Double</p></td>
-<td><p>Define the number of permutations in the CV2 folds. Default: 1. Note that the toolbox is not optimized for permutations on folds, and permutating the folds would significantly increase computation time and is not recommended.</p></td>
+<td><p>Define the number of permutations in the CV2 folds (Default: <code class="docutils literal notranslate"><span class="pre">1</span></code>). Note that the toolbox is not yet optimized for permutations on folds, and permutating the folds would significantly increase computation time and is not recommended.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">inner_permutations</span></code></p></td>
 <td><p>Double</p></td>
-<td><p>Define the number of permutations in the CV1 folds. Default: 1. Similar to outer permutations, the toolbox is not optimized for permutations on folds.</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">matrix_norm</span></code></p></td>
-<td><p>String/Double</p></td>
-<td><p>Define which matrix norm is used to compute the association between latent scores of Xs (used for significance testing of LV). [If &gt; 2 Xs:] <code class="docutils literal notranslate"><span class="pre">fro</span></code>; [If 2 Xs:]  <code class="docutils literal notranslate"><span class="pre">0</span></code> (Correlation coefficient as defined above is used).</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">CV</span></code></p></td>
-<td><p>Structure</p></td>
-<td><p>If the cross-validation structure <code class="docutils literal notranslate"><span class="pre">CV</span></code> is already defined, this input sets it directly.</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">save_CV</span></code></p></td>
-<td><p>Boolean/Double</p></td>
-<td><p>Define whether to save the cross-validation structure. Default: 0 if <code class="docutils literal notranslate"><span class="pre">CV</span></code> is provided.</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">optimization_strategy</span></code></p></td>
-<td><p>String</p></td>
-<td><p>Define which search algorithm to use in order to optimize sparsity hyperparameters. Options: <code class="docutils literal notranslate"><span class="pre">grid_search</span></code> (Default), <code class="docutils literal notranslate"><span class="pre">randomized_search</span></code>.</p></td>
-</tr>
-<tr class="row-even"><td><p>If <code class="docutils literal notranslate"><span class="pre">optimization_strategy</span></code> == <code class="docutils literal notranslate"><span class="pre">grid_dynamic.onset</span></code></p></td>
-<td><p></p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">density</span></code></p></td>
-<td><p>Cell array</p></td>
-<td><p>Only applicable if <code class="docutils literal notranslate"><span class="pre">optimization_strategy</span></code> is set to <code class="docutils literal notranslate"><span class="pre">grid_search</span></code>. Define the density for grid applications. Can be a single value for all Xs or specific values per matrix (e.g., <code class="docutils literal notranslate"><span class="pre">input.density</span> <span class="pre">=</span> <span class="pre">[10</span> <span class="pre">10</span> <span class="pre">10</span> <span class="pre">10]</span></code>.</p></td>
+<td><p>Define the number of permutations in the CV1 folds (Default: <code class="docutils literal notranslate"><span class="pre">1</span></code>). Similar to outer permutations, the toolbox is not yet optimized for permutations on folds.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">grid_dynamic</span></code></p></td>
 <td><p></p></td>
@@ -632,39 +621,15 @@ document.write(`
 </tr>
 <tr class="row-odd"><td><p>&gt; <code class="docutils literal notranslate"><span class="pre">onset</span></code></p></td>
 <td><p>Double</p></td>
-<td><p>Only applicable if <code class="docutils literal notranslate"><span class="pre">optimization_strategy</span></code> is set to <code class="docutils literal notranslate"><span class="pre">grid_search</span></code>. Choose the marks for grid applications. Default: <code class="docutils literal notranslate"><span class="pre">1</span></code> (Grid is defined at the first iteration and then not changed in later iterations).</p></td>
+<td><p>Choose the marks for grid applications. Default: <code class="docutils literal notranslate"><span class="pre">1</span></code> (Grid is defined at the first iteration and then not changed in later iterations).</p></td>
 </tr>
-<tr class="row-even"><td><p>&gt;<code class="docutils literal notranslate"> <span class="pre">LVs</span></code></p></td>
-<td><p>Cell Array</p></td>
-<td><p>Only applicable if <code class="docutils literal notranslate"><span class="pre">optimization_strategy</span></code> is set to ‘grid_search’. Contains grids created using the specified density values. Is created automatically (<code class="docutils literal notranslate"><span class="pre">cellfun(&#64;create_grid,</span> <span class="pre">input.density)</span></code>)</p></td>
+<tr class="row-even"><td><p>&gt;<code class="docutils literal notranslate"> <span class="pre">LV_1.x</span></code></p></td>
+<td><p>Struct</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'start'</span></code> defines the lower limit of the hyperparameter search (i.e., 1 means start is at value 1, 10 means it starts at the lower 10 percentile of the grid, etc.) (Default: <code class="docutils literal notranslate"><span class="pre">1</span></code>); <code class="docutils literal notranslate"><span class="pre">'end'</span></code> defines the upper limit of the hyperparameter search (i.e., 0 means all the way to the end, 10 means to stop at the upper 10 percentile, etc.) (Default: <code class="docutils literal notranslate"><span class="pre">0</span></code>)</p></td>
 </tr>
-<tr class="row-odd"><td><p>If <code class="docutils literal notranslate"><span class="pre">optimization_strategy</span></code> == <code class="docutils literal notranslate"><span class="pre">randomized_search</span></code></p></td>
-<td><p></p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">randomized_search_params</span></code></p></td>
-<td><p></p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-odd"><td><p>&gt; <code class="docutils literal notranslate"><span class="pre">randomized_search_iterations</span></code></p></td>
-<td><p>Double</p></td>
-<td><p>Only applicable if <code class="docutils literal notranslate"><span class="pre">optimization_strategy</span></code> is set to ‘randomized_search’. Define the number of iterations for randomized search (Default: 1500).</p></td>
-</tr>
-<tr class="row-even"><td><p>&gt; <code class="docutils literal notranslate"><span class="pre">randomized_search_iterations</span></code></p></td>
-<td><p>Double</p></td>
-<td><p>Only applicable if <code class="docutils literal notranslate"><span class="pre">optimization_strategy</span></code> is set to ‘randomized_search’. Define the number of iterations for randomized search (Default: 1500).</p></td>
-</tr>
-<tr class="row-odd"><td><p>&gt; <code class="docutils literal notranslate"><span class="pre">seed</span></code></p></td>
-<td><p>Double</p></td>
-<td><p>Only applicable if <code class="docutils literal notranslate"><span class="pre">optimization_strategy</span></code> is set to ‘randomized_search’. Seed for random number generator to ensure reproducibility (Default: 42).</p></td>
-</tr>
-<tr class="row-even"><td><p>&gt; <code class="docutils literal notranslate"><span class="pre">onset</span></code></p></td>
-<td><p>Double</p></td>
-<td><p>Only applicable if <code class="docutils literal notranslate"><span class="pre">optimization_strategy</span></code> is set to ‘randomized_search’. Define the onset for randomized search (Default: 1).</p></td>
-</tr>
-<tr class="row-odd"><td><p>&gt; <code class="docutils literal notranslate"><span class="pre">hyperparam_distributions</span></code></p></td>
-<td><p>Cell Array</p></td>
-<td><p>Only applicable if <code class="docutils literal notranslate"><span class="pre">optimization_strategy</span></code> is set to ‘randomized_search’. Defines the distributions for hyperparameters using a uniform distribution. Is created automatically within the for loop. (<code class="docutils literal notranslate"><span class="pre">makedist('uniform',</span> <span class="pre">1,</span> <span class="pre">sqrt(size(input.Xs{num_m},2)))</span></code></p></td>
+<tr class="row-odd"><td><p>&gt;<code class="docutils literal notranslate"> <span class="pre">LV_1.y</span></code></p></td>
+<td><p>Struct</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'start'</span></code> defines the lower limit of the hyperparameter search (i.e., 1 means start is at value 1, 10 means it starts at the lower 10 percentile of the grid, etc.); <code class="docutils literal notranslate"><span class="pre">'end'</span></code> defines the upper limit of the hyperparameter search (i.e., 0 means all the way to the end, 10 means to stop at the upper 10 percentile, etc.)</p></td>
 </tr>
 </tbody>
 </table>
@@ -680,80 +645,72 @@ document.write(`
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">standalone_version</span></code></p></td>
-<td><p>String</p></td>
-<td><p>Default: <code class="docutils literal notranslate"><span class="pre">MBSPLS_DEV_Aug2024_correctionscale_nosignflip_R2022a</span></code>.</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">date</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">date</span></code></p></td>
 <td><p>Dateformat</p></td>
 <td><p>Date of the analysis or script execution.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">partition</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">spls_standalone_path</span></code></p></td>
 <td><p>String</p></td>
-<td><p>Enter the partition on your server (e.g., jobs-matlab, jobs-cpu-long).</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">max_sim_jobs</span></code></p></td>
-<td><p>Double</p></td>
-<td><p>Define how many parallel jobs are created. Default: 10.</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">parallel_jobs</span></code></p></td>
-<td><p>Double</p></td>
-<td><p>Define how many jobs run in parallel at the same time (soft threshold). Default: 25.</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">mem_request</span></code></p></td>
-<td><p>Double</p></td>
-<td><p>Memory request for master and slave jobs (in GB). Default: 10.</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">matlab_version</span></code></p></td>
-<td><p>String</p></td>
-<td><p>Define MATLAB runtime engine (e.g., <code class="docutils literal notranslate"><span class="pre">R2022a</span></code>).</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">matlab_path</span></code></p></td>
-<td><p>String</p></td>
-<td><p>Path to MATLAB folder on your server.</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">cache_path</span></code></p></td>
-<td><p>String</p></td>
-<td><p>Path for output text files during hyperopt, permutation, bootstrapping (generally the same as scratch space).</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">scratch_space</span></code></p></td>
-<td><p>String</p></td>
-<td><p>Path for temporary file storage (hyperopt, permutation, bootstrapping) during analysis.</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">compilation_subpath</span></code></p></td>
-<td><p>String</p></td>
-<td><p>Default: ‘for_testing’.</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">mbspls_standalone_path</span></code></p></td>
-<td><p>String</p></td>
-<td><p>Full path to the SPLS Toolbox.</p></td>
+<td><p>Enter the name of the spls toolbox version (e.g., <code class="docutils literal notranslate"><span class="pre">setup.spls_standalone_path</span> <span class="pre">=</span> <span class="pre">'/data/core-psy-pronia/opt/SPLS_Toolbox_Dev_2023_CORE'</span></code>).</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">analysis_folder</span></code></p></td>
 <td><p>String</p></td>
-<td><p>Path to your analysis folder (e.g., fullfile(input.path_core, ‘Analysis’, input.project_name, setup.date)).</p></td>
+<td><p>Define the path to your analysis folder (e.g., <code class="docutils literal notranslate"><span class="pre">setup.analysis_folder</span> <span class="pre">=</span> <span class="pre">'/data/core-psy-archive/projects/YourProjectFolder'</span></code>).</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">data_folder</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">partition</span></code></p></td>
 <td><p>String</p></td>
-<td><p>Path to your data folder (e.g., fullfile(input.path_core, ‘Data’, input.project_name, setup.date)).</p></td>
+<td><p>Enter the partition on your server (e.g., <code class="docutils literal notranslate"><span class="pre">setup.partition</span> <span class="pre">=</span> <span class="pre">'jobs-cpu-long'</span></code>).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">max_sim_jobs</span></code></p></td>
+<td><p>Double</p></td>
+<td><p>Define how many parallel jobs are created (Default: <code class="docutils literal notranslate"><span class="pre">10</span></code>).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">parallel_jobs</span></code></p></td>
+<td><p>Double</p></td>
+<td><p>Define how many jobs run in parallel at the same time (soft threshold) (Default: <code class="docutils literal notranslate"><span class="pre">25</span></code>).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">mem_request</span></code></p></td>
+<td><p>Double</p></td>
+<td><p>Define the memory request for master and slave jobs (in GB) (Default: <code class="docutils literal notranslate"><span class="pre">10</span></code>).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">matlab_version</span></code></p></td>
+<td><p>String</p></td>
+<td><p>Define MATLAB runtime engine (e.g., <code class="docutils literal notranslate"><span class="pre">R2022a</span></code>).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">matlab_path</span></code></p></td>
+<td><p>String</p></td>
+<td><p>Define path to MATLAB folder on your server (e.g., <code class="docutils literal notranslate"><span class="pre">input.matlab_path</span> <span class="pre">=</span> <span class="pre">'/data/core-psy-pronia/opt/matlab/v912'</span></code>).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">cache_path</span></code></p></td>
+<td><p>String</p></td>
+<td><p>Path for output text files during hyperopt, permutation, bootstrapping (generally the same as scratch space) (e.g., <code class="docutils literal notranslate"><span class="pre">setup.cache_path</span> <span class="pre">=</span> <span class="pre">'/data/core-psy-pronia/opt/temp/YourUsername'</span></code>)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">scratch_space</span></code></p></td>
+<td><p>String</p></td>
+<td><p>Path for temporary file storage (hyperopt, permutation, bootstrapping) during analysis.  (e.g., <code class="docutils literal notranslate"><span class="pre">setup.scratch_path</span> <span class="pre">=</span> <span class="pre">'/data/core-psy-pronia/opt/temp/YourUsername'</span></code>)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">compilation_subpath</span></code></p></td>
+<td><p>String</p></td>
+<td><p>Default: <code class="docutils literal notranslate"><span class="pre">'for_testing'</span></code>.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">nodes</span></code></p></td>
 <td><p>Double</p></td>
 <td><p>Default: <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">account</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">queue_name</span></code></p></td>
 <td><p>String</p></td>
-<td><p>Name of your account on your server.</p></td>
+<td><p>Default: <code class="docutils literal notranslate"><span class="pre">''</span></code>; Leave empty for now.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">user</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">account</span></code></p></td>
 <td><p>String</p></td>
-<td><p>Your username on your server.</p></td>
+<td><p>Name of your account on your server. (e.g., <code class="docutils literal notranslate"><span class="pre">input.account</span> <span class="pre">=</span> <span class="pre">'core-psy'</span></code>)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">user</span></code></p></td>
+<td><p>String</p></td>
+<td><p>Your username on your server (e.g., <code class="docutils literal notranslate"><span class="pre">input.user</span> <span class="pre">=</span> <span class="pre">'clweyer'</span></code>)</p></td>
 </tr>
 </tbody>
 </table>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Test</p>
-</div>
 </div>
 </div>
 
@@ -789,16 +746,16 @@ document.write(`
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="intro.html"
+       href="mbspls_3vis.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">mbSPLS</p>
+        <p class="prev-next-title">Visualisation</p>
       </div>
     </a>
     <a class="right-next"
-       href="mbspls_2run.html"
+       href="spls_2run.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>

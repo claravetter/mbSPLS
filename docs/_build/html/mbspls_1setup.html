@@ -191,14 +191,16 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Data Input</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mbspls_2run.html">Model Training</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mbspls_3vis.html">Visualisation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">sPLS Toolbox</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="spls.html">sPLS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spls_1setup.html">Data Input</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spls_2run.html">Model Training</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spls_3vis.html">Visualisation</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Additional</span></p>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
 <li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
 <li class="toctree-l1"><a class="reference internal" href="contact.html">Contact</a></li>
 </ul>
@@ -414,7 +416,7 @@ document.write(`
   <div class="tex2jax_ignore mathjax_ignore section" id="data-input">
 <span id="mbspls-1setup"></span><h1>Data Input<a class="headerlink" href="#data-input" title="Permalink to this heading">#</a></h1>
 <p>This section provides a comprehensive overview of the <code class="docutils literal notranslate"><span class="pre">input</span></code> and <code class="docutils literal notranslate"><span class="pre">setup</span></code> parameters used in the mb-sPLS toolbox. These parameters enable you to tailor the analysis workflow to your specific needs, including cross-validation settings, model optimization strategies, data scaling methods, and memory management options. Properly configuring these parameters is essential for optimizing the performance and interpretability of your mb-sPLS analysis. Each parameter is outlined with its possible options, default values, and specific role within the toolbox to assist you in the configuration process.</p>
-<p>Once defined, the <code class="docutils literal notranslate"><span class="pre">input</span></code> and <code class="docutils literal notranslate"><span class="pre">setup</span></code> parameters are saved into a <code class="docutils literal notranslate"><span class="pre">datafile.mat</span></code> file using REPLACE?, which is then utilized in the subsequent <a class="reference internal" href="mbspls_2run.html"><span class="doc std std-doc">Model Training</span></a> step to ensure a seamless workflow.</p>
+<p>Once defined, the <code class="docutils literal notranslate"><span class="pre">input</span></code> and <code class="docutils literal notranslate"><span class="pre">setup</span></code> parameters are saved into a <code class="docutils literal notranslate"><span class="pre">datafile.mat</span></code> file using <code class="docutils literal notranslate"><span class="pre">&lt;placeholder&gt;</span></code>, which is then utilized in the subsequent <a class="reference internal" href="mbspls_2run.html"><span class="doc std std-doc">Model Training</span></a>.</p>
 <div class="section" id="input">
 <h2>Input<a class="headerlink" href="#input" title="Permalink to this heading">#</a></h2>
 <div class="section" id="data">
@@ -429,23 +431,23 @@ document.write(`
 <tbody>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">project_name</span></code></p></td>
 <td><p>String</p></td>
-<td><p></p></td>
+<td><p>Define a project name (e.g., <code class="docutils literal notranslate"><span class="pre">input.project_name</span> <span class="pre">=</span> <span class="pre">'YOURPROJECTNAME'</span></code>).</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Xs</span></code></p></td>
 <td><p>Cell array (double)</p></td>
-<td><p>Your matrices</p></td>
+<td><p>Define your matrices (e.g., <code class="docutils literal notranslate"><span class="pre">input.Xs</span> <span class="pre">=</span> <span class="pre">'{50x20</span> <span class="pre">double}</span> <span class="pre">{50x30</span> <span class="pre">double}</span></code>). The length of <code class="docutils literal notranslate"><span class="pre">input.Xs</span></code>should equal your number of matrices.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Xs_names</span></code></p></td>
 <td><p>Cell array (string)</p></td>
-<td><p>Names of your matrices</p></td>
+<td><p>Define the names of your matrices (e.g., <code class="docutils literal notranslate"><span class="pre">input.Xs_names</span> <span class="pre">=</span> <span class="pre">{'Matrix1'},</span> <span class="pre">{'Matrix2'}</span></code>. The length of <code class="docutils literal notranslate"><span class="pre">input.Xs_names</span></code> should equal the number of matrices. )</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Xs_feature_names</span></code></p></td>
 <td><p>Cell array (string)</p></td>
-<td><p>Names of matrix features</p></td>
+<td><p>Define the feature names of matrices (e.g., <code class="docutils literal notranslate"><span class="pre">input.Xs_feature_names</span> <span class="pre">=</span> <span class="pre">{1x20</span> <span class="pre">cell}</span> <span class="pre">{1x30</span> <span class="pre">cell}</span></code>. The length of <code class="docutils literal notranslate"><span class="pre">input.Xs_features_names</span></code> should equal the number of matrices. )</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">covariates</span></code></p></td>
 <td><p>Cell array (double)</p></td>
-<td><p>Your covariate(s) (vector/matrix)</p></td>
+<td><p>Define your covariate(s) (vector/matrix)</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">covariates_names</span></code></p></td>
 <td><p>Cell array (string)</p></td>
@@ -475,7 +477,7 @@ document.write(`
 </table>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>Make sure your input data (i.e., Xs, covariates, sites, Diag and DiagNames) does not contain any missing values. Make sure to either remove the missing values or impute them beforehand.</p>
+<p>Make sure your input data (i.e., <code class="docutils literal notranslate"><span class="pre">input.Xs</span></code>, <code class="docutils literal notranslate"><span class="pre">input.covariates</span></code>, <code class="docutils literal notranslate"><span class="pre">input.sites</span></code>, <code class="docutils literal notranslate"><span class="pre">input.Diag</span></code> and <code class="docutils literal notranslate"><span class="pre">input.DiagNames</span></code>) does not contain any missing values. Make sure to either remove the missing values or impute them beforehand.</p>
 </div>
 </div>
 <div class="section" id="machine-learning-framework">
