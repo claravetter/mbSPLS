@@ -33,6 +33,6 @@ cd PathToWorkingDirectory # (e.g., /data/core-psy-archive/projects/CW_NfL/Analys
 | `MemoryAmount`                   | Specifies the memory allocation for the job (e.g., `10GB`).                                                              |
 | `PathToCache`                    | Sets the directory for MATLAB's MCR (MATLAB Compiler Runtime) temporary files (e.g., `/path/to/cache`).                  |
 | `PathToMatlabRuntime`            | Configures the paths to MATLAB runtime libraries needed to execute the compiled MATLAB application. |
-| `PathToWorkingDirectory`         | Changes the directory to the working directory where the script will be executed (e.g., `/path/to/working/directory`).   |
+| `PathToProjectFolder`            | Changes the directory to your project folder where the script will be executed (e.g., `/path/to/project/folder`).   |
 | `PathToToolbox`                  | Specifies the path to the compiled mbSPLS toolbox.                         |
 | `PathToDatafile`                 | Specifies the full path to the input data file (e.g., `/path/to/datafile.mat`).            |
