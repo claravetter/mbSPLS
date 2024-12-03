@@ -373,7 +373,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -389,6 +391,16 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hyperparameter-optimization">1. Hyperparameter Optimization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#permutation-testing">2. Permutation Testing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bootstrapping">3. Bootstrapping</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -400,7 +412,30 @@ document.write(`
                   
   <div class="tex2jax_ignore mathjax_ignore section" id="model-training">
 <span id="spls-2run"></span><h1>Model Training<a class="headerlink" href="#model-training" title="Permalink to this heading">#</a></h1>
-<p>Add documentation on how to run the SPLS model</p>
+<p>ADAPT (took it from ChatGPT)</p>
+<p>During model training, a <strong>main job</strong> coordinates multiple <strong>slave jobs</strong>. These slave jobs are dedicated to specific tasks: <strong>hyperparameter optimization</strong>, <strong>permutation testing</strong>, and <strong>bootstrapping</strong>.</p>
+<hr class="docutils" />
+<div class="section" id="hyperparameter-optimization">
+<h2>1. Hyperparameter Optimization<a class="headerlink" href="#hyperparameter-optimization" title="Permalink to this heading">#</a></h2>
+<p>Hyperparameter optimization is a cornerstone of the sPLS workflow, balancing the sparsity of the model with predictive accuracy. This task is handled as a <strong>slave job</strong> that incorporates a flexible cross-validation framework defined in <code class="docutils literal notranslate"><span class="pre">input.framework</span></code>. While nested cross-validation is an option, users can also specify alternative frameworks, such as Leave-Some-Out Cross-Validation (LSOCV) or other custom schemes.</p>
+<p>In this step, the data is split according to the specified cross-validation framework. For each split, the model is trained on a subset of the data, and its performance is evaluated on the hold-out set. The sparsity of the model is tuned using a grid search, guided by the <code class="docutils literal notranslate"><span class="pre">input.density</span></code> parameter. This parameter defines the number of grid points (on a scale from 0 to 100) that are tested during the optimization process, allowing users to control the granularity of the search. Higher values of <code class="docutils literal notranslate"><span class="pre">input.density</span></code> result in finer-grained searches, exploring a larger number of potential sparsity configurations.</p>
+<p>Each hyperparameter configuration is evaluated using performance metrics such as mean squared error or the correlation between predicted and true responses. The configuration that performs best across all cross-validation folds is selected as the optimal setup.</p>
+</div>
+<hr class="docutils" />
+<div class="section" id="permutation-testing">
+<h2>2. Permutation Testing<a class="headerlink" href="#permutation-testing" title="Permalink to this heading">#</a></h2>
+<p>Permutation testing, managed by a dedicated <strong>slave job</strong>, evaluates the statistical significance of the sPLS model’s performance. This process ensures that the observed relationships between predictors and the response are not artifacts of random chance.</p>
+<p>The response variable is permuted multiple times, breaking any true associations in the data. For each permutation, the model is retrained using the same cross-validation framework and hyperparameters as the original model. The performance metrics obtained from these permuted datasets form a null distribution, representing the expected performance under random conditions.</p>
+<p>The actual model’s performance is compared against this null distribution to calculate a p-value, indicating the likelihood of achieving the observed performance by chance. In the sparse context of sPLS, this step is essential to validate that the sparsity-inducing penalties are not overfitting to noise or spurious correlations.</p>
+</div>
+<hr class="docutils" />
+<div class="section" id="bootstrapping">
+<h2>3. Bootstrapping<a class="headerlink" href="#bootstrapping" title="Permalink to this heading">#</a></h2>
+<p>Bootstrapping, handled by another <strong>slave job</strong>, provides an assessment of the stability and reliability of the sPLS model. This step evaluates the variability in variable selection, sparse loadings, and model predictions across different resampled datasets.</p>
+<p>Bootstrap samples are created by sampling the original data with replacement, and the sPLS model is retrained on each sample. This process allows for the estimation of confidence intervals for performance metrics and model parameters. Additionally, bootstrapping is particularly useful in sPLS for assessing the consistency of selected variables across resampled datasets. Variables that are consistently selected across bootstrap iterations are more likely to represent meaningful features of the data.</p>
+<hr class="docutils" />
+<p>Temporary files and results for each step are stored in <code class="docutils literal notranslate"><span class="pre">input.scratch_space</span></code>. For more information and references, please see <a class="reference internal" href="references.html"><span class="doc std std-doc">References</span></a>.</p>
+</div>
 </div>
 
     <script type="text/x-thebe-config">
@@ -461,6 +496,22 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hyperparameter-optimization">1. Hyperparameter Optimization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#permutation-testing">2. Permutation Testing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bootstrapping">3. Bootstrapping</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
