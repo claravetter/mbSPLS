@@ -36,7 +36,7 @@ cd PathToWorkingDirectory # (e.g., /data/core-psy-archive/projects/CW_NfL/Analys
 | `PathToToolbox`                  | Specifies the path to the compiled mbSPLS toolbox.                         |
 | `PathToDatafile`                 | Specifies the full path to the input data file (e.g., `/path/to/datafile.mat`).            |
 
-# Software Architecture of the mb-SPLS Toolbox
+---
 
 The SPLS Toolbox is a modular analysis framework implemented in MATLAB and consists of a master module (`dp_spls_standalone`) that oversees the execution of the entire analysis pipeline, and three specialized slave modules dedicated to **hyperparameter optimization**, **bootstrapping**, and **permutation testing**. 
 
