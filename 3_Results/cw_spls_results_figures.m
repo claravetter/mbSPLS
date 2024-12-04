@@ -196,11 +196,9 @@ switch type
             if isempty(mode)
                 mode4title = '';
                 suffix4saving = '_barplot_h.';
-                % suffix4saving = '_barplot_h.png';
             else
                 mode4title = [' (', mode, ')'];
                 suffix4saving = ['_' mode, '_barplot_h.'];
-                % suffix4saving = ['_' mode, '_barplot_h.png'];
             end
 
             if isempty(maxFeatures)
@@ -319,10 +317,6 @@ switch type
             % DEFINE TITLE
             h.Title = ['// LV ', num2str(lv_idx), ' //' newline, 'Correlation of Latent Scores', mode4title];
 
-            % % Save Figure
-            % if ~exist(finalpath)
-            %     mkdir(finalpath)
-            % end
 
             % FIGURE NAME
             figure_name = fullfile(path, ['LV', num2str(lv_idx), '_LS', suffix4saving]);
