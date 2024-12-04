@@ -400,7 +400,91 @@ document.write(`
                   
   <div class="tex2jax_ignore mathjax_ignore section" id="model-training">
 <span id="mbspls-2run"></span><h1>Model Training<a class="headerlink" href="#model-training" title="Permalink to this heading">#</a></h1>
-<p>Add documentation on how to run the mbSPLS model</p>
+<p>The function <code class="docutils literal notranslate"><span class="pre">&lt;placeholder&gt;</span></code>creates a slurm script, which submits the <code class="docutils literal notranslate"><span class="pre">datafile.mat</span></code> that was created in the <a class="reference internal" href="mbspls_1setup.html"><span class="doc std std-doc">Data Input</span></a> step to the mb-SPLS toolbox, with the following structure:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/sh </span>
+<span class="c1">#SBATCH --error=PathToErrorFile-%j.err # (e.g., /path/to/your/project/output-%j.err)</span>
+<span class="c1">#SBATCH --output=PathToOutputFile-%j.log # (e.g., /path/to/your/project/output-%j.log)</span>
+<span class="c1">#SBATCH --partition=PartitionName # (e.g., jobs-cpu-long)</span>
+<span class="c1">#SBATCH --account=AccountName # (e.g., core-psy)</span>
+<span class="c1">#SBATCH --nodes=1 </span>
+<span class="c1">#SBATCH --ntasks=1 </span>
+<span class="c1">#SBATCH --job-name JobName # (e.g., mbspls_main)</span>
+<span class="c1">#SBATCH --mem=MemoryAmount # (e.g., 10GB)</span>
+<span class="nv">$PMODE</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">MCR_CACHE_ROOT</span><span class="o">=</span>PathToCache<span class="w"> </span><span class="c1"># (e.g., /data/core-psy-archive/projects/CW_NfL/Cache )</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span>PathToMatlabRuntime<span class="w"> </span><span class="c1"># (e.g., /path/to/matlab/runtime/glnxa64:/path/to/matlab/bin/glnxa64:/path/to/matlab/sys/os/glnxa64)</span>
+<span class="nb">cd</span><span class="w"> </span>PathToWorkingDirectory<span class="w"> </span><span class="c1"># (e.g., /data/core-psy-archive/projects/CW_NfL/Analysis/PRS_auto_BLOOD_PROTEOMIC_SOCIO/02-Dec-2024)</span>
+
+/Path/To/Toolbox<span class="w"> </span><span class="c1"># (e.g., /data/core-psy-archive/projects/CV_mbspls/mbspls/MBSPLS_DEV_Oct2024_R2023b/for_testing/MBSPLS_DEV_Oct2024_R2023b) </span>
+/Path/To/Datafile.mat<span class="w"> </span><span class="c1"># (e.g., /data/core-psy-archive/projects/CW_NfL/Data/PRS_auto_BLOOD_PROTEOMIC_SOCIO/02-Dec-2024/02-Dec-2024_CW_mbspls_PRS_auto_BLOOD_PROTEOMIC_SOCIO_5x5_1000perm_100boot_Benjamini_Hochberg_fro_matrixnorm_grid_search_20_20_20_20_datafile.mat)</span>
+</pre></div>
+</div>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Input</strong></p></th>
+<th class="head"><p><strong>Description</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">PathToErrorFile-%j.err</span></code></p></td>
+<td><p>Specifies the file where errors from the job will be logged. <code class="docutils literal notranslate"><span class="pre">%j</span></code> is replaced by the job ID during execution.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">PathToOutputFile-%j.log</span></code></p></td>
+<td><p>Specifies the file where standard output from the job will be logged. <code class="docutils literal notranslate"><span class="pre">%j</span></code> is replaced by the job ID during execution.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">PartitionName</span></code></p></td>
+<td><p>Specifies the partition (queue) where the job will run (e.g., <code class="docutils literal notranslate"><span class="pre">jobs-cpu-long</span></code>).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">AccountName</span></code></p></td>
+<td><p>Specifies the account to charge for the job (e.g., <code class="docutils literal notranslate"><span class="pre">core-psy</span></code>).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">JobName</span></code></p></td>
+<td><p>Sets a name for the job (e.g., <code class="docutils literal notranslate"><span class="pre">mbspls_main</span></code>), helpful for tracking jobs in the SLURM queue.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">MemoryAmount</span></code></p></td>
+<td><p>Specifies the memory allocation for the job (e.g., <code class="docutils literal notranslate"><span class="pre">10GB</span></code>).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">PathToCache</span></code></p></td>
+<td><p>Sets the directory for MATLAB’s MCR (MATLAB Compiler Runtime) temporary files (e.g., <code class="docutils literal notranslate"><span class="pre">/path/to/cache</span></code>).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">PathToMatlabRuntime</span></code></p></td>
+<td><p>Configures the paths to MATLAB runtime libraries needed to execute the compiled MATLAB application.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">PathToProjectFolder</span></code></p></td>
+<td><p>Changes the directory to your project folder where the script will be executed (e.g., <code class="docutils literal notranslate"><span class="pre">/path/to/project/folder</span></code>).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">PathToToolbox</span></code></p></td>
+<td><p>Specifies the path to the compiled mbSPLS toolbox.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">PathToDatafile</span></code></p></td>
+<td><p>Specifies the full path to the input data file (e.g., <code class="docutils literal notranslate"><span class="pre">/path/to/datafile.mat</span></code>).</p></td>
+</tr>
+</tbody>
+</table>
+<hr class="docutils" />
+<p>The mb-SPLS Toolbox is a modular analysis framework implemented in MATLAB and consists of a master module (<code class="docutils literal notranslate"><span class="pre">dp_spls_standalone</span></code>) that oversees the execution of the entire analysis pipeline, and three specialized slave modules dedicated to <strong>hyperparameter optimization</strong>, <strong>bootstrapping</strong>, and <strong>permutation testing</strong>.</p>
+<p>The master module coordinates the workflow by deploying the slave modules as job arrays on a high-performance computing cluster. These job arrays enable parallel processing, significantly reducing the computation time required for large-scale analyses. The modular architecture allows each slave module to handle its specific task independently, while the master module integrates their outputs to generate the final SPLS model.</p>
+<p>All modules have been compiled as standalone MATLAB executables using MATLAB’s built-in compiler, ensuring compatibility with high-performance cluster environments managed by Sun Grid Engine (SGE). The deployment process is automated through Bash scripts, which simplify execution and facilitate scalability across different computational infrastructures. This design ensures that the SPLS Toolbox is both efficient and user-friendly, catering to the demands of large datasets and complex machine learning workflows.</p>
+<hr class="docutils" />
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Module</strong></p></th>
+<th class="head"><p><strong>Explanation</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>1. Hyperparameter Optimization</strong></p></td>
+<td><p>This module systematically searches in a grid search (<code class="docutils literal notranslate"><span class="pre">input.density</span></code>, <code class="docutils literal notranslate"><span class="pre">input.optimization_strategy</span></code>) for the best hyperparameters that control the sparsity of the mb-SPLS model. It evaluates a range of hyperparameter combinations to identify those that maximize the correlation (<code class="docutils literal notranslate"><span class="pre">input.correlation_method</span></code>) between the projections of the data matrices (e.g., neuroimaging, phenotypic data). By tuning these hyperparameters, the model achieves an optimal balance between interpretability and predictive performance. The process is performed using cross-validation within the inner loop of the mb-SPLS framework (defined by <code class="docutils literal notranslate"><span class="pre">input.framework</span></code>).</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>2. Bootstrapping</strong></p></td>
+<td><p>The bootstrapping module assesses the stability and reliability of the weight vectors associated with the latent variables (LVs). By generating multiple resampled datasets through sampling with replacement (<code class="docutils literal notranslate"><span class="pre">input.bootstrap_testing</span></code>), the module calculates variability in the feature weights, identifying which features consistently contribute to the mb-SPLS model. This helps quantify the robustness of the model and supports interpretation by highlighting key features that are reliably associated across resamples.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>3. Permutation Testing</strong></p></td>
+<td><p>This module evaluates the statistical significance of the latent variables identified by the algorithm. It creates a large number of randomized datasets (<code class="docutils literal notranslate"><span class="pre">input.permutation_testing</span></code>) by permuting one data matrix, effectively destroying the relationships between the data matrices. The module then trains the mb-SPLS model on these permuted datasets and compares their performance (correlation between projections) to that of the original model. A p-value (<code class="docutils literal notranslate"><span class="pre">input.alpha_value</span></code>) is calculated to determine the likelihood of observing the original model’s performance by chance, providing robust statistical validation.</p></td>
+</tr>
+</tbody>
+</table>
+<p>Temporary files and results for each step are stored in <code class="docutils literal notranslate"><span class="pre">input.scratch_space</span></code>. For more information and references, please see <a class="reference internal" href="references.html"><span class="doc std std-doc">References</span></a>.</p>
 </div>
 
     <script type="text/x-thebe-config">

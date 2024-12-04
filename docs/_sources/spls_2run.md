@@ -1,38 +1,55 @@
 (spls_2run)=
 # Model Training 
 
-ADAPT (took it from ChatGPT) 
+The function `<placeholder>`creates a slurm script, which submits the `datafile.mat` that was created in the [Data Input](spls_1setup.md) step to the SPLS toolbox, with the following structure:
 
-During model training, a **main job** coordinates multiple **slave jobs**. These slave jobs are dedicated to specific tasks: **hyperparameter optimization**, **permutation testing**, and **bootstrapping**.  
+```bash
+#!/bin/sh 
+#SBATCH --error=PathToErrorFile-%j.err # (e.g., /path/to/your/project/output-%j.err)
+#SBATCH --output=PathToOutputFile-%j.log # (e.g., /path/to/your/project/output-%j.log)
+#SBATCH --partition=PartitionName # (e.g., jobs-cpu-long)
+#SBATCH --account=AccountName # (e.g., core-psy)
+#SBATCH --nodes=1 
+#SBATCH --ntasks=1 
+#SBATCH --job-name JobName # (e.g., spls_main)
+#SBATCH --mem=MemoryAmount # (e.g., 10GB)
+$PMODE
+export MCR_CACHE_ROOT=PathToCache # (e.g., /data/core-psy-archive/projects/CW_NfL/Cache )
+export LD_LIBRARY_PATH=PathToMatlabRuntime # (e.g., /path/to/matlab/runtime/glnxa64:/path/to/matlab/bin/glnxa64:/path/to/matlab/sys/os/glnxa64)
+cd PathToWorkingDirectory # (e.g., /data/core-psy-archive/projects/CW_NfL/Analysis/PRS_auto_BLOOD_PROTEOMIC_SOCIO/02-Dec-2024)
+
+/Path/To/Toolbox # (e.g., /data/core-psy-pronia/opt/SPLS_Toolbox_Dev_2023_CORE/dp_spls_standalone/for_testing/dp_spls_standalone) 
+/Path/To/Datafile.mat # (e.g., /data/core-psy-archive/projects/CW_NfL/Data/PRS_auto_BLOOD_PROTEOMIC_SOCIO/02-Dec-2024/02-Dec-2024_CW_spls_PRS_auto_BLOOD_PROTEOMIC_SOCIO_5x5_1000perm_100boot_Benjamini_Hochberg_density20_datafile.mat)
+```
+
+| **Input**                       | **Description**                                                                                                   |
+|----------------------------------|--------------------------------------------------------------------------------------------------------------------------|
+| `PathToErrorFile-%j.err`         | Specifies the file where errors from the job will be logged. `%j` is replaced by the job ID during execution.            |
+| `PathToOutputFile-%j.log`        | Specifies the file where standard output from the job will be logged. `%j` is replaced by the job ID during execution.   |
+| `PartitionName`                  | Specifies the partition (queue) where the job will run (e.g., `jobs-cpu-long`).                                          |
+| `AccountName`                    | Specifies the account to charge for the job (e.g., `core-psy`).                                                          |
+| `JobName`                        | Sets a name for the job (e.g., `mbspls_main`), helpful for tracking jobs in the SLURM queue.                             |
+| `MemoryAmount`                   | Specifies the memory allocation for the job (e.g., `10GB`).                                                              |
+| `PathToCache`                    | Sets the directory for MATLAB's MCR (MATLAB Compiler Runtime) temporary files (e.g., `/path/to/cache`).                  |
+| `PathToMatlabRuntime`            | Configures the paths to MATLAB runtime libraries needed to execute the compiled MATLAB application. |
+| `PathToProjectFolder`            | Changes the directory to your project folder where the script will be executed (e.g., `/path/to/project/folder`).   |
+| `PathToToolbox`                  | Specifies the path to the compiled mbSPLS toolbox.                         |
+| `PathToDatafile`                 | Specifies the full path to the input data file (e.g., `/path/to/datafile.mat`).            |
 
 ---
 
-## 1. Hyperparameter Optimization
+The SPLS Toolbox is a modular analysis framework implemented in MATLAB and consists of a master module (`dp_spls_standalone`) that oversees the execution of the entire analysis pipeline, and three specialized slave modules dedicated to **hyperparameter optimization**, **bootstrapping**, and **permutation testing**. 
 
-Hyperparameter optimization is a cornerstone of the sPLS workflow, balancing the sparsity of the model with predictive accuracy. This task is handled as a **slave job** that incorporates a flexible cross-validation framework defined in `input.framework`. While nested cross-validation is an option, users can also specify alternative frameworks, such as Leave-Some-Out Cross-Validation (LSOCV) or other custom schemes.
+The master module coordinates the workflow by deploying the slave modules as job arrays on a high-performance computing cluster. These job arrays enable parallel processing, significantly reducing the computation time required for large-scale analyses. The modular architecture allows each slave module to handle its specific task independently, while the master module integrates their outputs to generate the final SPLS model. 
 
-In this step, the data is split according to the specified cross-validation framework. For each split, the model is trained on a subset of the data, and its performance is evaluated on the hold-out set. The sparsity of the model is tuned using a grid search, guided by the `input.density` parameter. This parameter defines the number of grid points (on a scale from 0 to 100) that are tested during the optimization process, allowing users to control the granularity of the search. Higher values of `input.density` result in finer-grained searches, exploring a larger number of potential sparsity configurations.
-
-Each hyperparameter configuration is evaluated using performance metrics such as mean squared error or the correlation between predicted and true responses. The configuration that performs best across all cross-validation folds is selected as the optimal setup. 
+All modules have been compiled as standalone MATLAB executables using MATLAB's built-in compiler, ensuring compatibility with high-performance cluster environments managed by Sun Grid Engine (SGE). The deployment process is automated through Bash scripts, which simplify execution and facilitate scalability across different computational infrastructures. This design ensures that the SPLS Toolbox is both efficient and user-friendly, catering to the demands of large datasets and complex machine learning workflows.
 
 ---
 
-## 2. Permutation Testing
-
-Permutation testing, managed by a dedicated **slave job**, evaluates the statistical significance of the sPLS model's performance. This process ensures that the observed relationships between predictors and the response are not artifacts of random chance. 
-
-The response variable is permuted multiple times, breaking any true associations in the data. For each permutation, the model is retrained using the same cross-validation framework and hyperparameters as the original model. The performance metrics obtained from these permuted datasets form a null distribution, representing the expected performance under random conditions.
-
-The actual model's performance is compared against this null distribution to calculate a p-value, indicating the likelihood of achieving the observed performance by chance. In the sparse context of sPLS, this step is essential to validate that the sparsity-inducing penalties are not overfitting to noise or spurious correlations. 
-
----
-
-## 3. Bootstrapping
-
-Bootstrapping, handled by another **slave job**, provides an assessment of the stability and reliability of the sPLS model. This step evaluates the variability in variable selection, sparse loadings, and model predictions across different resampled datasets.
-
-Bootstrap samples are created by sampling the original data with replacement, and the sPLS model is retrained on each sample. This process allows for the estimation of confidence intervals for performance metrics and model parameters. Additionally, bootstrapping is particularly useful in sPLS for assessing the consistency of selected variables across resampled datasets. Variables that are consistently selected across bootstrap iterations are more likely to represent meaningful features of the data.
-
----
+| **Module**            | **Explanation**                                                                                                          |
+|------------------------|--------------------------------------------------------------------------------------------------------------------------|
+| **1. Hyperparameter Optimization** | This module systematically searches in a grid search (`input.density`) for the best hyperparameters  that control the sparsity of the SPLS model. It evaluates a range of hyperparameter combinations to identify those that maximize the correlation between the projections of the data matrices (e.g., neuroimaging, phenotypic data). By tuning these hyperparameters, the model achieves an optimal balance between interpretability and predictive performance. The process is performed using cross-validation within the inner loop of the SPLS framework (defined by `input.framework`). |
+| **2. Bootstrapping**               | The bootstrapping module assesses the stability and reliability of the weight vectors associated with the latent variables (LVs). By generating multiple resampled datasets through sampling with replacement, the module calculates variability in the feature weights, identifying which features consistently contribute to the SPLS model. This helps quantify the robustness of the model and supports interpretation by highlighting key features that are reliably associated across resamples. |
+| **3. Permutation Testing**         | This module evaluates the statistical significance of the latent variables identified by the algorithm. It creates a large number of randomized datasets by permuting one data matrix, effectively destroying the relationships between the data matrices. The module then trains the SPLS model on these permuted datasets and compares their performance (correlation between projections) to that of the original model. A p-value is calculated to determine the likelihood of observing the original model's performance by chance, providing robust statistical validation
 
 Temporary files and results for each step are stored in `input.scratch_space`. For more information and references, please see [References](references.md).
