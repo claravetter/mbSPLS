@@ -92,8 +92,11 @@ if flip_flag
 else
     Path2Report = fullfile(folderpath, 'Reports');
 end
-if ~exist(Path2Report)
-    mkdir(Path2Report)
+
+if report_flag
+    if ~exist(Path2Report)
+        mkdir(Path2Report)
+    end
 end
 
 % CHECK WHETHER NUMBER OF TOP FEATURES FOR FIGURES WAS DEFINED (BARPLOT)
