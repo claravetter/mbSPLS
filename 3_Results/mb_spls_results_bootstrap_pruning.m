@@ -16,6 +16,18 @@ for lv_idx =1:height(output.final_parameters)
                 log_bs_weight = output.bootstrap_results.(lv_name).log_bs_weights{matrix_idx};
                 weight(log_bs_weight) = 0;
         end
+        % pruning can remove every feature of a block: its latent score is then
+        % zero and all correlations with it are NaN
+        if all(weight == 0)
+            if isfield(input, 'Xs_names') && numel(input.Xs_names) >= matrix_idx
+                block_name = char(string(input.Xs_names{matrix_idx}));
+            else
+                block_name = num2str(matrix_idx);
+            end
+            warning('mbspls:emptyBlockAfterPruning', ...
+                '%s: %s pruning removed all features of block ''%s''; its latent scores will be zero.', ...
+                lv_name, log_application, block_name);
+        end
         weights{matrix_idx}=weight;
         output.final_parameters{lv_idx, matches(output.opt_parameters_names, 'weights')} = weights;
     end
